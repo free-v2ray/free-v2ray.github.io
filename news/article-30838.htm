@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://free-v2ray.github.io/news/article-30838.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Python生成迷宫</title>
+        <meta name="description" content="算法简介:   生成一张网格，把网格里面的所有边都存进一个列表edgeList里面.   从(0, 0)开始，做DFS。每次DFS的时候，随机地选择四周一个没有走过的格子，凿墙过去，把道路打通。凿墙的" />
+        <link rel="icon" href="/assets/website/img/free_v2ray/favicon.ico" type="image/x-icon"/>
+    <!-- google-fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- //google-fonts -->
+    <!-- Template CSS Style link -->
+    <link rel="stylesheet" href="/assets/website/css/free_v2ray/style-starter.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EFW7LQ09JM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-EFW7LQ09JM');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <!--header-->
+<header id="site-header" class="fixed-top">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg stroke px-0">
+                        <a class="navbar-brand" href="/">
+                <span>
+                    Free V2ray
+                </span>
+            </a>
+                        <!-- if logo is image enable this
+    <a class="navbar-brand" href="#index.html">
+        <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
+    </a> -->
+            <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav ml-lg-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">首页</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">免费节点</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">新闻资讯</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="#">关于</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">联系</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- toggle switch for light and dark theme -->
+            <div class="cont-ser-position mt-lg-2">
+                <nav class="navigation">
+                    <div class="theme-switch-wrapper">
+                        <label class="theme-switch" for="checkbox">
+                            <input type="checkbox" id="checkbox">
+                            <div class="mode-container">
+                                <i class="gg-sun"></i>
+                                <i class="gg-moon"></i>
+                            </div>
+                        </label>
+                    </div>
+                </nav>
+            </div>
+            <!-- //toggle switch for light and dark theme -->
+        </nav>
+    </div>
+</header>
+<!--//header-->
+    <!-- inner banner -->
+    <div class="inner-banner">
+        <div class="w3l-breadcrumb">
+            <div class="container">
+                <h1 class="inner-text-title font-weight-bold">Python生成迷宫</h1>
+                <ul class="breadcrumbs-custom-path">
+                    <li><a href="/">首页</a></li>
+                    <li><i class="fas fa-angle-right mx-2"></i></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li class="active"><i class="fas fa-angle-right mx-2"></i>正文</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- //inner banner -->
+    <!-- progress section -->
+    <section class="w3l-about-2 py-5">
+        <div class="container py-2">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="markdown_views prism-dracula"> <p>算法简介:</p> <ol> <li> <p>生成一张网格，把网格里面的所有边都存进一个列表edgeList里面.</p> </li> <li> <p>从(0, 0)开始，做DFS。每次DFS的时候，随机地选择四周一个没有走过的格子，凿墙过去，把道路打通。凿墙的时候，把edgeList列表中相对应的那堵墙删除掉。</p> </li> <li> <p>将剩下的没有凿开过的墙画出来，就是一个完整的迷宫了。</p> </li> </ol> <pre><code class="prism language-python"><span class="token keyword">import</span> sys<span class="token keyword">import</span> matplotlib<span class="token punctuation">.</span>pyplot<span class="token keyword">as</span> plt<span class="token keyword">from</span> random<span class="token keyword">import</span> randint  WIDTH<span class="token operator">=</span><span class="token number">60</span> HEIGHT<span class="token operator">=</span><span class="token number">40</span> sys<span class="token punctuation">.</span>setrecursionlimit<span class="token punctuation">(</span>WIDTH<span class="token operator">*</span> HEIGHT<span class="token punctuation">)</span><span class="token keyword">def</span><span class="token function">initVisitedList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> 	visited<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token keyword">for</span> y<span class="token keyword">in</span><span class="token builtin">range</span><span class="token punctuation">(</span>HEIGHT<span class="token punctuation">)</span><span class="token punctuation">:</span> 		line<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token keyword">for</span> x<span class="token keyword">in</span><span class="token builtin">range</span><span class="token punctuation">(</span>WIDTH<span class="token punctuation">)</span><span class="token punctuation">:</span> 			line<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token boolean">False</span><span class="token punctuation">)</span> 		visited<span class="token punctuation">.</span>append<span class="token punctuation">(</span>line<span class="token punctuation">)</span><span class="token keyword">return</span> visited<span class="token keyword">def</span><span class="token function">drawLine</span><span class="token punctuation">(</span>x1<span class="token punctuation">,</span> y1<span class="token punctuation">,</span> x2<span class="token punctuation">,</span> y2<span class="token punctuation">)</span><span class="token punctuation">:</span> 	plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span><span class="token punctuation">[</span>x1<span class="token punctuation">,</span> x2<span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span>y1<span class="token punctuation">,</span> y2<span class="token punctuation">]</span><span class="token punctuation">,</span> color<span class="token operator">=</span><span class="token string">"black"</span><span class="token punctuation">)</span><span class="token keyword">def</span><span class="token function">removeLine</span><span class="token punctuation">(</span>x1<span class="token punctuation">,</span> y1<span class="token punctuation">,</span> x2<span class="token punctuation">,</span> y2<span class="token punctuation">)</span><span class="token punctuation">:</span> 	plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span><span class="token punctuation">[</span>x1<span class="token punctuation">,</span> x2<span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span>y1<span class="token punctuation">,</span> y2<span class="token punctuation">]</span><span class="token punctuation">,</span> color<span class="token operator">=</span><span class="token string">"white"</span><span class="token punctuation">)</span><span class="token keyword">def</span><span class="token function">get_edges</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">:</span> 	result<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">]</span> 	result<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> x<span class="token punctuation">,</span> y<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span> 	result<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">(</span>x<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span> y<span class="token punctuation">,</span> x<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span> y<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span> 	result<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> x<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">)</span> 	result<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span> x<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span> y<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token keyword">return</span> result<span class="token keyword">def</span><span class="token function">drawCell</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">:</span> 	edges<span class="token operator">=</span> get_edges<span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token keyword">for</span> item<span class="token keyword">in</span> edges<span class="token punctuation">:</span> 		drawLine<span class="token punctuation">(</span>item<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> item<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> item<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> item<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token keyword">def</span><span class="token function">getCommonEdge</span><span class="token punctuation">(</span>cell1_x<span class="token punctuation">,</span> cell1_y<span class="token punctuation">,</span> cell2_x<span class="token punctuation">,</span> cell2_y<span class="token punctuation">)</span><span class="token punctuation">:</span> 	edges1<span class="token operator">=</span> get_edges<span class="token punctuation">(</span>cell1_x<span class="token punctuation">,</span> cell1_y<span class="token punctuation">)</span> 	edges2<span class="token operator">=</span><span class="token builtin">set</span><span class="token punctuation">(</span>get_edges<span class="token punctuation">(</span>cell2_x<span class="token punctuation">,</span> cell2_y<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token keyword">for</span> edge<span class="token keyword">in</span> edges1<span class="token punctuation">:</span><span class="token keyword">if</span> edge<span class="token keyword">in</span> edges2<span class="token punctuation">:</span><span class="token keyword">return</span> edge<span class="token keyword">return</span><span class="token boolean">None</span><span class="token keyword">def</span><span class="token function">initEdgeList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> 	edges<span class="token operator">=</span><span class="token builtin">set</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token keyword">for</span> x<span class="token keyword">in</span><span class="token builtin">range</span><span class="token punctuation">(</span>WIDTH<span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token keyword">for</span> y<span class="token keyword">in</span><span class="token builtin">range</span><span class="token punctuation">(</span>HEIGHT<span class="token punctuation">)</span><span class="token punctuation">:</span> 			cellEdges<span class="token operator">=</span> get_edges<span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token keyword">for</span> edge<span class="token keyword">in</span> cellEdges<span class="token punctuation">:</span> 				edges<span class="token punctuation">.</span>add<span class="token punctuation">(</span>edge<span class="token punctuation">)</span><span class="token keyword">return</span> edges<span class="token keyword">def</span><span class="token function">isValidPosition</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token keyword">if</span> x<span class="token operator">&lt;</span><span class="token number">0</span><span class="token keyword">or</span> x<span class="token operator">&gt;=</span> WIDTH<span class="token punctuation">:</span><span class="token keyword">return</span><span class="token boolean">False</span><span class="token keyword">elif</span> y<span class="token operator">&lt;</span><span class="token number">0</span><span class="token keyword">or</span> y<span class="token operator">&gt;=</span> HEIGHT<span class="token punctuation">:</span><span class="token keyword">return</span><span class="token boolean">False</span><span class="token keyword">else</span><span class="token punctuation">:</span><span class="token keyword">return</span><span class="token boolean">True</span><span class="token keyword">def</span><span class="token function">shuffle</span><span class="token punctuation">(</span>dX<span class="token punctuation">,</span> dY<span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token keyword">for</span> t<span class="token keyword">in</span><span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">:</span> 		i<span class="token operator">=</span> randint<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span> 		j<span class="token operator">=</span> randint<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span> 		dX<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> dX<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token operator">=</span> dX<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span> dX<span class="token punctuation">[</span>i<span class="token punctuation">]</span> 		dY<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> dY<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token operator">=</span> dY<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span> dY<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token keyword">def</span><span class="token function">DFS</span><span class="token punctuation">(</span>X<span class="token punctuation">,</span> Y<span class="token punctuation">,</span> edgeList<span class="token punctuation">,</span> visited<span class="token punctuation">)</span><span class="token punctuation">:</span> 	dX<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">]</span> 	dY<span class="token operator">=</span><span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span> 	shuffle<span class="token punctuation">(</span>dX<span class="token punctuation">,</span> dY<span class="token punctuation">)</span><span class="token keyword">for</span> i<span class="token keyword">in</span><span class="token builtin">range</span><span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>dX<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span> 		nextX<span class="token operator">=</span> X<span class="token operator">+</span> dX<span class="token punctuation">[</span>i<span class="token punctuation">]</span> 		nextY<span class="token operator">=</span> Y<span class="token operator">+</span> dY<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token keyword">if</span> isValidPosition<span class="token punctuation">(</span>nextX<span class="token punctuation">,</span> nextY<span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token keyword">if</span><span class="token keyword">not</span> visited<span class="token punctuation">[</span>nextY<span class="token punctuation">]</span><span class="token punctuation">[</span>nextX<span class="token punctuation">]</span><span class="token punctuation">:</span> 				visited<span class="token punctuation">[</span>nextY<span class="token punctuation">]</span><span class="token punctuation">[</span>nextX<span class="token punctuation">]</span><span class="token operator">=</span><span class="token boolean">True</span> 				commonEdge<span class="token operator">=</span> getCommonEdge<span class="token punctuation">(</span>X<span class="token punctuation">,</span> Y<span class="token punctuation">,</span> nextX<span class="token punctuation">,</span> nextY<span class="token punctuation">)</span><span class="token keyword">if</span> commonEdge<span class="token keyword">in</span> edgeList<span class="token punctuation">:</span> 					edgeList<span class="token punctuation">.</span>remove<span class="token punctuation">(</span>commonEdge<span class="token punctuation">)</span> 				DFS<span class="token punctuation">(</span>nextX<span class="token punctuation">,</span> nextY<span class="token punctuation">,</span> edgeList<span class="token punctuation">,</span> visited<span class="token punctuation">)</span>  plt<span class="token punctuation">.</span>axis<span class="token punctuation">(</span><span class="token string">'equal'</span><span class="token punctuation">)</span> plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span><span class="token string">'Maze'</span><span class="token punctuation">)</span> edgeList<span class="token operator">=</span> initEdgeList<span class="token punctuation">(</span><span class="token punctuation">)</span> visited<span class="token operator">=</span> initVisitedList<span class="token punctuation">(</span><span class="token punctuation">)</span> DFS<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span> edgeList<span class="token punctuation">,</span> visited<span class="token punctuation">)</span> edgeList<span class="token punctuation">.</span>remove<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span> edgeList<span class="token punctuation">.</span>remove<span class="token punctuation">(</span><span class="token punctuation">(</span>WIDTH<span class="token punctuation">,</span> HEIGHT<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> WIDTH<span class="token punctuation">,</span> HEIGHT<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token keyword">for</span> edge<span class="token keyword">in</span> edgeList<span class="token punctuation">:</span> 	drawLine<span class="token punctuation">(</span>edge<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> edge<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> edge<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> edge<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span> plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-30352.htm">聊城宠物店洗澡价格（阳谷宠物店洗澡多少钱）</a></p>
+                                        <p>下一个：<a href="/news/article-30839.htm">宠物粮食品牌上市公司排名前十 宠物粮食品牌上市公司排名前十名</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-11-9-node-share.htm" title="11月9日→18.9M/S|2024年最新免费节点Free V2ray订阅链接地址">11月9日→18.9M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-14-free-high-speed-nodes.htm" title="11月14日→18.7M/S|2024年最新免费节点Free V2ray订阅链接地址">11月14日→18.7M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-1-clash-v2ray-ss-ssr.htm" title="10月1日→18.5M/S|2024年最新免费节点Free V2ray订阅链接地址">10月1日→18.5M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-20-free-high-speed-nodes.htm" title="10月20日→18.5M/S|2024年最新免费节点Free V2ray订阅链接地址">10月20日→18.5M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-23-node-share.htm" title="10月23日→19.7M/S|2024年最新免费节点Free V2ray订阅链接地址">10月23日→19.7M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-18-node-share-links.htm" title="12月18日→19.2M/S|2024年最新免费节点Free V2ray订阅链接地址">12月18日→19.2M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-1-clash-v2ray-ss-ssr.htm" title="12月1日→21.1M/S|2024年最新免费节点Free V2ray订阅链接地址">12月1日→21.1M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-25-node-share.htm" title="10月25日→22.8M/S|2024年最新免费节点Free V2ray订阅链接地址">10月25日→22.8M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                        <li class="py-2"><a href="/news/article-24279.htm" title="动物疫苗存在的问题及解决措施论文（动物疫苗现状）">动物疫苗存在的问题及解决措施论文（动物疫苗现状）</a></li>
+                        <li class="py-2"><a href="/news/article-18798.htm" title="全国十大兽药生产企业（兽药知名企业）">全国十大兽药生产企业（兽药知名企业）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">75</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">20</span> <a href="/date/2024-09/" title="2024-09 归档">2024-09</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- //progress section -->
+    <!--//testimonials-->
+        <!-- footer -->
+    <footer class="w3l-footer-16 py-5">
+        <div class="container">
+            <div class="below-section text-center">
+                <p class="copy-text">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                    <a href="/">Free V2ray免费梯子节点分享官网</a> 版权所有 Powered by WordPress
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- move top -->
+    <button onclick="topFunction()" id="movetop" title="Go to top">
+        <span class="fas fa-level-up-alt" aria-hidden="true"></span>
+    </button>
+    <script>
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {
+        scrollFunction()
+    };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("movetop").style.display = "block";
+        } else {
+            document.getElementById("movetop").style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+    </script>
+    <!-- //move top -->
+    <!-- common jquery plugin -->
+    <script src="/assets/website/js/frontend/free_v2ray/jquery-3.5.1.min.js"></script>
+    <!-- //common jquery plugin -->
+    <!-- counter for stats -->
+    <script src="/assets/website/js/frontend/free_v2ray/counter.js"></script>
+    <!-- //counter for stats -->
+    <!-- theme switch js (light and dark)-->
+    <script src="/assets/website/js/frontend/free_v2ray/theme-change.js"></script>
+    <script>
+    function autoType(elementClass, typingSpeed) {
+        var thhis = $(elementClass);
+        thhis.css({
+            "position": "relative",
+            "display": "inline-block"
+        });
+        thhis.prepend('<div class="cursor" style="right: initial; left:0;"></div>');
+        thhis = thhis.find(".text-js");
+        var text = thhis.text().trim().split('');
+        var amntOfChars = text.length;
+        var newString = "";
+        thhis.text("|");
+        setTimeout(function() {
+            thhis.css("opacity", 1);
+            thhis.prev().removeAttr("style");
+            thhis.text("");
+            for (var i = 0; i < amntOfChars; i++) {
+                (function(i, char) {
+                    setTimeout(function() {
+                        newString += char;
+                        thhis.text(newString);
+                    }, i * typingSpeed);
+                })(i + 1, text[i]);
+            }
+        }, 1500);
+    }
+
+    $(document).ready(function() {
+        // Now to start autoTyping just call the autoType function with the
+        // class of outer div
+        // The second paramter is the speed between each letter is typed.
+        autoType(".type-js", 200);
+    });
+    </script>
+    <!-- //theme switch js (light and dark)-->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!--bootstrap-->
+    <script src="/assets/website/js/frontend/free_v2ray/bootstrap.min.js"></script>
+    <!-- //bootstrap-->
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+    <!-- //Js scripts -->
+</body>
+
+</html>
