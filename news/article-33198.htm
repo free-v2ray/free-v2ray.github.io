@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://free-v2ray.github.io/news/article-33198.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>etcd分布式键值数据库安装（单机版）</title>
+        <meta name="description" content="etcd分布式键值数据库  1. etcd是什么 2.服务发现(重点) 3. etcd关键词 4. etcd工作原理 5. etcd安装前介绍 6. etcd安装(单节点) etcd基本使用    e" />
+        <link rel="icon" href="/assets/website/img/free_v2ray/favicon.ico" type="image/x-icon"/>
+    <!-- google-fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- //google-fonts -->
+    <!-- Template CSS Style link -->
+    <link rel="stylesheet" href="/assets/website/css/free_v2ray/style-starter.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EFW7LQ09JM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-EFW7LQ09JM');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <!--header-->
+<header id="site-header" class="fixed-top">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg stroke px-0">
+                        <a class="navbar-brand" href="/">
+                <span>
+                    Free V2ray
+                </span>
+            </a>
+                        <!-- if logo is image enable this
+    <a class="navbar-brand" href="#index.html">
+        <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
+    </a> -->
+            <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav ml-lg-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">首页</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">免费节点</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">新闻资讯</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="#">关于</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">联系</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- toggle switch for light and dark theme -->
+            <div class="cont-ser-position mt-lg-2">
+                <nav class="navigation">
+                    <div class="theme-switch-wrapper">
+                        <label class="theme-switch" for="checkbox">
+                            <input type="checkbox" id="checkbox">
+                            <div class="mode-container">
+                                <i class="gg-sun"></i>
+                                <i class="gg-moon"></i>
+                            </div>
+                        </label>
+                    </div>
+                </nav>
+            </div>
+            <!-- //toggle switch for light and dark theme -->
+        </nav>
+    </div>
+</header>
+<!--//header-->
+    <!-- inner banner -->
+    <div class="inner-banner">
+        <div class="w3l-breadcrumb">
+            <div class="container">
+                <h1 class="inner-text-title font-weight-bold">etcd分布式键值数据库安装（单机版）</h1>
+                <ul class="breadcrumbs-custom-path">
+                    <li><a href="/">首页</a></li>
+                    <li><i class="fas fa-angle-right mx-2"></i></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li class="active"><i class="fas fa-angle-right mx-2"></i>正文</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- //inner banner -->
+    <!-- progress section -->
+    <section class="w3l-about-2 py-5">
+        <div class="container py-2">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> <div class="toc"> <h3>etcd分布式键值数据库</h3> <ul> <li><a href="#1_etcd_1" rel="nofollow">1. etcd是什么</a></li> <li><a href="#2_19" rel="nofollow">2.服务发现(重点)</a></li> <li><a href="#3_etcd_45" rel="nofollow">3. etcd关键词</a></li> <li><a href="#4_etcd_75" rel="nofollow">4. etcd工作原理</a></li> <li><a href="#5_etcd_101" rel="nofollow">5. etcd安装前介绍</a></li> <li><a href="#6_etcd_114" rel="nofollow">6. etcd安装(单节点)</a></li> <li><a href="#etcd_276" rel="nofollow">etcd基本使用</a></li> </ul> </div> </h1> <p><strong>etcd是CoreOS团队于2013年6月发起的开源项目，它的目标是构建一个高可用的分布式键值(key-value)数据库.</strong><br /><strong>etcd内部采用<mark>raft协议作为一致性算法</mark>，etcd基于Go语言实现</strong></p> <p>那么这个etcd用在哪呢?</p> <ul> <li>分布式系统，我们部署了多台节点，节点上的数据必须保持一致性</li> <li>这个etcd解决了分布式项目最大的问题也就是一致性问题</li> </ul> <p><strong>etcd作为服务发现系统，有以下的特点：</strong></p> <ol> <li>简单：安装配置简单，而且提供了HTTP API进行交互，使用也很简单</li> <li>安全：支持SSL证书验证</li> <li>快速：根据官方提供的benchmark数据，单实例支持每秒2k+读操作</li> <li>可靠：采用raft算法，实现分布式系统数据的可用性和一致性</li> </ol> <p>etcd项目地址：https://github.com/coreos/etcd/<br /> etcd下载地址：https://github.com/etcd-io/etcd/releases 根据需要查找对应版本下载即可</p> </h1> <p><strong>1.服务发现(重点)<br /> 服务发现（Service Discovery）要解决的是分布式系统中最常见的问题之一，<br /> 即在同一个分布式集群中的进程或服务如何才能找到对方并建立连接</strong></p> <p>在通俗点就是我们消费者去掉生产者的服务的时候 生产者在哪里部署在哪个服务上面我们都不知道<br /> 这个时候就需要我们去找到这个服务，它能让你远程调用的时候性能特别快</p> <ul> <li>微服务协同工作架构中，服务动态添加。随着Docker容器的流行，多种微服务共同协作，构成一个相对功能强大的架构的案例越来越多。</li> <li>透明化的动态添加这些服务的需求也日益强烈。通过服务发现机制，在etcd中注册某个服务名字的目录，在该目录下存储可用的服务节点的IP。</li> <li>在使用服务的过程中，只要从服务目录下查找可用的服务节点去使用即可。</li> <li>注1：etcd可以理解成springcloud中的注册中心，用于服务注册和发现</li> <li>注2：Kubernetes： 将docker集群的配置信息存储到etcd中，用于服务发现和集群管理；etcd<br /> 的一致性对于正确安排和运行服务至关重要。</li> <li>Kubernetes API 服务器将群集状态持久化在 etcd 中。它使用etcd的 watch API监视集群，并发布关键的配置更改</li> </ul> <p><strong>2.消息发布与订阅</strong></p> <p><strong>3.负载均衡</strong></p> <p><strong>4.分布式通知与协调</strong></p> <p><strong>5.分布式锁</strong></p> </h1> <p>Raft：etcd所采用的保证分布式系统强一致性的算法。</p> <p>Node：一个Raft状态机实例。</p> <p>Member： 一个etcd实例。它管理着一个Node，并且可以为客户端请求提供服务。</p> <p>Cluster：由多个Member构成可以协同工作的etcd集群。</p> <p>Peer：对同一个etcd集群中另外一个Member的称呼。</p> <p>Client： 向etcd集群发送HTTP请求的客户端。</p> <p>WAL：预写式日志，etcd用于持久化存储的日志格式。</p> <p>snapshot：etcd防止WAL文件过多而设置的快照，存储etcd数据状态。</p> <p>Proxy：etcd的一种模式，为etcd集群提供反向代理服务。</p> <p>Leader(领导者)：Raft算法中通过竞选而产生的处理所有数据提交的节点。</p> <p>Follower(跟随者)：竞选失败的节点作为Raft中的从属节点，为算法提供强一致性保证。</p> <p>Candidate：当Follower超过一定时间接收不到Leader的心跳时转变为Candidate开始Leader竞选。</p> <p>Term：某个节点成为Leader到下一次竞选开始的时间周期，称为一个Term。</p> <p>Index：数据项编号。Raft中通过Term和Index来定位数据。</p> </h1> <p><img decoding="async" src="http://img.555519.xyz/uploads/20230119/b69db60d8f57aca189098d15cb9f2313.jpg" alt="etcd分布式键值数据库安装（单机版）"></p> <p><strong>从etcd的架构图中我们可以看到，etcd主要分为四个部分</strong></p> <ul> <li> <p>第1部分是HTTP Server： 用于处理用户发送的API请求，以及其它etcd节点的同步与心跳信息请求</p> </li> <li> <p>第2部分是Store：用于处理etcd支持的各类功能的事务，包括数据索引、节点状态变更、监控与反馈、事件处理与执行等等，是etcd对用户提供的大多数API功能的具体实现</p> </li> <li> <p>第3部分是Raft：Raft强一致性算法的具体实现，是etcd的核心</p> </li> <li> <p>第4部分是WAL：Write Ahead<br /> Log（预写式日志），是etcd的数据存储方式。除了在内存中存有所有数据的状态以及节点的索引以外，etcd就通过WAL进行持久化存储。</p> </li> <li> <p>在WAL中，所有的数据提交前都会事先记录日志。Snapshot是为了防止数据过多而进行的状态快照；Entry表示存储的具体日志内容</p> </li> <li> <p>通常，一个用户的请求发送过来，会经由HTTP<br /> Server转发给Store，以进行具体的事务处理。如果涉及到节点修改，则交给Raft模块进行状态变更、日志记录；</p> </li> <li> <p>然后，再同步给别的etcd节点，以确认数据提交；最后，进行数据提交，再次同步</p> </li> </ul> </h1> <p>1.etcd在生产环境中一般推荐集群方式部署</p> <p>2.etcd使用的2个默认端口号：2379和2380<br /> 2379：用于客户端通信(类似于sqlserver的1433/oracle的1521/mysql的3306)<br /> 客户端与<br /> 2380：用于与集群中的Peer通信 集群与集群通讯就需要2380这个端口</p> <p>3.因为etcd是go语言编写的，安装只需要下载对应的二进制文件，并放到合适的路径就行。</p> </h1> <p><strong>第一步：下载并安装</strong><br /> 1.创建并切换到下载目录</p> <ul> <li>mkdir /usr/local/mytools &amp;&amp; cd /usr/local/mytools</li> </ul> <p>2.直接下载速度太慢，建议提前下载安装包再用rz上传</p> <ul> <li>apt install lrzsz</li> <li>wget<br /> https://github.com/etcd-io/etcd/releases/download/v3.4.3/etcd-v3.4.3-linux-amd64.tar.gz</li> </ul> <p>3.解压文件到当前目录</p> <ul> <li>tar xzvf etcd-v3.4.3-linux-amd64.tar.gz</li> </ul> <p><img decoding="async" src="http://img.555519.xyz/uploads/20230119/7263bd250f0f9ae2ba31f21d8beb8bfe.jpg" alt="etcd分布式键值数据库安装（单机版）"><br /> 4.切换至etcd根目录，运行查看命令ls，里面会有一些文档和2个二进制文件etcd和etcdctl。etcd是server端，etcdctl是客户端</p> <ul> <li>cd etcd-v3.4.3-linux-amd64 &amp;&amp; ls</li> </ul> <p>5.将etcd和etcdctl二进制文件复制到/usr/local/bin目录，why?这样系统中可以直接调用etcd/etcdctl这两个程序</p> <ul> <li>cp etcd etcdctl /usr/local/bin</li> </ul> <p><img decoding="async" src="http://img.555519.xyz/uploads/20230119/d517d6e81e097492e1cb829695d5b012.jpg" alt="etcd分布式键值数据库安装（单机版）"></p> <p>6.查看etcd版本</p> <ul> <li>etcd --version</li> </ul> <p>注意：etct3.4.3默认使用v3命令所以步骤7可省略，之前版本此步骤不可少，例如：v3.3.10</p> <p>7.编辑环境变量,设置etcdctl版本(v2/v3)<br /> vi /etc/profile</p> <p>最后一行指定etcdctl命令的版本为v3<br /> export ETCDCTL_API=3</p> <p>刷新配置文件<br /> source /etc/profile<br /><img decoding="async" src="http://img.555519.xyz/uploads/20230119/ad20adb58e7d733819056a37f4d10ae2.jpg" alt="etcd分布式键值数据库安装（单机版）"><br /> 8.证明etcd安装成功<br /> #v3查看版本号<br /> etcdctl version</p> <p>v2查看版本号<br /> etcdctl -version或 etcdctl -v</p> <p>注意：etct3.4.3默认使用v3命令所以步骤7可省略，之前版本此步骤不可少，例如：v3.3.10</p> <p>9.更多命令帮助可以查询<br /> etcdctl --help</p> <p>注1：重要注意事项，etcd版本不一样，命令是不一样，但可以通过etcdctl --help命令查看变化</p> <p><img decoding="async" src="http://img.555519.xyz/uploads/20230119/5aeca077164b3cc041e7d6d186f28ac9.jpg" alt="etcd分布式键值数据库安装（单机版）"></p> <p><strong>第二步.测试，输入命令etcd，即可启动一个单节点的etcd服务,ctrl+c即可停止服务</strong></p> <p>etcd</p> <p>etcd服务启动成功后，控制台会输出很多信息，重要的几个参数说明如下：</p> <ul> <li>1.name表示节点名称，默认为default。</li> <li>2.data-dir 保存日志和快照的目录，默认为当前工作目录default.etcd/目录下。</li> <li>3.在http://localhost:2380和集群中其他节点通信。</li> <li>4.在http://localhost:2379提供客户端交互。</li> <li>5.heartbeat为100ms，该参数的作用是leader多久发送一次心跳到followers，默认值是100ms。</li> <li>6.election为1000ms，该参数的作用是重新投票的超时时间，如果follow在该时间间隔没有收到心跳包，会触发重新投票，默认为1000ms。</li> <li>7.snapshot count为10000，该参数的作用是指定有多少事务被提交时，触发截取快照保存到磁盘。</li> <li>8.集群和每个节点都会生成一个uuid。</li> <li>9.启动的时候会运行raft，选举出leader</li> </ul> <p>注2：采用这种方式启动的etcd只是一个程序，如果启动etcd的窗口被关闭的话则etcd便会被关闭，所以如果要长期使用的话最好是为etcd开启一个服务，在后台运行</p> <p><img decoding="async" src="http://img.555519.xyz/uploads/20230119/5d9ef07f583e99157672794fa9328670.jpg" alt="etcd分布式键值数据库安装（单机版）"></p> <p><strong>三.创建一个etcd服务</strong></p> <p>1.建立etcd相关目录(即数据文件和配置文件的保存位置)<br /> /etc目录是整个Linux系统的中心，其中包含所有系统管理和维护方面的配置文件，所以etcd的配置也放在这里</p> <ul> <li>mkdir -p /var/lib/etcd/ &amp;&amp; mkdir -p /etc/etcd/</li> </ul> <p>2.创建etcd配置文件</p> <ul> <li> <p>vim /etc/etcd/etcd.conf</p> </li> <li> <p>(#) 节点名称</p> </li> <li> <p>ETCD_NAME=“etcd0”</p> </li> <li> <p>(#) 指定数据文件存放位置</p> </li> <li> <p>ETCD_DATA_DIR="/var/lib/etcd/"</p> </li> </ul> <p><img decoding="async" src="http://img.555519.xyz/uploads/20230119/5e7cc8bce4dddc72c2fc917f9458ddf2.jpg" alt="etcd分布式键值数据库安装（单机版）"></p> <p>3.创建systemd配置文件<br /> vim /etc/systemd/system/etcd.service</p> <pre><code>[Unit] Description=Etcd Server After=network.target After=network-online.target Wants=network-online.target  [Service] User=root Type=notify WorkingDirectory=/var/lib/etcd/ ## 根据实际情况修改EnvironmentFile和ExecStart这两个参数值 ## 1.EnvironmentFile即配置文件的位置，注意“-”不能少 EnvironmentFile=-/etc/etcd/etcd.conf ## 2.ExecStart即etcd启动程序位置 ExecStart=/usr/local/bin/etcd Restart=on-failure LimitNOFILE=65536  [Install] WantedBy=multi-user.target </code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads/20230119/31bf9eca55abd21cbf03e6c6200a96b4.jpg" alt="etcd分布式键值数据库安装（单机版）"></p> <p>** 4.启动/停止/查看etcd服务**</p> <p>1.设置开机自启动</p> <ul> <li>systemctl enable etcd</li> </ul> <p>2.重新加载systemd服务</p> <ul> <li>systemctl daemon-reload</li> </ul> <p>3.启动etcd</p> <ul> <li>systemctl start etcd</li> </ul> <p>4.查看etcd运行状态</p> <ul> <li>systemctl status etcd<br /><img decoding="async" src="http://img.555519.xyz/uploads/20230119/7316549f8b3f4f8b17ba881377dc1eaa.jpg" alt="etcd分布式键值数据库安装（单机版）"> </li> </ul> <p>5.停止服务</p> <ul> <li>systemctl stop etcd</li> </ul> <p>6.重启etcd</p> <ul> <li>systemctl restart etcd</li> </ul> <p>至此单机版etcd安装及测试成功成功，但如果启动失败，可通过如下两个命令查看原因</p> <p>查看etcd服务状态<br /> ystemctl status etcd.service</p> <p>日志查看命令<br /> journalctl -xe</p> </h1> <p><strong>etcdctl是一个命令行客户端，可以对etcd服务进行测试或者手动修改数据库内容。另外，etcdctl还支持HTTP API(之后介绍)。<br /> etcdctl支持的命令大体上分为数据库操作和非数据库操作两类</strong></p> <p>1.数据库操作<br /> 数据库操作围绕对键值和目录的CRUD完整生命周期的管理</p> <p>etcd在键的组织上采用了层次化的空间结构(类似于文件系统中目录的概念)，用户指定的键可以为单独的名字，如:testkey，</p> <p>此时实际上放在根目录/下面，也可以为指定目录结构，如/cluster1/node2/testkey，则将创建相应的目录结构</p> <p>0.帮助命令</p> <ul> <li>etcdctl -h</li> </ul> <p><strong>1.put</strong><br /> 指定某个键的值。例如</p> <ul> <li>etcdctl put /testdir/testkey “Hello world”</li> </ul> <p>##控制台输出<br /> Hello world</p> <p>支持的选项包括<br /> –ttl ‘0’ 该键值的超时时间(单位为秒)，不配置(默认为0)则永不超时<br /> –swap-with-value value 若该键现在的值是value，则进行设置操作<br /> –swap-with-index ‘0’ 若该键现在的索引值是指定索引，则进行设置操作</p> <p><strong>2.get</strong><br /> 获取指定键的值。例如：</p> <ul> <li>etcdctl get /testdir/testkey</li> </ul> <p>支持的选项为:<br /> –sort 对结果进行排序<br /> -consistent 将请求发给主节点，保证获取内容的一致性。<br /><img decoding="async" src="http://img.555519.xyz/uploads/20230119/fad5c6071dca9e67880884cabc2dda71.jpg" alt="etcd分布式键值数据库安装（单机版）"><br /><strong>3.del</strong><br /> 清空数据</p> <ul> <li>etcdctl del / --prefix</li> </ul> <p>删除所有/xx前缀的节点</p> <ul> <li>etcdctl del /xx–prefix</li> </ul> <p><strong>4.其它命令</strong><br /> update/rm/mk/mkdir/setdir/updatedir/rmdir/ls/</p> <p>1.非数据库操作<br /> 非数据库操作包括：备份、监测、节点管理等</p> <p>2.backup<br /> 备份etcd的数据</p> <p>3.watch<br /> 监测一个键值的变化，一旦键值发生更新，就会输出最新的值并退出</p> <p>4.在一个终端运行<br /> etcdctl watch key1</p> <p>5.在第2个终端运行put/get/del命令<br /> etcdctl put key1 “zzz”<br /> etcdctl get key1 #因为get操作值无变化，所以watch命令是没有任何反应的<br /> etcdctl del key1</p> <p>6.exec-watch<br /> 监测一个键值的变化，一旦键值发生更新，就执行给定命令</p> <p>7.member<br /> 通过list、add、remove命令列出、添加、删除etcd实例到etcd集群中</p> <p>8.查看版本<br /> curl http://127.0.0.1:2379/version</p> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-32735.htm">【TypeScript】TypeScript 与 JavaScript 有何不同？</a></p>
+                                        <p>下一个：<a href="/news/article-33199.htm">北京宠物店兼职（北京宠物医院兼职）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-30352.htm" title="聊城宠物店洗澡价格（阳谷宠物店洗澡多少钱）">聊城宠物店洗澡价格（阳谷宠物店洗澡多少钱）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-25-node-share.htm" title="10月25日→22.8M/S|2024年最新免费节点Free V2ray订阅链接地址">10月25日→22.8M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-10-free-v2ray.htm" title="10月10日→20.5M/S|2024年最新免费节点Free V2ray订阅链接地址">10月10日→20.5M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-4-free-subscribe-node.htm" title="11月4日→20.7M/S|2024年最新免费节点Free V2ray订阅链接地址">11月4日→20.7M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-27-clash-v2ray-ss-ssr.htm" title="11月27日→22.3M/S|2024年最新免费节点Free V2ray订阅链接地址">11月27日→22.3M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-25-free-subscribe-node.htm" title="9月25日→22.9M/S|2024年最新免费节点Free V2ray订阅链接地址">9月25日→22.9M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                        <li class="py-2"><a href="/news/article-32735.htm" title="【TypeScript】TypeScript 与 JavaScript 有何不同？">【TypeScript】TypeScript 与 JavaScript 有何不同？</a></li>
+                        <li class="py-2"><a href="/news/article-26605.htm" title="长期上门收购各种宠物犬株洲（株洲哪里有收狗的）">长期上门收购各种宠物犬株洲（株洲哪里有收狗的）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-24-node-share.htm" title="10月24日→19.1M/S|2024年最新免费节点Free V2ray订阅链接地址">10月24日→19.1M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-11-free-node-subscribe-links.htm" title="9月11日→19.3M/S|2024年最新免费节点Free V2ray订阅链接地址">9月11日→19.3M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">90</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">20</span> <a href="/date/2024-09/" title="2024-09 归档">2024-09</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- //progress section -->
+    <!--//testimonials-->
+        <!-- footer -->
+    <footer class="w3l-footer-16 py-5">
+        <div class="container">
+            <div class="below-section text-center">
+                <p class="copy-text">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                    <a href="/">Free V2ray免费梯子节点分享官网</a> 版权所有 Powered by WordPress
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- move top -->
+    <button onclick="topFunction()" id="movetop" title="Go to top">
+        <span class="fas fa-level-up-alt" aria-hidden="true"></span>
+    </button>
+    <script>
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {
+        scrollFunction()
+    };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("movetop").style.display = "block";
+        } else {
+            document.getElementById("movetop").style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+    </script>
+    <!-- //move top -->
+    <!-- common jquery plugin -->
+    <script src="/assets/website/js/frontend/free_v2ray/jquery-3.5.1.min.js"></script>
+    <!-- //common jquery plugin -->
+    <!-- counter for stats -->
+    <script src="/assets/website/js/frontend/free_v2ray/counter.js"></script>
+    <!-- //counter for stats -->
+    <!-- theme switch js (light and dark)-->
+    <script src="/assets/website/js/frontend/free_v2ray/theme-change.js"></script>
+    <script>
+    function autoType(elementClass, typingSpeed) {
+        var thhis = $(elementClass);
+        thhis.css({
+            "position": "relative",
+            "display": "inline-block"
+        });
+        thhis.prepend('<div class="cursor" style="right: initial; left:0;"></div>');
+        thhis = thhis.find(".text-js");
+        var text = thhis.text().trim().split('');
+        var amntOfChars = text.length;
+        var newString = "";
+        thhis.text("|");
+        setTimeout(function() {
+            thhis.css("opacity", 1);
+            thhis.prev().removeAttr("style");
+            thhis.text("");
+            for (var i = 0; i < amntOfChars; i++) {
+                (function(i, char) {
+                    setTimeout(function() {
+                        newString += char;
+                        thhis.text(newString);
+                    }, i * typingSpeed);
+                })(i + 1, text[i]);
+            }
+        }, 1500);
+    }
+
+    $(document).ready(function() {
+        // Now to start autoTyping just call the autoType function with the
+        // class of outer div
+        // The second paramter is the speed between each letter is typed.
+        autoType(".type-js", 200);
+    });
+    </script>
+    <!-- //theme switch js (light and dark)-->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!--bootstrap-->
+    <script src="/assets/website/js/frontend/free_v2ray/bootstrap.min.js"></script>
+    <!-- //bootstrap-->
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+    <!-- //Js scripts -->
+</body>
+
+</html>
