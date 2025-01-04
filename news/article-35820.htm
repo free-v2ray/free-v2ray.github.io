@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://free-v2ray.github.io/news/article-35820.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Python3 MySQL 数据库连接</title>
+        <meta name="description" content="PyMySQL 安装  在使用 PyMySQL 之前，我们需要确保 PyMySQL 已安装。  PyMySQL 下载地址：https://github.com/PyMySQL/PyMySQL。  如果" />
+        <link rel="icon" href="/assets/website/img/free_v2ray/favicon.ico" type="image/x-icon"/>
+    <!-- google-fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- //google-fonts -->
+    <!-- Template CSS Style link -->
+    <link rel="stylesheet" href="/assets/website/css/free_v2ray/style-starter.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EFW7LQ09JM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-EFW7LQ09JM');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <!--header-->
+<header id="site-header" class="fixed-top">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg stroke px-0">
+                        <a class="navbar-brand" href="/">
+                <span>
+                    Free V2ray
+                </span>
+            </a>
+                        <!-- if logo is image enable this
+    <a class="navbar-brand" href="#index.html">
+        <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
+    </a> -->
+            <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav ml-lg-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">首页</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">免费节点</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">新闻资讯</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="#">关于</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">联系</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- toggle switch for light and dark theme -->
+            <div class="cont-ser-position mt-lg-2">
+                <nav class="navigation">
+                    <div class="theme-switch-wrapper">
+                        <label class="theme-switch" for="checkbox">
+                            <input type="checkbox" id="checkbox">
+                            <div class="mode-container">
+                                <i class="gg-sun"></i>
+                                <i class="gg-moon"></i>
+                            </div>
+                        </label>
+                    </div>
+                </nav>
+            </div>
+            <!-- //toggle switch for light and dark theme -->
+        </nav>
+    </div>
+</header>
+<!--//header-->
+    <!-- inner banner -->
+    <div class="inner-banner">
+        <div class="w3l-breadcrumb">
+            <div class="container">
+                <h1 class="inner-text-title font-weight-bold">Python3 MySQL 数据库连接</h1>
+                <ul class="breadcrumbs-custom-path">
+                    <li><a href="/">首页</a></li>
+                    <li><i class="fas fa-angle-right mx-2"></i></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li class="active"><i class="fas fa-angle-right mx-2"></i>正文</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- //inner banner -->
+    <!-- progress section -->
+    <section class="w3l-about-2 py-5">
+        <div class="container py-2">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="htmledit_views"> <h2 style="margin:20px 0px 10px; padding:0px; font-family:微软雅黑; line-height:1.7; font-size:16px"> </h2> <h2 style="margin:20px 0px 10px; padding:0px; font-family:微软雅黑; line-height:1.7; font-size:16px"> PyMySQL 安装</h2> <p style="margin-top:0px; margin-bottom:5px; padding-top:0px; padding-bottom:0px; word-wrap:break-word; line-height:1.7; font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14px"> 在使用 PyMySQL 之前，我们需要确保 PyMySQL 已安装。</p> <p style="margin-top:0px; margin-bottom:5px; padding-top:0px; padding-bottom:0px; word-wrap:break-word; line-height:1.7; font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14px"> PyMySQL 下载地址：https://github.com/PyMySQL/PyMySQL。</p> <p style="margin-top:0px; margin-bottom:5px; padding-top:0px; padding-bottom:0px; word-wrap:break-word; line-height:1.7; font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14px"> 如果还未安装，我们可以使用以下命令安装最新版的 PyMySQL：</p> <pre style="margin-top:15px; margin-bottom:15px; padding:10px 5px; overflow:auto; font-family:Consolas,&quot;Courier New&quot;,Courier,monospace; font-size:14px; line-height:1.7; word-break:break-all; color:rgb(51,51,51); background:rgb(239,239,239); border:1px solid rgb(221,221,221); width:auto; max-width:700px; word-wrap:break-word!important; white-space:pre-wrap!important">$ pip install PyMySQL </pre> <p style="margin-top:0px; margin-bottom:5px; padding-top:0px; padding-bottom:0px; word-wrap:break-word; line-height:1.7; font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14px"> 如果你的系统不支持 pip 命令，可以使用以下方式安装：</p> <p style="margin-top:0px; margin-bottom:5px; padding-top:0px; padding-bottom:0px; word-wrap:break-word; line-height:1.7; font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14px"> 1、使用 git 命令下载安装包安装(你也可以手动下载)：</p> <pre style="margin-top:15px; margin-bottom:15px; padding:10px 5px; overflow:auto; font-family:Consolas,&quot;Courier New&quot;,Courier,monospace; font-size:14px; line-height:1.7; word-break:break-all; color:rgb(51,51,51); background:rgb(239,239,239); border:1px solid rgb(221,221,221); width:auto; max-width:700px; word-wrap:break-word!important; white-space:pre-wrap!important">$ git clone https://github.com/PyMySQL/PyMySQL $ cd PyMySQL/ $ python3 setup.py install </pre> <p style="margin-top:0px; margin-bottom:5px; padding-top:0px; padding-bottom:0px; word-wrap:break-word; line-height:1.7; font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14px"> 2、如果需要制定版本号，可以使用 curl 命令来安装：</p> <pre style="margin-top:15px; margin-bottom:15px; padding:10px 5px; overflow:auto; font-family:Consolas,&quot;Courier New&quot;,Courier,monospace; font-size:14px; line-height:1.7; word-break:break-all; color:rgb(51,51,51); background:rgb(239,239,239); border:1px solid rgb(221,221,221); width:auto; max-width:700px; word-wrap:break-word!important; white-space:pre-wrap!important">$ # X.X 为 PyMySQL 的版本号 $ curl -L https://github.com/PyMySQL/PyMySQL/tarball/pymysql-X.X | tar xz $ cd PyMySQL* $ python3 setup.py install $ # 现在你可以删除 PyMySQL* 目录 </pre> <p style="margin-top:0px; margin-bottom:5px; padding-top:0px; padding-bottom:0px; word-wrap:break-word; line-height:1.7; font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14px"> <span style="margin:0px; padding:0px">注意：</span>请确保您有root权限来安装上述模块。</p> <p style="margin-top:0px; margin-bottom:5px; padding-top:0px; padding-bottom:0px; word-wrap:break-word; line-height:1.7; font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14px"> <p style="margin-top:0px; margin-bottom:5px; padding-top:0px; padding-bottom:0px; word-wrap:break-word; line-height:1.7; font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14px"> 安装的过程中可能会出现"ImportError: No module named setuptools"的错误提示，意思是你没有安装setuptools，你可以访问<a target="_blank" href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://pypi.python.org/pypi/setuptools"  style="margin:0px; padding:0px; background:0px 0px; color:rgb(144,11,9); word-break:break-all" rel="nofollow">https://pypi.python.org/pypi/setuptools</a>&nbsp;找到各个系统的安装方法。</p> <p style="margin-top:0px; margin-bottom:5px; padding-top:0px; padding-bottom:0px; word-wrap:break-word; line-height:1.7; font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14px"> Linux 系统安装实例：</p> <pre style="margin-top:15px; margin-bottom:15px; padding:10px 5px; overflow:auto; font-family:Consolas,&quot;Courier New&quot;,Courier,monospace; font-size:14px; line-height:1.7; word-break:break-all; color:rgb(51,51,51); background:rgb(239,239,239); border:1px solid rgb(221,221,221); width:auto; max-width:700px; word-wrap:break-word!important; white-space:pre-wrap!important">$ wget https://bootstrap.pypa.io/ez_setup.py $ python3 ez_setup.py</pre> <h2 style="margin:20px 0px 10px; padding:0px; font-family:微软雅黑; line-height:1.7; font-size:16px"> 数据库连接</h2> <p style="margin-top:0px; margin-bottom:5px; padding-top:0px; padding-bottom:0px; word-wrap:break-word; line-height:1.7; font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14px"> 连接数据库前，请先确认以下事项：</p> <ul style="margin:10px 0px; padding:0px 0px 0px 30px; list-style-position:outside; line-height:1.7; font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14px"> <li style="margin:0px; padding:0px; list-style-type:inherit; list-style-position:initial"> 您已经创建了数据库 TESTDB.</li> <li style="margin:0px; padding:0px; list-style-type:inherit; list-style-position:initial"> 在TESTDB数据库中您已经创建了表 EMPLOYEE</li> <li style="margin:0px; padding:0px; list-style-type:inherit; list-style-position:initial"> EMPLOYEE表字段为 FIRST_NAME, LAST_NAME, AGE, SEX 和 INCOME。</li> <li style="margin:0px; padding:0px; list-style-type:inherit; list-style-position:initial"> 连接数据库TESTDB使用的用户名为 "testuser" ，密码为 "test123",你可以可以自己设定或者直接使用root用户名及其密码，Mysql数据库用户授权请使用Grant命令。</li> <li style="margin:0px; padding:0px; list-style-type:inherit; list-style-position:initial"> 在你的机子上已经安装了 Python MySQLdb 模块。</li> <li style="margin:0px; padding:0px; list-style-type:inherit; list-style-position:initial"> 如果您对sql语句不熟悉，可以访问我们的&nbsp;<a target="_blank" href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.w3cschool.cn/sql/sql-tutorial.html"  style="margin:0px; padding:0px; background:0px 0px; color:rgb(144,11,9); word-break:break-all" rel="nofollow">SQL基础教程</a> </li> </ul> <h3 style="margin:20px 0px 10px; padding:0px; font-family:微软雅黑; line-height:1.7; font-size:14px"> 实例：</h3> <p style="margin-top:0px; margin-bottom:5px; padding-top:0px; padding-bottom:0px; word-wrap:break-word; line-height:1.7; font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14px"> 以下实例链接Mysql的TESTDB数据库：</p> <pre style="margin-top:15px; margin-bottom:15px; padding:10px 5px; overflow:auto; font-family:Consolas,&quot;Courier New&quot;,Courier,monospace; font-size:14px; line-height:1.7; word-break:break-all; color:rgb(51,51,51); background:rgb(239,239,239); border:1px solid rgb(221,221,221); width:auto; max-width:700px; word-wrap:break-word!important; white-space:pre-wrap!important"><pre style="margin-top:15px; margin-bottom:15px; padding:10px 5px; overflow:auto; font-family:Consolas,&quot;Courier New&quot;,Courier,monospace; font-size:14px; line-height:1.7; word-break:break-all; color:rgb(51,51,51); background:rgb(239,239,239); border:1px solid rgb(221,221,221); width:auto; max-width:700px; word-wrap:break-word!important; white-space:pre-wrap!important">#!/usr/bin/python3  import pymysql  # 打开数据库连接 db = pymysql.connect("localhost","testuser","test123","TESTDB" )  # 使用 cursor() 方法创建一个游标对象 cursor cursor = db.cursor()  # 使用 execute()  方法执行 SQL 查询  cursor.execute("SELECT VERSION()")  # 使用 fetchone() 方法获取单条数据. data = cursor.fetchone()  print ("Database version : %s " % data)  # 关闭数据库连接 db.close() </pre> <p style="margin-top:0px; margin-bottom:5px; padding-top:0px; padding-bottom:0px; word-wrap:break-word; line-height:1.7; font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14px">执行以上脚本输出结果如下：</p> <pre style="margin-top:15px; margin-bottom:15px; padding:10px 5px; overflow:auto; font-family:Consolas,&quot;Courier New&quot;,Courier,monospace; font-size:14px; line-height:1.7; word-break:break-all; color:rgb(51,51,51); background:rgb(239,239,239); border:1px solid rgb(221,221,221); width:auto; max-width:700px; word-wrap:break-word!important; white-space:pre-wrap!important">Database version : 5.5.20-log </pre> <hr style="margin:15px 0px; padding:0px; height:0px; border-right:0px; border-bottom:0px; border-left:0px; border-top-style:solid; border-top-color:rgb(170,170,170); font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14px"/> <h2 style="margin:20px 0px 10px; padding:0px; font-family:微软雅黑; line-height:1.7; font-size:16px">创建数据库表</h2> <p style="margin-top:0px; margin-bottom:5px; padding-top:0px; padding-bottom:0px; word-wrap:break-word; line-height:1.7; font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14px">如果数据库连接存在我们可以使用execute()方法来为数据库创建表，如下所示创建表EMPLOYEE：</p> <pre style="margin-top:15px; margin-bottom:15px; padding:10px 5px; overflow:auto; font-family:Consolas,&quot;Courier New&quot;,Courier,monospace; font-size:14px; line-height:1.7; word-break:break-all; color:rgb(51,51,51); background:rgb(239,239,239); border:1px solid rgb(221,221,221); width:auto; max-width:700px; word-wrap:break-word!important; white-space:pre-wrap!important">#!/usr/bin/python3  import pymysql  # 打开数据库连接 db = pymysql.connect("localhost","testuser","test123","TESTDB" )  # 使用 cursor() 方法创建一个游标对象 cursor cursor = db.cursor()  # 使用 execute() 方法执行 SQL，如果表存在则删除 cursor.execute("DROP TABLE IF EXISTS EMPLOYEE")  # 使用预处理语句创建表 sql = """CREATE TABLE EMPLOYEE (          FIRST_NAME  CHAR(20) NOT NULL,          LAST_NAME  CHAR(20),          AGE INT,            SEX CHAR(1),          INCOME FLOAT )"""  cursor.execute(sql)  # 关闭数据库连接 db.close() </pre> <hr style="margin:15px 0px; padding:0px; height:0px; border-right:0px; border-bottom:0px; border-left:0px; border-top-style:solid; border-top-color:rgb(170,170,170); font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14px"/> <h2 style="margin:20px 0px 10px; padding:0px; font-family:微软雅黑; line-height:1.7; font-size:16px">数据库插入操作</h2> <p style="margin-top:0px; margin-bottom:5px; padding-top:0px; padding-bottom:0px; word-wrap:break-word; line-height:1.7; font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14px">以下实例使用执行 SQL INSERT 语句向表 EMPLOYEE 插入记录：</p> <pre style="margin-top:15px; margin-bottom:15px; padding:10px 5px; overflow:auto; font-family:Consolas,&quot;Courier New&quot;,Courier,monospace; font-size:14px; line-height:1.7; word-break:break-all; color:rgb(51,51,51); background:rgb(239,239,239); border:1px solid rgb(221,221,221); width:auto; max-width:700px; word-wrap:break-word!important; white-space:pre-wrap!important">#!/usr/bin/python3  import pymysql  # 打开数据库连接 db = pymysql.connect("localhost","testuser","test123","TESTDB" )  # 使用cursor()方法获取操作游标  cursor = db.cursor()  # SQL 插入语句 sql = """INSERT INTO EMPLOYEE(FIRST_NAME,          LAST_NAME, AGE, SEX, INCOME)          VALUES ('Mac', 'Mohan', 20, 'M', 2000)""" try:    # 执行sql语句    cursor.execute(sql)    # 提交到数据库执行    db.commit() except:    # 如果发生错误则回滚    db.rollback()  # 关闭数据库连接 db.close() </pre> <p style="margin-top:0px; margin-bottom:5px; padding-top:0px; padding-bottom:0px; word-wrap:break-word; line-height:1.7; font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14px">以上例子也可以写成如下形式：</p> <pre style="margin-top:15px; margin-bottom:15px; padding:10px 5px; overflow:auto; font-family:Consolas,&quot;Courier New&quot;,Courier,monospace; font-size:14px; line-height:1.7; word-break:break-all; color:rgb(51,51,51); background:rgb(239,239,239); border:1px solid rgb(221,221,221); width:auto; max-width:700px; word-wrap:break-word!important; white-space:pre-wrap!important">#!/usr/bin/python3  import pymysql  # 打开数据库连接 db = pymysql.connect("localhost","testuser","test123","TESTDB" )  # 使用cursor()方法获取操作游标  cursor = db.cursor()  # SQL 插入语句 sql = "INSERT INTO EMPLOYEE(FIRST_NAME, \        LAST_NAME, AGE, SEX, INCOME) \        VALUES ('%s', '%s', '%d', '%c', '%d' )" % \        ('Mac', 'Mohan', 20, 'M', 2000) try:    # 执行sql语句    cursor.execute(sql)    # 执行sql语句    db.commit() except:    # 发生错误时回滚    db.rollback()  # 关闭数据库连接 db.close() </pre> <p style="margin-top:0px; margin-bottom:5px; padding-top:0px; padding-bottom:0px; word-wrap:break-word; line-height:1.7; font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14px">以下代码使用变量向SQL语句中传递参数:</p> <pre style="margin-top:15px; margin-bottom:15px; padding:10px 5px; overflow:auto; font-family:Consolas,&quot;Courier New&quot;,Courier,monospace; font-size:14px; line-height:1.7; word-break:break-all; color:rgb(51,51,51); background:rgb(239,239,239); border:1px solid rgb(221,221,221); width:auto; max-width:700px; word-wrap:break-word!important; white-space:pre-wrap!important">.................................. user_id = "test123" password = "password"  con.execute('insert into Login values("%s", "%s")' % \              (user_id, password)) .................................. </pre> <hr style="margin:15px 0px; padding:0px; height:0px; border-right:0px; border-bottom:0px; border-left:0px; border-top-style:solid; border-top-color:rgb(170,170,170); font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14px"/> <h2 style="margin:20px 0px 10px; padding:0px; font-family:微软雅黑; line-height:1.7; font-size:16px">数据库查询操作</h2> <p style="margin-top:0px; margin-bottom:5px; padding-top:0px; padding-bottom:0px; word-wrap:break-word; line-height:1.7; font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14px">Python查询Mysql使用 fetchone() 方法获取单条数据, 使用fetchall() 方法获取多条数据。</p> <ul style="margin:10px 0px; padding:0px 0px 0px 30px; list-style-position:outside; line-height:1.7; font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14px"> <li style="margin:0px; padding:0px; list-style-type:inherit; list-style-position:initial"> <span style="margin:0px; padding:0px">fetchone():</span>&nbsp;该方法获取下一个查询结果集。结果集是一个对象</li> <li style="margin:0px; padding:0px; list-style-type:inherit; list-style-position:initial"> <span style="margin:0px; padding:0px">fetchall():&nbsp;</span>接收全部的返回结果行.</li> <li style="margin:0px; padding:0px; list-style-type:inherit; list-style-position:initial"> <span style="margin:0px; padding:0px">rowcount:</span>&nbsp;这是一个只读属性，并返回执行execute()方法后影响的行数。</li> </ul> <h3 style="margin:20px 0px 10px; padding:0px; font-family:微软雅黑; line-height:1.7; font-size:14px">实例：</h3> <p style="margin-top:0px; margin-bottom:5px; padding-top:0px; padding-bottom:0px; word-wrap:break-word; line-height:1.7; font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14px">查询EMPLOYEE表中salary（工资）字段大于1000的所有数据：</p> <pre style="margin-top:15px; margin-bottom:15px; padding:10px 5px; overflow:auto; font-family:Consolas,&quot;Courier New&quot;,Courier,monospace; font-size:14px; line-height:1.7; word-break:break-all; color:rgb(51,51,51); background:rgb(239,239,239); border:1px solid rgb(221,221,221); width:auto; max-width:700px; word-wrap:break-word!important; white-space:pre-wrap!important">#!/usr/bin/python3  import pymysql  # 打开数据库连接 db = pymysql.connect("localhost","testuser","test123","TESTDB" )  # 使用cursor()方法获取操作游标  cursor = db.cursor()  # SQL 查询语句 sql = "SELECT * FROM EMPLOYEE \        WHERE INCOME &gt; '%d'" % (1000) try:    # 执行SQL语句    cursor.execute(sql)    # 获取所有记录列表    results = cursor.fetchall()    for row in results:       fname = row[0]       lname = row[1]       age = row[2]       sex = row[3]       income = row[4]        # 打印结果       print ("fname=%s,lname=%s,age=%d,sex=%s,income=%d" % \              (fname, lname, age, sex, income )) except:    print ("Error: unable to fecth data")  # 关闭数据库连接 db.close() </pre> <p style="margin-top:0px; margin-bottom:5px; padding-top:0px; padding-bottom:0px; word-wrap:break-word; line-height:1.7; font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14px">以上脚本执行结果如下：</p> <pre style="margin-top:15px; margin-bottom:15px; padding:10px 5px; overflow:auto; font-family:Consolas,&quot;Courier New&quot;,Courier,monospace; font-size:14px; line-height:1.7; word-break:break-all; color:rgb(51,51,51); background:rgb(239,239,239); border:1px solid rgb(221,221,221); width:auto; max-width:700px; word-wrap:break-word!important; white-space:pre-wrap!important">fname=Mac, lname=Mohan, age=20, sex=M, income=2000 </pre> <hr style="margin:15px 0px; padding:0px; height:0px; border-right:0px; border-bottom:0px; border-left:0px; border-top-style:solid; border-top-color:rgb(170,170,170); font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14px"/> <h2 style="margin:20px 0px 10px; padding:0px; font-family:微软雅黑; line-height:1.7; font-size:16px">数据库更新操作</h2> <p style="margin-top:0px; margin-bottom:5px; padding-top:0px; padding-bottom:0px; word-wrap:break-word; line-height:1.7; font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14px">更新操作用于更新数据表的的数据，以下实例将 TESTDB表中的 SEX 字段全部修改为 'M'，AGE 字段递增1：</p> <pre style="margin-top:15px; margin-bottom:15px; padding:10px 5px; overflow:auto; font-family:Consolas,&quot;Courier New&quot;,Courier,monospace; font-size:14px; line-height:1.7; word-break:break-all; color:rgb(51,51,51); background:rgb(239,239,239); border:1px solid rgb(221,221,221); width:auto; max-width:700px; word-wrap:break-word!important; white-space:pre-wrap!important">#!/usr/bin/python3  import pymysql  # 打开数据库连接 db = pymysql.connect("localhost","testuser","test123","TESTDB" )  # 使用cursor()方法获取操作游标  cursor = db.cursor()  # SQL 更新语句 sql = "UPDATE EMPLOYEE SET AGE = AGE + 1                           WHERE SEX = '%c'" % ('M') try:    # 执行SQL语句    cursor.execute(sql)    # 提交到数据库执行    db.commit() except:    # 发生错误时回滚    db.rollback()  # 关闭数据库连接 db.close() </pre> <hr style="margin:15px 0px; padding:0px; height:0px; border-right:0px; border-bottom:0px; border-left:0px; border-top-style:solid; border-top-color:rgb(170,170,170); font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14px"/> <h2 style="margin:20px 0px 10px; padding:0px; font-family:微软雅黑; line-height:1.7; font-size:16px">删除操作</h2> <p style="margin-top:0px; margin-bottom:5px; padding-top:0px; padding-bottom:0px; word-wrap:break-word; line-height:1.7; font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14px">删除操作用于删除数据表中的数据，以下实例演示了删除数据表 EMPLOYEE 中 AGE 大于 20 的所有数据：</p> <pre style="margin-top:15px; margin-bottom:15px; padding:10px 5px; overflow:auto; font-family:Consolas,&quot;Courier New&quot;,Courier,monospace; font-size:14px; line-height:1.7; word-break:break-all; color:rgb(51,51,51); background:rgb(239,239,239); border:1px solid rgb(221,221,221); width:auto; max-width:700px; word-wrap:break-word!important; white-space:pre-wrap!important">#!/usr/bin/python3  import pymysql  # 打开数据库连接 db = pymysql.connect("localhost","testuser","test123","TESTDB" )  # 使用cursor()方法获取操作游标  cursor = db.cursor()  # SQL 删除语句 sql = "DELETE FROM EMPLOYEE WHERE AGE &gt; '%d'" % (20) try:    # 执行SQL语句    cursor.execute(sql)    # 提交修改    db.commit() except:    # 发生错误时回滚    db.rollback()  # 关闭连接 db.close() </pre> <hr style="margin:15px 0px; padding:0px; height:0px; border-right:0px; border-bottom:0px; border-left:0px; border-top-style:solid; border-top-color:rgb(170,170,170); font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14px"/> <h2 style="margin:20px 0px 10px; padding:0px; font-family:微软雅黑; line-height:1.7; font-size:16px">执行事务</h2> <p style="margin-top:0px; margin-bottom:5px; padding-top:0px; padding-bottom:0px; word-wrap:break-word; line-height:1.7; font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14px">事务机制可以确保数据一致性。</p> <p style="margin-top:0px; margin-bottom:5px; padding-top:0px; padding-bottom:0px; word-wrap:break-word; line-height:1.7; font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14px">事务应该具有4个属性：原子性、一致性、隔离性、持久性。这四个属性通常称为ACID特性。</p> <ul style="margin:10px 0px; padding:0px 0px 0px 30px; list-style-position:outside; line-height:1.7; font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14px"> <li style="margin:0px; padding:0px; list-style-type:inherit; list-style-position:initial">原子性（atomicity）。一个事务是一个不可分割的工作单位，事务中包括的诸操作要么都做，要么都不做。</li> <li style="margin:0px; padding:0px; list-style-type:inherit; list-style-position:initial">一致性（consistency）。事务必须是使数据库从一个一致性状态变到另一个一致性状态。一致性与原子性是密切相关的。</li> <li style="margin:0px; padding:0px; list-style-type:inherit; list-style-position:initial">隔离性（isolation）。一个事务的执行不能被其他事务干扰。即一个事务内部的操作及使用的数据对并发的其他事务是隔离的，并发执行的各个事务之间不能互相干扰。</li> <li style="margin:0px; padding:0px; list-style-type:inherit; list-style-position:initial">持久性（durability）。持续性也称永久性（permanence），指一个事务一旦提交，它对数据库中数据的改变就应该是永久性的。接下来的其他操作或故障不应该对其有任何影响。</li> </ul> <p style="margin-top:0px; margin-bottom:5px; padding-top:0px; padding-bottom:0px; word-wrap:break-word; line-height:1.7; font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14px">Python DB API 2.0 的事务提供了两个方法 commit 或 rollback。</p> <h3 style="margin:20px 0px 10px; padding:0px; font-family:微软雅黑; line-height:1.7; font-size:14px">实例</h3> <pre style="margin-top:15px; margin-bottom:15px; padding:10px 5px; overflow:auto; font-family:Consolas,&quot;Courier New&quot;,Courier,monospace; font-size:14px; line-height:1.7; word-break:break-all; color:rgb(51,51,51); background:rgb(239,239,239); border:1px solid rgb(221,221,221); width:auto; max-width:700px; word-wrap:break-word!important; white-space:pre-wrap!important"># SQL删除记录语句 sql = "DELETE FROM EMPLOYEE WHERE AGE &gt; '%d'" % (20) try:    # 执行SQL语句    cursor.execute(sql)    # 向数据库提交    db.commit() except:    # 发生错误时回滚    db.rollback() </pre> <p style="margin-top:0px; margin-bottom:5px; padding-top:0px; padding-bottom:0px; word-wrap:break-word; line-height:1.7; font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14px">对于支持事务的数据库， 在Python数据库编程中，当游标建立之时，就自动开始了一个隐形的数据库事务。</p> <p style="margin-top:0px; margin-bottom:5px; padding-top:0px; padding-bottom:0px; word-wrap:break-word; line-height:1.7; font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14px">commit()方法游标的所有更新操作，rollback（）方法回滚当前游标的所有操作。每一个方法都开始了一个新的事务。</p> <hr style="margin:15px 0px; padding:0px; height:0px; border-right:0px; border-bottom:0px; border-left:0px; border-top-style:solid; border-top-color:rgb(170,170,170); font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14px"/> <h2 style="margin:20px 0px 10px; padding:0px; font-family:微软雅黑; line-height:1.7; font-size:16px">错误处理</h2> <p style="margin-top:0px; margin-bottom:5px; padding-top:0px; padding-bottom:0px; word-wrap:break-word; line-height:1.7; font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14px">DB API中定义了一些数据库操作的错误及异常，下表列出了这些错误和异常:</p> <table class="reference" style="margin:4px 0px; padding:0px; border-collapse:collapse; border-spacing:0px; max-width:100%; width:812px; table-layout:fixed; color:rgb(0,0,0); font-family:Verdana,Arial,Helvetica,sans-serif; font-size:14px"> <tbody style="margin:0px; padding:0px"> <tr style="margin:0px; padding:0px; background-color:rgb(239,239,239)"> <th style="margin:0px; padding:3px; text-align:left; background-color:rgb(189,189,189); border-top:1px solid rgb(189,189,189); border-right:1px solid rgb(189,189,189); border-bottom:none; border-left:1px solid rgb(189,189,189); color:rgb(255,255,255); font-size:14px; vertical-align:top; width:121px">异常</th> <th style="margin:0px; padding:3px; text-align:left; background-color:rgb(189,189,189); border-top:1px solid rgb(189,189,189); border-right:1px solid rgb(189,189,189); border-bottom:none; border-left:1px solid rgb(189,189,189); color:rgb(255,255,255); font-size:14px; vertical-align:top">描述</th> </tr> <tr style="margin:0px; padding:0px"> <td style="margin:0px; padding:7px 5px; min-width:40px; height:30px; border:1px solid rgb(221,221,221); vertical-align:top; font-size:14px">Warning</td> <td style="margin:0px; padding:7px 5px; min-width:40px; height:30px; border:1px solid rgb(221,221,221); vertical-align:top; font-size:14px">当有严重警告时触发，例如插入数据是被截断等等。必须是<br />  StandardError 的子类。</td> </tr> <tr style="margin:0px; padding:0px; background-color:rgb(239,239,239)"> <td style="margin:0px; padding:7px 5px; min-width:40px; height:30px; border:1px solid rgb(221,221,221); vertical-align:top; font-size:14px">Error</td> <td style="margin:0px; padding:7px 5px; min-width:40px; height:30px; border:1px solid rgb(221,221,221); vertical-align:top; font-size:14px">警告以外所有其他错误类。必须是<br />  StandardError 的子类。</td> </tr> <tr style="margin:0px; padding:0px"> <td style="margin:0px; padding:7px 5px; min-width:40px; height:30px; border:1px solid rgb(221,221,221); vertical-align:top; font-size:14px">InterfaceError</td> <td style="margin:0px; padding:7px 5px; min-width:40px; height:30px; border:1px solid rgb(221,221,221); vertical-align:top; font-size:14px">当有数据库接口模块本身的错误（而不是数据库的错误）发生时触发。<br />  必须是Error的子类。</td> </tr> <tr style="margin:0px; padding:0px; background-color:rgb(239,239,239)"> <td style="margin:0px; padding:7px 5px; min-width:40px; height:30px; border:1px solid rgb(221,221,221); vertical-align:top; font-size:14px">DatabaseError</td> <td style="margin:0px; padding:7px 5px; min-width:40px; height:30px; border:1px solid rgb(221,221,221); vertical-align:top; font-size:14px">和数据库有关的错误发生时触发。<br />  必须是Error的子类。</td> </tr> <tr style="margin:0px; padding:0px"> <td style="margin:0px; padding:7px 5px; min-width:40px; height:30px; border:1px solid rgb(221,221,221); vertical-align:top; font-size:14px">DataError</td> <td style="margin:0px; padding:7px 5px; min-width:40px; height:30px; border:1px solid rgb(221,221,221); vertical-align:top; font-size:14px">当有数据处理时的错误发生时触发，例如：除零错误，数据超范围等等。<br />  必须是DatabaseError的子类。</td> </tr> <tr style="margin:0px; padding:0px; background-color:rgb(239,239,239)"> <td style="margin:0px; padding:7px 5px; min-width:40px; height:30px; border:1px solid rgb(221,221,221); vertical-align:top; font-size:14px">OperationalError</td> <td style="margin:0px; padding:7px 5px; min-width:40px; height:30px; border:1px solid rgb(221,221,221); vertical-align:top; font-size:14px">指非用户控制的，而是操作数据库时发生的错误。例如：连接意外断开、<br />  数据库名未找到、事务处理失败、内存分配错误等等操作数据库是发生的错误。 必须是DatabaseError的子类。</td> </tr> <tr style="margin:0px; padding:0px"> <td style="margin:0px; padding:7px 5px; min-width:40px; height:30px; border:1px solid rgb(221,221,221); vertical-align:top; font-size:14px">IntegrityError</td> <td style="margin:0px; padding:7px 5px; min-width:40px; height:30px; border:1px solid rgb(221,221,221); vertical-align:top; font-size:14px">完整性相关的错误，例如外键检查失败等。必须是DatabaseError子类。</td> </tr> <tr style="margin:0px; padding:0px; background-color:rgb(239,239,239)"> <td style="margin:0px; padding:7px 5px; min-width:40px; height:30px; border:1px solid rgb(221,221,221); vertical-align:top; font-size:14px">InternalError</td> <td style="margin:0px; padding:7px 5px; min-width:40px; height:30px; border:1px solid rgb(221,221,221); vertical-align:top; font-size:14px">数据库的内部错误，例如游标（cursor）失效了、事务同步失败等等。<br />  必须是DatabaseError子类。</td> </tr> <tr style="margin:0px; padding:0px"> <td style="margin:0px; padding:7px 5px; min-width:40px; height:30px; border:1px solid rgb(221,221,221); vertical-align:top; font-size:14px">ProgrammingError</td> <td style="margin:0px; padding:7px 5px; min-width:40px; height:30px; border:1px solid rgb(221,221,221); vertical-align:top; font-size:14px">程序错误，例如数据表（table）没找到或已存在、SQL语句语法错误、<br />  参数数量错误等等。必须是DatabaseError的子类。</td> </tr> <tr style="margin:0px; padding:0px; background-color:rgb(239,239,239)"> <td style="margin:0px; padding:7px 5px; min-width:40px; height:30px; border:1px solid rgb(221,221,221); vertical-align:top; font-size:14px">NotSupportedError</td> <td style="margin:0px; padding:7px 5px; min-width:40px; height:30px; border:1px solid rgb(221,221,221); vertical-align:top; font-size:14px">不支持错误，指使用了数据库不支持的函数或API等。例如在连接对象上<br />  使用.rollback()函数，然而数据库并不支持事务或者事务已关闭。 必须是DatabaseError的子类。</td> </tr> </tbody> </table> <p> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-35163.htm">动物打疫苗要多少钱 动物打疫苗要多少钱一针</a></p>
+                                        <p>下一个：<a href="/news/article-35821.htm">小型宠物粮食加工设备厂家排名前十（小型宠物粮食加工设备厂家排名前十名）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-29877.htm" title="宠物粮生产利润（宠物粮生产设备多少钱）">宠物粮生产利润（宠物粮生产设备多少钱）</a></li>
+                        <li class="py-2"><a href="/news/article-28460.htm" title="宠物店一般卖几个月的猫比较好（宠物店一般卖几个月的猫比较好呢）">宠物店一般卖几个月的猫比较好（宠物店一般卖几个月的猫比较好呢）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-22-node-share.htm" title="9月22日→19.4M/S|2024年最新免费节点Free V2ray订阅链接地址">9月22日→19.4M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-18-free-v2ray-subscribe.htm" title="11月18日→18.1M/S|2024年最新免费节点Free V2ray订阅链接地址">11月18日→18.1M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                        <li class="py-2"><a href="/news/article-21972.htm" title="附近美甲美睫培训学校哪家好一点（美甲美睫美容学校）">附近美甲美睫培训学校哪家好一点（美甲美睫美容学校）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-14-node-share.htm" title="10月14日→22.3M/S|2024年最新免费节点Free V2ray订阅链接地址">10月14日→22.3M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-1-free-node-subscribe.htm" title="11月1日→19.7M/S|2024年最新免费节点Free V2ray订阅链接地址">11月1日→19.7M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-29-free-v2ray.htm" title="9月29日→19.5M/S|2024年最新免费节点Free V2ray订阅链接地址">9月29日→19.5M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                        <li class="py-2"><a href="/news/article-32252.htm" title="动物医院规模排名前十（动物医院全国排名）">动物医院规模排名前十（动物医院全国排名）</a></li>
+                        <li class="py-2"><a href="/news/article-33684.htm" title="动物打的疫苗是什么疫苗啊（给动物打的疫苗是什么）">动物打的疫苗是什么疫苗啊（给动物打的疫苗是什么）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">12</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">20</span> <a href="/date/2024-09/" title="2024-09 归档">2024-09</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- //progress section -->
+    <!--//testimonials-->
+        <!-- footer -->
+    <footer class="w3l-footer-16 py-5">
+        <div class="container">
+            <div class="below-section text-center">
+                <p class="copy-text">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                    <a href="/">Free V2ray免费梯子节点分享官网</a> 版权所有 Powered by WordPress
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- move top -->
+    <button onclick="topFunction()" id="movetop" title="Go to top">
+        <span class="fas fa-level-up-alt" aria-hidden="true"></span>
+    </button>
+    <script>
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {
+        scrollFunction()
+    };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("movetop").style.display = "block";
+        } else {
+            document.getElementById("movetop").style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+    </script>
+    <!-- //move top -->
+    <!-- common jquery plugin -->
+    <script src="/assets/website/js/frontend/free_v2ray/jquery-3.5.1.min.js"></script>
+    <!-- //common jquery plugin -->
+    <!-- counter for stats -->
+    <script src="/assets/website/js/frontend/free_v2ray/counter.js"></script>
+    <!-- //counter for stats -->
+    <!-- theme switch js (light and dark)-->
+    <script src="/assets/website/js/frontend/free_v2ray/theme-change.js"></script>
+    <script>
+    function autoType(elementClass, typingSpeed) {
+        var thhis = $(elementClass);
+        thhis.css({
+            "position": "relative",
+            "display": "inline-block"
+        });
+        thhis.prepend('<div class="cursor" style="right: initial; left:0;"></div>');
+        thhis = thhis.find(".text-js");
+        var text = thhis.text().trim().split('');
+        var amntOfChars = text.length;
+        var newString = "";
+        thhis.text("|");
+        setTimeout(function() {
+            thhis.css("opacity", 1);
+            thhis.prev().removeAttr("style");
+            thhis.text("");
+            for (var i = 0; i < amntOfChars; i++) {
+                (function(i, char) {
+                    setTimeout(function() {
+                        newString += char;
+                        thhis.text(newString);
+                    }, i * typingSpeed);
+                })(i + 1, text[i]);
+            }
+        }, 1500);
+    }
+
+    $(document).ready(function() {
+        // Now to start autoTyping just call the autoType function with the
+        // class of outer div
+        // The second paramter is the speed between each letter is typed.
+        autoType(".type-js", 200);
+    });
+    </script>
+    <!-- //theme switch js (light and dark)-->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!--bootstrap-->
+    <script src="/assets/website/js/frontend/free_v2ray/bootstrap.min.js"></script>
+    <!-- //bootstrap-->
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+    <!-- //Js scripts -->
+</body>
+
+</html>
