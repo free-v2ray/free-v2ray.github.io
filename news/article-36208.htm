@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://free-v2ray.github.io/news/article-36208.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Redis的高并发是如何支持的</title>
+        <meta name="description" content="redis高并发：主从架构，一主多从，一般来说，很多项目其实就足够了，单主用来写入数据，单机几万QPS，多从用来查询数据，多个从实例可以提供每秒10万的QPS。 redis高并发的同时，还需要容纳大量" />
+        <link rel="icon" href="/assets/website/img/free_v2ray/favicon.ico" type="image/x-icon"/>
+    <!-- google-fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- //google-fonts -->
+    <!-- Template CSS Style link -->
+    <link rel="stylesheet" href="/assets/website/css/free_v2ray/style-starter.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EFW7LQ09JM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-EFW7LQ09JM');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <!--header-->
+<header id="site-header" class="fixed-top">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg stroke px-0">
+                        <a class="navbar-brand" href="/">
+                <span>
+                    Free V2ray
+                </span>
+            </a>
+                        <!-- if logo is image enable this
+    <a class="navbar-brand" href="#index.html">
+        <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
+    </a> -->
+            <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav ml-lg-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">首页</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">免费节点</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">新闻资讯</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="#">关于</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">联系</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- toggle switch for light and dark theme -->
+            <div class="cont-ser-position mt-lg-2">
+                <nav class="navigation">
+                    <div class="theme-switch-wrapper">
+                        <label class="theme-switch" for="checkbox">
+                            <input type="checkbox" id="checkbox">
+                            <div class="mode-container">
+                                <i class="gg-sun"></i>
+                                <i class="gg-moon"></i>
+                            </div>
+                        </label>
+                    </div>
+                </nav>
+            </div>
+            <!-- //toggle switch for light and dark theme -->
+        </nav>
+    </div>
+</header>
+<!--//header-->
+    <!-- inner banner -->
+    <div class="inner-banner">
+        <div class="w3l-breadcrumb">
+            <div class="container">
+                <h1 class="inner-text-title font-weight-bold">Redis的高并发是如何支持的</h1>
+                <ul class="breadcrumbs-custom-path">
+                    <li><a href="/">首页</a></li>
+                    <li><i class="fas fa-angle-right mx-2"></i></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li class="active"><i class="fas fa-angle-right mx-2"></i>正文</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- //inner banner -->
+    <!-- progress section -->
+    <section class="w3l-about-2 py-5">
+        <div class="container py-2">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="htmledit_views"> <p>redis高并发：主从架构，一主多从，一般来说，很多项目其实就足够了，单主用来写入数据，单机几万QPS，多从用来查询数据，多个从实例可以提供每秒10万的QPS。</p> <p>redis高并发的同时，还需要容纳大量的数据：一主多从，每个实例都容纳了完整的数据，比如redis主就10G的内存量，其实你就最对只能容纳10g的数据量。如果你的缓存要容纳的数据量很大，达到了几十g，甚至几百g，或者是几t，那你就需要redis集群，而且用redis集群之后，可以提供可能每秒几十万的读写并发。</p> <p>redis高可用：如果你做主从架构部署，其实就是加上哨兵就可以了，就可以实现，任何一个实例宕机，自动会进行主备切换。</p> <p><strong>redis 实现高并发主要依靠主从架构，一主多从.</strong></p> <p>对于性能来说，单主用来写入数据，单机几万QPS，多从用来查询数据，多个从实例可以提供每秒 10w 的 QPS。</p> <p><strong>如果想要在实现高并发的同时，容纳大量的数据，那么就需要 redis 集群。</strong></p> <p>&nbsp;使用 redis cluster 模式，可以提供每秒几十万的读写并发。</p> <p><strong>redis 高可用，如果是做主从架构部署，那么加上哨兵就可以了，就可以实现，任何一个实例宕机，可以进行主备切换。</strong></p> <p>所以就有了几个问题？</p> <ul> <li> <p>什么是主从架构，主从如何备份？</p> </li> <li> <p>什么是redis cluster模式？</p> </li> <li> <p>什么是哨兵集群?</p> </li> </ul> </h1> <p>主从(master-slave)架构，一主多从，主负责写，并且将数据复制到其它的 slave 节点，从节点负责读。所有的读请求全部走从节点。这样也可以很轻松实现水平扩容，支撑读高并发。</p> <p>Redis虽然读取写入的速度都特别快，但是也会产生读压力特别大的情况，所以为了缓解读的压力，所以进行读写分类，并对读进行扩展。</p> <h2>优点：</h2> <p>1、解决数据备份问题</p> <p>2、做到读写分离，提高服务器性能</p> <h2>缺点：</h2> <p>1、每个客户端连接redis实例的时候都是指定了ip和端口号的，如果所连接的redis实例因为故障下线了，而主从模式也没有提供一定的手段通知客户端另外可连接的客户端地址，因而需要手动更改客户端配置重新连接</p> <p>2、主从模式下，如果主节点由于故障下线了，那么从节点因为没有主节点而同步中断，因而需要人工进行故障转移工作</p> <p>3、无法实现动态扩容</p> <p><img decoding="async" alt="" src="http://img.555519.xyz/uploads/20221230/0a18d551f02065bd73a5596e763217d1.jpg"></p> <p>主从架构就涉及到一个数据从主节点同步到从节点的问题。涉及redis replication问题</p> <h2>redis replication 的核心机制</h2> <p>当启动一个 slave node 的时候，它会发送一个 PSYNC 命令给 master node,如果这是第一次连接master node 那么会触发一次 full resynchronization 全量复制.全量复制的时候，master 会启动一个后台线程，开始生成一份 RDB 快照文件，同时还会将从客户端新收到的所有写命令缓存在内存中。最后将生成的RDB文件发送给slave,slave会先写入本地磁盘，然后再从本地磁盘加载到内存中，接着 master 会将内存中缓存的写命令发送到 slave，slave 也会同步这些数据。</p> <p>如果是连接之后 master node 仅会复制给 slave 部分缺少的数据。master 如果发现有多个slave node都来重新连接，仅仅会启动一个rdb save操作，用一份数据服务所有slave node。</p> <p>注：redis2.8 开始，就支持主从复制的断点续传，如果主从复制过程中，断掉了，那么可以接着上次复制的地方，继续复制下去，而不是从头开始复制一份。 master node 会在内存中维护一个 backlog，master 和 slave 都会保存一个 replica offset 还有一个 master run id，offset 就是保存在 backlog 中的。如果 master 和 slave 网络连接断掉了，slave 会让 master 从上次 replica offset 开始继续复制，如果没有找到对应的 offset，那么就会执行一次 resynchronization。</p> </h1> <h2>master和slave都会维护一个offset</h2> <p>master会在自身不断累加offset，slave也会在自身不断累加offset slave每秒都会上报自己的offset给master，同时master也会保存每个slave的offset，检测offset来保证数据的一致性</p> <h2>backlog</h2> <p>master node有一个backlog，默认是1MB大小 master node给slave node复制数据时，也会将数据在backlog中同步写一份 backlog主要是用来做全量复制中断候的增量复制的</p> <h2>master run id</h2> <p>如果根据host+ip定位master node，是不靠谱的，如果master node重启或者数据出现了变化，那么slave node应该根据不同的run id区分，run id不同就做全量复制 如果需要不更改run id重启redis，可以使用redis-cli debug reload命令</p> <h2>psync</h2> <p>从节点使用psync从master node进行复制，psync runid offset。master node会根据自身的情况返回响应信息，可能是FULLRESYNC runid offset触发全量复制，可能是CONTINUE触发增量复制</p> </h1> <p>redis 服务节点中任何两个节点之间都是相互连通的。客户端可以与任何一个节点相连接，然后就可以访问集群中的任何一个节点。对其进行存取和其他操作。</p> <p>一般集群建议搭建三主三从架构，三主提供服务，三从提供备份功能。</p> <p>每一个节点都存有这个集群所有主节点以及从节点的信息。</p> <h2>Redis集群数据分片</h2> <p>在redis的每一个节点上，都有这么两个东西，一个是插槽（slot）可以理解为是一个可以存储两个数值的一个变量这个变量的取值范围是：0-16383。还有一个就是cluster我个人把这个cluster理解为是一个集群管理的插件。当我们的存取的key到达的时候，redis会根据crc16的算法得出一个结果，然后把结果对 16384 求余数，这样每个 key 都会对应一个编号在 0-16383 之间的哈希槽，通过这个值，去找到对应的插槽所对应的节点，然后直接自动跳转到这个对应的节点上进行存取操作。</p> <p>投票过程是集群中所有master参与,如果半数以上master节点与master节点通信超时(cluster-node-timeout),认为当前master节点挂掉.</p> <p><strong>什么时候整个集群不可用(cluster_state:fail)?</strong></p> <p>如果集群任意master挂掉,且当前master没有slave.集群进入fail状态,也可以理解成集群的slot映射[0-16383]不完整时进入fail状态.</p> <p>一个Redis实例具备了“数据存储”和“路由重定向”，完全去中心化的设计。这带来的好处是部署非常简单，直接部署Redis就行，不像Codis有那么多的组件和依赖。但带来的问题是很难对业务进行无痛的升级，如果哪天Redis集群出了什么严重的Bug，就只能回滚整个Redis集群。</p> <h2>优点：</h2> <p>1、有效的解决了redis在分布式方面的需求</p> <p>2、遇到单机内存，并发和流量瓶颈等问题时，可采用Cluster方案达到负载均衡的目的</p> <p>3、可实现动态扩容</p> <p>4、P2P模式，无中心化</p> <p>5、通过Gossip协议同步节点信息</p> <p>6、自动故障转移、Slot迁移中数据可用</p> <h2>缺点：</h2> <p>1、架构比较新，最佳实践较少</p> <p>2、为了性能提升，客户端需要缓存路由表信息</p> <p>3、节点发现、reshard操作不够自动化</p> </h1> <h2>哨兵的功能：</h2> <ul> <li>集群监控：负责监控 redis master 和 slave 进程是否正常工作。</li> <li>消息通知：如果某个 redis 实例有故障，那么哨兵负责发送消息作为报警通知给管理员。</li> <li>故障转移：如果 master node 挂掉了，会自动转移到 slave node 上。</li> <li>配置中心：如果故障转移发生了，通知 client 客户端新的 master 地址。</li> </ul> <p>哨兵用于实现 redis 集群的高可用，本身也是分布式的，作为一个哨兵集群去运行，互相协同工作。</p> <p>故障转移时，判断一个 master node 是否宕机了，需要大部分的哨兵都同意才行，涉及到了分布式选举的问题。</p> <p>即使部分哨兵节点挂掉了，哨兵集群还是能正常工作的。</p> <h2>哨兵的核心知识</h2> <ul> <li>哨兵至少需要 3 个实例，来保证自己的健壮性。</li> <li>哨兵 + redis 主从的部署架构，是不保证数据零丢失的，只能保证 redis 集群的高可用性。</li> <li>对于哨兵 + redis 主从这种复杂的部署架构，尽量在测试环境和生产环境，都进行充足的测试和演练。</li> </ul> <h2>数据丢失问题的解决方案？</h2> <p><code>进行如下配置： min-slaves-to-write 1 min-slaves-max-lag 10</code></p> <p>要求至少有 1 个 slave，数据复制和同步的延迟不能超过 10 秒。如果说一旦所有的 slave，数据复制和同步的延迟都超过了 10 秒钟，那么这个时候，master 就不会再接收任何请求了。</p> <pre><code>    减少异步复制数据的丢失     有了 min-slaves-max-lag 这个配置，就可以确保说，一旦 slave 复制数据和 ack 延时太长，就认为可能 master 宕机后损失的数据太多了，那么就拒绝写请求，这样可以把 master 宕机时由于部分数据未同步到 slave 导致的数据丢失降低的可控范围内。     减少脑裂的数据丢失     如果一个 master 出现了脑裂，跟其他 slave 丢了连接，那么上面两个配置可以确保说，如果不能继续给指定数量的 slave 发送数据，而且 slave 超过 10 秒没有给自己 ack 消息，那么就直接拒绝客户端的写请求。 </code></pre> </h1> <h2>1.sdown 和 odown 转换机制</h2> <p>sdown 是主观宕机，就一个哨兵如果自己觉得一个 master 宕机了，那么就是主观宕机。odown 是客观宕机，如果 quorum 数量的哨兵都觉得一个 master 宕机了，那么就是客观宕机。</p> <p>sdown 达成的条件很简单，如果一个哨兵 ping 一个 master，超过了 is-master-down-after-milliseconds 指定的毫秒数之后，就主观认为 master 宕机了。sdown到odown转换的条件很简单，如果一个哨兵在指定时间内，收到了 quorum 数量的 其它哨兵也认为那个 master 是 sdown 的，那么就认为是 odown 了，客观认为master宕机。</p> <h2>2.哨兵集群的自动发现机制</h2> <p>哨兵互相之间的发现，是通过 redis 的 pub/sub 系统实现的，每个哨兵都会往sentinel:hello这个 channel 里发送一个消息，这时候所有其他哨兵都可以消费到这个消息，并感知到其他的哨兵的存在。 每隔两秒钟，每个哨兵都会往自己监控的某个 master+slaves 对应的sentinel:hello channel 里发送一个消息，内容是自己的 host、ip 和 runid 还有对这个 master 的监控配置。 每个哨兵也会去监听自己监控的每个 master+slaves 对应的sentinel:hello channel，然后去感知到同样在监听这个 master+slaves 的其他哨兵的存在。 每个哨兵还会跟其他哨兵交换对 master 的监控配置，互相进行监控配置的同步。</p> <h2>3.slave 配置的自动纠正</h2> <p>哨兵会负责自动纠正 slave 的一些配置，比如 slave 如果要成为潜在的 master 候选人，哨兵会确保 slave 复制现有 master 的数据; 如果 slave 连接到了一个错误的 master 上，比如故障转移之后，那么哨兵会确保它们连接到正确的 master 上。</p> <h2>4.slave-&gt;master 选举算法</h2> <p>如果一个 master 被认为 odown 了，而且 majority 数量的哨兵都允许主备切换，那么某个哨兵就会执行主备切换操作，此时首先要选举一个 slave 来，会考虑 slave 的一些信息：</p> <pre><code>    跟 master 断开连接的时长     0slave 优先级     复制 offset     run id </code></pre> <p>如果一个 slave 跟 master 断开连接的时间已经超过了down-after-milliseconds的 10 倍，外加 master 宕机的时长，那么 slave 就被认为不适合选举为 master。</p> <p><code>(down-after-milliseconds * 10) + milliseconds_since_master_is_in_SDOWN_state</code></p> <p>接下来会对 slave 进行排序：</p> <p><code>按照 slave 优先级进行排序，slave priority 越低，优先级就越高。 如果 slave priority 相同，那么看 replica offset，哪个 slave 复制了越多的数据，offset 越靠后，优先级就越高。 如果上面两个条件都相同，那么选择一个 run id 比较小的那个 slave。&nbsp;</code></p> <h2>5.quorum 和 majority</h2> <p>每次一个哨兵要做主备切换，首先需要 quorum 数量的哨兵认为 odown，然后选举出一个哨兵来做切换，这个哨兵还得得到 majority 哨兵的授权，才能正式执行切换。 如果 quorum &lt; majority，比如 5 个哨兵，majority 就是 3，quorum 设置为2，那么就 3 个哨兵授权就可以执行切换。 但是如果 quorum &gt;= majority，那么必须 quorum 数量的哨兵都授权，比如 5 个哨兵，quorum 是 5，那么必须 5 个哨兵都同意授权，才能执行切换。</p> <h2>6.configuration epoch</h2> <p>哨兵会对一套 redis master+slaves 进行监控，有相应的监控的配置。 执行切换的那个哨兵，会从要切换到的新 master（salve-&gt;master）那里得到一个 configuration epoch，这就是一个 version 号，每次切换的 version 号都必须是唯一的。 如果第一个选举出的哨兵切换失败了，那么其他哨兵，会等待 failover-timeout 时间，然后接替继续执行切换，此时会重新获取一个新的 configuration epoch，作为新的 version 号。</p> <h2>7.configuraiton 传播</h2> <p>哨兵完成切换之后，会在自己本地更新生成最新的 master 配置，然后同步给其他的哨兵，就是通过之前说的 pub/sub 消息机制。 这里之前的 version 号就很重要了，因为各种消息都是通过一个 channel 去发布和监听的，所以一个哨兵完成一次新的切换之后，新的 master 配置是跟着新的 version 号的。其他的哨兵都是根据版本号的大小来更新自己的 master 配置的。</p> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-35821.htm">小型宠物粮食加工设备厂家排名前十（小型宠物粮食加工设备厂家排名前十名）</a></p>
+                                        <p>下一个：<a href="/news/article-36209.htm">中牧股份的疫苗怎么样（中牧疫苗销售点有哪些）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-11-19-clash-v2ray-ss-ssr.htm" title="11月19日→22M/S|2024年最新免费节点Free V2ray订阅链接地址">11月19日→22M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-28-node-share-links.htm" title="10月28日→21.7M/S|2024年最新免费节点Free V2ray订阅链接地址">10月28日→21.7M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-15-free-v2ray-subscribe.htm" title="12月15日→20.6M/S|2024年最新免费节点Free V2ray订阅链接地址">12月15日→20.6M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-23-node-share.htm" title="12月23日→22.4M/S|2024年最新免费节点Free V2ray订阅链接地址分享">12月23日→22.4M/S|2024年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-30352.htm" title="聊城宠物店洗澡价格（阳谷宠物店洗澡多少钱）">聊城宠物店洗澡价格（阳谷宠物店洗澡多少钱）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-27-node-share.htm" title="10月27日→19.8M/S|2024年最新免费节点Free V2ray订阅链接地址">10月27日→19.8M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-1-free-subscribe-node.htm" title="1月1日→18M/S|2025年最新免费节点Free V2ray订阅链接地址分享">1月1日→18M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-25211.htm" title="哪里能免费领养宠物猫咪（去哪里免费领养猫咪）">哪里能免费领养宠物猫咪（去哪里免费领养猫咪）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-10-free-node-subscribe-links.htm" title="12月10日→21.5M/S|2024年最新免费节点Free V2ray订阅链接地址">12月10日→21.5M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-9-free-high-speed-nodes.htm" title="12月9日→19.9M/S|2024年最新免费节点Free V2ray订阅链接地址">12月9日→19.9M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">21</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">25</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- //progress section -->
+    <!--//testimonials-->
+        <!-- footer -->
+    <footer class="w3l-footer-16 py-5">
+        <div class="container">
+            <div class="below-section text-center">
+                <p class="copy-text">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                    <a href="/">Free V2ray免费梯子节点分享官网</a> 版权所有 Powered by WordPress
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- move top -->
+    <button onclick="topFunction()" id="movetop" title="Go to top">
+        <span class="fas fa-level-up-alt" aria-hidden="true"></span>
+    </button>
+    <script>
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {
+        scrollFunction()
+    };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("movetop").style.display = "block";
+        } else {
+            document.getElementById("movetop").style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+    </script>
+    <!-- //move top -->
+    <!-- common jquery plugin -->
+    <script src="/assets/website/js/frontend/free_v2ray/jquery-3.5.1.min.js"></script>
+    <!-- //common jquery plugin -->
+    <!-- counter for stats -->
+    <script src="/assets/website/js/frontend/free_v2ray/counter.js"></script>
+    <!-- //counter for stats -->
+    <!-- theme switch js (light and dark)-->
+    <script src="/assets/website/js/frontend/free_v2ray/theme-change.js"></script>
+    <script>
+    function autoType(elementClass, typingSpeed) {
+        var thhis = $(elementClass);
+        thhis.css({
+            "position": "relative",
+            "display": "inline-block"
+        });
+        thhis.prepend('<div class="cursor" style="right: initial; left:0;"></div>');
+        thhis = thhis.find(".text-js");
+        var text = thhis.text().trim().split('');
+        var amntOfChars = text.length;
+        var newString = "";
+        thhis.text("|");
+        setTimeout(function() {
+            thhis.css("opacity", 1);
+            thhis.prev().removeAttr("style");
+            thhis.text("");
+            for (var i = 0; i < amntOfChars; i++) {
+                (function(i, char) {
+                    setTimeout(function() {
+                        newString += char;
+                        thhis.text(newString);
+                    }, i * typingSpeed);
+                })(i + 1, text[i]);
+            }
+        }, 1500);
+    }
+
+    $(document).ready(function() {
+        // Now to start autoTyping just call the autoType function with the
+        // class of outer div
+        // The second paramter is the speed between each letter is typed.
+        autoType(".type-js", 200);
+    });
+    </script>
+    <!-- //theme switch js (light and dark)-->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!--bootstrap-->
+    <script src="/assets/website/js/frontend/free_v2ray/bootstrap.min.js"></script>
+    <!-- //bootstrap-->
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+    <!-- //Js scripts -->
+</body>
+
+</html>
