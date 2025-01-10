@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://free-v2ray.github.io/news/article-38510.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>关于VUE中组件之间传值以及调用方法汇总</title>
+        <meta name="description" content="VUE中组件之间传值，总结来讲有三种情况，分别是：父组件对子组件、子组件对父组件以及兄弟组件之间传值以及调用。    一、父组件==&gt;子组件  1.父组件传值给子组件，通过类似于属性绑定的方式，" />
+        <link rel="icon" href="/assets/website/img/free_v2ray/favicon.ico" type="image/x-icon"/>
+    <!-- google-fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- //google-fonts -->
+    <!-- Template CSS Style link -->
+    <link rel="stylesheet" href="/assets/website/css/free_v2ray/style-starter.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EFW7LQ09JM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-EFW7LQ09JM');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <!--header-->
+<header id="site-header" class="fixed-top">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg stroke px-0">
+                        <a class="navbar-brand" href="/">
+                <span>
+                    Free V2ray
+                </span>
+            </a>
+                        <!-- if logo is image enable this
+    <a class="navbar-brand" href="#index.html">
+        <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
+    </a> -->
+            <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav ml-lg-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">首页</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">免费节点</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">新闻资讯</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="#">关于</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">联系</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- toggle switch for light and dark theme -->
+            <div class="cont-ser-position mt-lg-2">
+                <nav class="navigation">
+                    <div class="theme-switch-wrapper">
+                        <label class="theme-switch" for="checkbox">
+                            <input type="checkbox" id="checkbox">
+                            <div class="mode-container">
+                                <i class="gg-sun"></i>
+                                <i class="gg-moon"></i>
+                            </div>
+                        </label>
+                    </div>
+                </nav>
+            </div>
+            <!-- //toggle switch for light and dark theme -->
+        </nav>
+    </div>
+</header>
+<!--//header-->
+    <!-- inner banner -->
+    <div class="inner-banner">
+        <div class="w3l-breadcrumb">
+            <div class="container">
+                <h1 class="inner-text-title font-weight-bold">关于VUE中组件之间传值以及调用方法汇总</h1>
+                <ul class="breadcrumbs-custom-path">
+                    <li><a href="/">首页</a></li>
+                    <li><i class="fas fa-angle-right mx-2"></i></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li class="active"><i class="fas fa-angle-right mx-2"></i>正文</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- //inner banner -->
+    <!-- progress section -->
+    <section class="w3l-about-2 py-5">
+        <div class="container py-2">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> <h3 id="vue中组件之间传值总结来讲有三种情况分别是父组件对子组件子组件对父组件以及兄弟组件之间传值以及调用">VUE中组件之间传值，总结来讲有三种情况，分别是：父组件对子组件、子组件对父组件以及兄弟组件之间传值以及调用。</h3> <dl> <p>  一、父组件==&gt;子组件</p> <dd> <p><strong>1.父组件传值给子组件</strong>，通过类似于属性绑定的方式，将需要传入子组件中的数据，绑定在子组件上，子组件通过props接收传入进来的数据。</p> <pre><code>父组件中内容 </code></pre> <pre class="prettyprint"><code class="hljs lasso"><span class="hljs-comment">//在teamplate中调用此组件</span> <span class="hljs-subst">&lt;</span>spList :keyword<span class="hljs-subst">=</span><span class="hljs-string">"keyword"</span> :activename<span class="hljs-subst">=</span><span class="hljs-string">"active"</span><span class="hljs-subst">&gt;&lt;</span>/spList<span class="hljs-subst">&gt;</span> <span class="hljs-comment">//引入子组件</span> <span class="hljs-keyword">import</span> spList from <span class="hljs-string">"../../components/sp_list.vue"</span>; components: {     spList }, <span class="hljs-built_in">data</span>() {     <span class="hljs-keyword">return</span> {         active: <span class="hljs-string">"2"</span>,         keyword: <span class="hljs-string">''</span>,     }; },</code></pre> <pre><code>子组件中内容 </code></pre> <pre class="prettyprint"><code class="hljs javascript">props: {      keyword:<span class="hljs-built_in">String</span>,      activename:<span class="hljs-built_in">String</span>, }, <span class="hljs-comment">//或者</span> props: {      <span class="hljs-string">"keyword"</span>,      <span class="hljs-string">"activename"</span> },</code></pre> </dd> <dd> <p><strong>2.父组件调用子组件中的方法或数据</strong>，VUE官网中的描述：ref 被用来给元素或子组件注册引用信息。引用信息将会注册在父组件的 $refs 对象上。如果在普通的 DOM 元素上使用，引用指向的就是 DOM 元素；如果用在子组件上，引用就指向组件实例。</p> <pre><code>父组件中内容 </code></pre> <pre class="prettyprint"><code class="hljs cs"><span class="hljs-comment">//在teamplate中调用此组件，并将该组件注册在$refs对象上</span> &lt;spList <span class="hljs-keyword">ref</span>=<span class="hljs-string">"splist"</span>&gt;&lt;/spList&gt; <span class="hljs-comment">//引入子组件</span> import spList <span class="hljs-keyword">from</span> <span class="hljs-string">"../../components/sp_list.vue"</span>; components: {     spList }, methods: {     getsomeList(){         <span class="hljs-keyword">this</span>.$refs.splist.getlist();<span class="hljs-comment">//调用子组件中的方法</span>         <span class="hljs-keyword">this</span>.$refs.splist.tableData;<span class="hljs-comment">//获取子组件中的数据</span>     } },</code></pre> <pre><code>子组件中内容 </code></pre> <pre class="prettyprint"><code class="hljs haskell"><span class="hljs-typedef"><span class="hljs-keyword">data</span><span class="hljs-container">()</span> <span class="hljs-container">{     <span class="hljs-title">return</span> {         <span class="hljs-title">tableData</span>:[],     }</span></span> },  methods: {     //获取列表的方法     getlist(){      }, },</code></pre> </dd> <p>  二、子组件==&gt;父组件</p> <dd> <p>1.通过<strong>事件派发</strong>的方式传值给父组件，或者告知父组件需要调用方法。</p> <pre><code>父组件中内容 </code></pre> <pre class="prettyprint"><code class="hljs scala"><span class="hljs-comment">//在teamplate中调用此组件，并绑定与子组件约定好的事件名称和在父组件中由该事件出发的方法</span> &lt;spList <span class="hljs-annotation">@changeBxd</span>=<span class="hljs-string">"setBxd"</span>&gt;&lt;/spList&gt; <span class="hljs-comment">//引入子组件</span> <span class="hljs-keyword">import</span> spList from <span class="hljs-string">"../../components/sp_list.vue"</span>; components: {     spList }, methods: {     setBxd(<span class="hljs-keyword">val</span>){         console.log(<span class="hljs-keyword">val</span>);<span class="hljs-comment">//'你好世界'</span>         <span class="hljs-keyword">this</span>.getFlow();<span class="hljs-comment">//触发事件后调用其他父组件中的方法</span>     },     getFlow(){      }, },</code></pre> <pre><code>子组件中内容 </code></pre> <pre class="prettyprint"><code class="hljs cs">methods: {     <span class="hljs-comment">//获取列表的方法</span>     getlist(){         <span class="hljs-keyword">let</span> name = <span class="hljs-string">'你好世界'</span>;         <span class="hljs-keyword">this</span>.$emit(<span class="hljs-string">'changeBxd'</span>,name );<span class="hljs-comment">//触发约定好的事件</span>     }, },</code></pre> </dd> <p>  三、兄弟组件之间</p> <dd> <p>1.通过<strong>eventbus</strong>的方式监听事件。 <br /> 首先需要先创建一个eventbus的事件容器，哪里需要哪里引用。 <br /><img decoding="async" src="http://img.555519.xyz/uploads/20221230/b513e415939e3068697875d737f47435.jpg" alt="关于VUE中组件之间传值以及调用方法汇总"></p> <pre><code>兄弟组件1中的内容 </code></pre> <pre class="prettyprint"><code class="hljs lasso"><span class="hljs-comment">//引入eventbus</span> <span class="hljs-keyword">import</span> Bus from <span class="hljs-string">'@/util/bus.js'</span> <span class="hljs-comment">//在方法中触发事件，（提前约定好事件名称）</span> methods: {     getFlow(){         Bus<span class="hljs-built_in">.</span><span class="hljs-variable">$emit</span>(<span class="hljs-string">'getCwbxList'</span>)     }, },</code></pre> <pre><code>兄弟组件2中的内容 </code></pre> <pre class="prettyprint"><code class="hljs coffeescript"><span class="hljs-regexp">//</span> 引入eventbus <span class="hljs-reserved">import</span> Bus from <span class="hljs-string">'@/util/bus.js'</span> mounted(){     <span class="hljs-regexp">//</span> 监听此事件     Bus.$<span class="hljs-literal">on</span><span class="hljs-function"><span class="hljs-params">(<span class="hljs-string">'getCwbxList'</span>,()=&gt;{         <span class="hljs-keyword">this</span>.getlist();     })</span> }</span></code></pre> <blockquote> <p><strong>注意：</strong>：eventbus 这种传值方式，适用于任何组件之间传值，父子间或者兄弟间。</p> </blockquote> </dd> </dl> <p>另外，除了这些方法之外，还可以是用<strong>vuex</strong>官方推荐的状态管理。关于vuex在之后记录介绍，最近还在整理中。</p> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-38029.htm">南京宠物狗领养地址在哪里啊（南京宠物狗领养地址在哪里啊电话）</a></p>
+                                        <p>下一个：<a href="/news/article-38511.htm">宠物助理考试（宠物助理考试题）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-19228.htm" title="开个小型宠物食品加工厂怎么样啊视频讲解（开个宠物食品厂要投资多少钱）">开个小型宠物食品加工厂怎么样啊视频讲解（开个宠物食品厂要投资多少钱）</a></li>
+                        <li class="py-2"><a href="/news/article-33199.htm" title="北京宠物店兼职（北京宠物医院兼职）">北京宠物店兼职（北京宠物医院兼职）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-26-free-high-speed-nodes.htm" title="12月26日→19M/S|2024年最新免费节点Free V2ray订阅链接地址分享">12月26日→19M/S|2024年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-18-free-v2ray-subscribe.htm" title="11月18日→18.1M/S|2024年最新免费节点Free V2ray订阅链接地址">11月18日→18.1M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-3-free-high-speed-nodes.htm" title="1月3日→18.6M/S|2025年最新免费节点Free V2ray订阅链接地址分享">1月3日→18.6M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-22-free-v2ray-subscribe.htm" title="10月22日→19.7M/S|2024年最新免费节点Free V2ray订阅链接地址">10月22日→19.7M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-5-free-node-subscribe-links.htm" title="1月5日→20.5M/S|2025年最新免费节点Free V2ray订阅链接地址分享">1月5日→20.5M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-27071.htm" title="动物诊所的英文 动物诊所的英文怎么说">动物诊所的英文 动物诊所的英文怎么说</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-8-free-subscribe-node.htm" title="1月8日→20.1M/S|2025年最新免费节点Free V2ray订阅链接地址分享">1月8日→20.1M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-30-clash-v2ray-ss-ssr.htm" title="12月30日→21.8M/S|2024年最新免费节点Free V2ray订阅链接地址分享">12月30日→21.8M/S|2024年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">25</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- //progress section -->
+    <!--//testimonials-->
+        <!-- footer -->
+    <footer class="w3l-footer-16 py-5">
+        <div class="container">
+            <div class="below-section text-center">
+                <p class="copy-text">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                    <a href="/">Free V2ray免费梯子节点分享官网</a> 版权所有 Powered by WordPress
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- move top -->
+    <button onclick="topFunction()" id="movetop" title="Go to top">
+        <span class="fas fa-level-up-alt" aria-hidden="true"></span>
+    </button>
+    <script>
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {
+        scrollFunction()
+    };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("movetop").style.display = "block";
+        } else {
+            document.getElementById("movetop").style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+    </script>
+    <!-- //move top -->
+    <!-- common jquery plugin -->
+    <script src="/assets/website/js/frontend/free_v2ray/jquery-3.5.1.min.js"></script>
+    <!-- //common jquery plugin -->
+    <!-- counter for stats -->
+    <script src="/assets/website/js/frontend/free_v2ray/counter.js"></script>
+    <!-- //counter for stats -->
+    <!-- theme switch js (light and dark)-->
+    <script src="/assets/website/js/frontend/free_v2ray/theme-change.js"></script>
+    <script>
+    function autoType(elementClass, typingSpeed) {
+        var thhis = $(elementClass);
+        thhis.css({
+            "position": "relative",
+            "display": "inline-block"
+        });
+        thhis.prepend('<div class="cursor" style="right: initial; left:0;"></div>');
+        thhis = thhis.find(".text-js");
+        var text = thhis.text().trim().split('');
+        var amntOfChars = text.length;
+        var newString = "";
+        thhis.text("|");
+        setTimeout(function() {
+            thhis.css("opacity", 1);
+            thhis.prev().removeAttr("style");
+            thhis.text("");
+            for (var i = 0; i < amntOfChars; i++) {
+                (function(i, char) {
+                    setTimeout(function() {
+                        newString += char;
+                        thhis.text(newString);
+                    }, i * typingSpeed);
+                })(i + 1, text[i]);
+            }
+        }, 1500);
+    }
+
+    $(document).ready(function() {
+        // Now to start autoTyping just call the autoType function with the
+        // class of outer div
+        // The second paramter is the speed between each letter is typed.
+        autoType(".type-js", 200);
+    });
+    </script>
+    <!-- //theme switch js (light and dark)-->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!--bootstrap-->
+    <script src="/assets/website/js/frontend/free_v2ray/bootstrap.min.js"></script>
+    <!-- //bootstrap-->
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+    <!-- //Js scripts -->
+</body>
+
+</html>
