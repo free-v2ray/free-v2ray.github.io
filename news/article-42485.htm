@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://free-v2ray.github.io/news/article-42485.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>关于BenchMark/c++11计时器/Chrome:tracing 的一些笔记_在线工具</title>
+        <meta name="description" content="A benchmark is a test of the performance of a computer system. 		基准测试是对计算机系统的性能的测试  计时器 性能的指标就是时间，在c" />
+        <link rel="icon" href="/assets/website/img/free_v2ray/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="Free V2ray免费梯子节点分享官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://free-v2ray.github.io/news/article-42485.htm" />
+    <meta property="og:site_name" content="Free V2ray免费梯子节点分享官网" />
+    <meta property="og:title" content="关于BenchMark/c++11计时器/Chrome:tracing 的一些笔记_在线工具" />
+    <meta property="og:image" content="https://free-v2ray.github.io/uploads/20240911-1/d96a5838f75d31b21ebfb44d387140bb.webp" />
+        <meta property="og:release_date" content="2025-01-18T07:15:03" />
+    <meta property="og:updated_time" content="2025-01-18T07:15:03" />
+        <meta property="og:description" content="A benchmark is a test of the performance of a computer system. 		基准测试是对计算机系统的性能的测试  计时器 性能的指标就是时间，在c" />
+        
+    <!-- google-fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- //google-fonts -->
+    <!-- Template CSS Style link -->
+    <link rel="stylesheet" href="/assets/website/css/free_v2ray/style-starter.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EFW7LQ09JM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-EFW7LQ09JM');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <!--header-->
+<header id="site-header" class="fixed-top">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg stroke px-0">
+                        <a class="navbar-brand" href="/">
+                <span>
+                    Free V2ray
+                </span>
+            </a>
+                        <!-- if logo is image enable this
+    <a class="navbar-brand" href="#index.html">
+        <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
+    </a> -->
+            <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav ml-lg-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">首页</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">免费节点</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">新闻资讯</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="#">关于</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">联系</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- toggle switch for light and dark theme -->
+            <div class="cont-ser-position mt-lg-2">
+                <nav class="navigation">
+                    <div class="theme-switch-wrapper">
+                        <label class="theme-switch" for="checkbox">
+                            <input type="checkbox" id="checkbox">
+                            <div class="mode-container">
+                                <i class="gg-sun"></i>
+                                <i class="gg-moon"></i>
+                            </div>
+                        </label>
+                    </div>
+                </nav>
+            </div>
+            <!-- //toggle switch for light and dark theme -->
+        </nav>
+    </div>
+</header>
+<!--//header-->
+    <!-- inner banner -->
+    <div class="inner-banner">
+        <div class="w3l-breadcrumb">
+            <div class="container">
+                <h1 class="inner-text-title font-weight-bold">关于BenchMark/c++11计时器/Chrome:tracing 的一些笔记_在线工具</h1>
+                <ul class="breadcrumbs-custom-path">
+                    <li><a href="/">首页</a></li>
+                    <li><i class="fas fa-angle-right mx-2"></i></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li class="active"><i class="fas fa-angle-right mx-2"></i>正文</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- //inner banner -->
+    <!-- progress section -->
+    <section class="w3l-about-2 py-5">
+        <div class="container py-2">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<p></p> <blockquote> <p>A benchmark is a test of the performance of a computer system.</p> <p>		基准测试是对计算机系统的性能的测试</p> </blockquote> <h2 id="计时器">计时器</h2> <p>性能的指标就是时间，在c++11后计时十分方便，因为有<code>&lt;chrono&gt;</code>神器</p> <p>在性能测试中，一般依赖堆栈上的生命周期来进行计时</p> <p>计时器的实现全貌</p> <pre><code class="language-cpp">class InstrumentationTimer { private:     chrono::time_point&lt;chrono::steady_clock&gt; start;     const char *m_hint;  public:     explicit InstrumentationTimer(const char *hint) : m_hint(hint) {         start = chrono::steady_clock::now();     }       ~InstrumentationTimer() {         auto end = chrono::steady_clock::now();         cout &lt;&lt; m_hint &lt;&lt; ':' &lt;&lt; static_cast&lt;double&gt;((end - start).count()) / 1e6 &lt;&lt; "ms\n";         long long llst = chrono::time_point_cast&lt;chrono::microseconds&gt;(start).time_since_epoch().count();         long long lled = chrono::time_point_cast&lt;chrono::microseconds&gt;(end).time_since_epoch().count();          //Instrumentor::Get().WriteProfile({m_hint, llst, lled});     } };</code></pre> <p>非常简单的原理 就是应用作用域自动调用析构函数来停止计时</p> <p>唯一难搞的就是chrono的层层包装</p> <p>本文非常功利 不深究底层 ~</p> <h3 id="time_pointer">time_pointer</h3> <pre><code class="language-cpp">chrono::time_point&lt;chrono::steady_clock&gt; start;</code></pre> <p>在chrono命名空间下（std下层） 有个神奇的类型 叫时间点<code>time_point</code></p> <p>在不同的操作环境下 有不同的实现 所以这是一个模板</p> <p>模板类型可以有</p> <ul> <li><code>chrono::high_resolution_clock</code> 高解析度类型 不建议使用 因为这个可能有移植的问题 但好像进度最高？</li> <li><code>chrono::steady_clock</code> 稳得一批的钟 我超爱这个 因为这个不仅进度不低 而且调用的时间短，影响极小  （300ns</li> <li><code>chrono::system_clock</code> 系统带的钟 不大行 精度因系统而定？ windows是100ns</li> </ul> <p>所以 你懂的 用steady就好了（也不用太纠结几纳秒</p> <p>给时间点一个当前时间  注意类型一致</p> <pre><code class="language-cpp">start = chrono::steady_clock::now();</code></pre> <h3 id="duration">duration</h3> <pre><code>auto  dur = end - start;</code></pre> <p>为啥用auto  因为方便昂（duration 模板具体化写到头皮发麻</p> <p>时间点运算得到的是时间段 因为默认的时间点单位时间是纳秒（steady_clock），所以得到的时间是内部以longlong存储的多少纳秒</p> <p>如何调出时间？</p> <pre><code class="language-cpp">(end - start).count()</code></pre> <p>得到的是longlong  ns</p> <p>如何更改单位时间？</p> <p>一个是转换时间段的格式</p> <pre><code class="language-cpp">chrono::duration_cast&lt;chrono::microseconds&gt;(end - start).count())</code></pre> <p>一个是转换时间点的格式</p> <pre><code>chrono::time_point_cast&lt;chrono::microseconds&gt;(start)</code></pre> <p>如何调出一个时间戳？（系统从我也不知道哪开始算起的时间段 1970.1.1大概？ 相当于帮你减了一下</p> <pre><code class="language-cpp">start.time_since_epoch().count()</code></pre> <p>可选格式：</p> <ul> <li> <p>chrono::nanoseconds</p> </li> <li> <p>chrono::microseconds</p> </li> <li> <p>chrono::milliseconds</p> </li> <li> <p>chrono::seconds</p> </li> <li> <p>chrono::minutes</p> </li> <li> <p>chrono::hours</p> </li> </ul> <h3 id="回到实现">回到实现</h3> <p>构造函数没啥好讲的  就是开始计时</p> <p>重点是析构函数</p> <pre><code class="language-cpp">~InstrumentationTimer() {         auto end = chrono::steady_clock::now();         cout &lt;&lt; m_hint &lt;&lt; ':' &lt;&lt; static_cast&lt;double&gt;((end - start).count()) / 1e6 &lt;&lt; "ms\n";         long long llst = chrono::time_point_cast&lt;chrono::microseconds&gt;(start).time_since_epoch().count();         long long lled = chrono::time_point_cast&lt;chrono::microseconds&gt;(end).time_since_epoch().count();          Instrumentor::Get().WriteProfile({m_hint, llst, lled});     }</code></pre> <p>思路：</p> <ul> <li> <p>首先！！！一定先停止计时 （你不会还想增大误差吧）  用auto接住 省一个成员</p> </li> <li> <p>然后 输出的是你要计时的位置的注释（hint） 接一个时间段</p> <p>因为时间段输出的是longlong 我看多了几点几ms觉得非常亲切 所以用纳秒算时间段（默认）后再除1e6得到毫秒</p> </li> <li> <p>留两个时间戳后面有用</p> </li> <li> <p>然后是后面的调用记录某一段程序运行时间的函数啦 这里传进去的有hint 开始和结束的时间戳 有了这些 你就能算出经过的时间</p> </li> </ul> <h2 id="整理输出部分">整理输出部分</h2> <blockquote> <p>Chrome大法好</p> </blockquote> <p>chromo 自带了个可视化分析软件 在地址栏上输入<code>chrome://tracing/</code>就可以看到</p> <p>它接受的是json文件 所以我们要把我们记录下来的东西打包成json拖到界面上 就可以看到精美（并不） 的可视化界面</p> <p>这是打包器+记录器的全貌</p> <pre><code class="language-cpp">class Instrumentor { private:     ofstream m_OutputStream;     bool m_Fir;  public:     Instrumentor() : m_Fir(true) {}      void BeginSession(const string &amp;filepath = "results.json") {         m_OutputStream.open(filepath);         WriteHeader();      }      void EndSession() {         WriteFooter();         m_OutputStream.close();         m_Fir = true;     }      void WriteProfile(const ProfileResult &amp;result) {         if (!m_Fir) { //not add ',' when first time             m_OutputStream &lt;&lt; ',';         } else m_Fir = false;          string name(result.Name);         replace(name.begin(), name.end(), '"', '\'');         m_OutputStream &lt;&lt; R"({)";         m_OutputStream &lt;&lt; R"("cat":"function",)";         m_OutputStream &lt;&lt; R"("dur":)" &lt;&lt; result.end - result.start &lt;&lt; ",";         m_OutputStream &lt;&lt; R"("name":")" &lt;&lt; name &lt;&lt; "\",";         m_OutputStream &lt;&lt; R"("ph":"X",)";         m_OutputStream &lt;&lt; R"("pid":0,)";         m_OutputStream &lt;&lt; R"("tid":0,)";         m_OutputStream &lt;&lt; R"("ts":)" &lt;&lt; result.start;         m_OutputStream &lt;&lt; R"(})";         m_OutputStream.flush();     }      void WriteHeader() {         m_OutputStream &lt;&lt; R"({"otherData":{},"traceEvents":[)";         m_OutputStream.flush();     }      void WriteFooter() {         m_OutputStream &lt;&lt; "]}";         m_OutputStream.flush();     }      static Instrumentor &amp;Get() {         static auto instance = new Instrumentor();         return *instance;     } };</code></pre> <p>以及我们的目标 Chrome能识别的json文件</p> <pre><code class="language-json">{   "otherData": {},   "traceEvents": [     {       "cat": "function",       "dur": 2166411,       "name": "void core1(int)",       "ph": "X",       "pid": 0,       "tid": 0,       "ts": 19699253339     },     {       "cat": "function",       "dur": 1649285,       "name": "void core2()",       "ph": "X",       "pid": 0,       "tid": 0,       "ts": 19701420118     },     {       "cat": "function",       "dur": 3816266,       "name": "void benchMark()",       "ph": "X",       "pid": 0,       "tid": 0,       "ts": 19699253338     }   ] }</code></pre> <h3 id="get-">Get( )</h3> <p>首先看到最后的Get( )</p> <pre><code class="language-cpp">static Instrumentor &amp;Get() {     static auto instance = new Instrumentor();     return *instance; }</code></pre> <p>这个能提供给我们一个单例，就是仅存在一个与我们运行时的对象</p> <p>static 显式的指出Get得到的东西是和我们exe文件存在时间一样长的 而且这个定义只执行一次</p> <p>如果你没有听懂 就只要记住它返回的永远是同一个对象 要用这个对象的时候就用Get</p> <p>该这么用：</p> <pre><code class="language-cpp">Instrumentor::Get().balabala();</code></pre> <h3 id="初始化">初始化</h3> <pre><code class="language-cpp">private:     ofstream m_OutputStream;     bool m_Fir;  public:     Instrumentor() : m_Fir(true) {}      void BeginSession(const string &amp;filepath = "results.json") {         m_OutputStream.open(filepath);         WriteHeader();      }      void EndSession() {         WriteFooter();         m_OutputStream.close();         m_Fir = true;     }</code></pre> <p>ofsteam文件输出流用于输出到文件默认是results.json</p> <p>不要忘记列表中的逗号的处理 我们用m_Fir检测是不是第一个</p> <p>然后是注意到json开头和结尾是固定的</p> <pre><code class="language-cpp">void WriteHeader() {     m_OutputStream &lt;&lt; R"({"otherData":{},"traceEvents":[)";     m_OutputStream.flush(); }  void WriteFooter() {     m_OutputStream &lt;&lt; "]}";     m_OutputStream.flush(); }</code></pre> <blockquote> <p>R"(      string      )"即原始字符串 可以输出字符串里面的原本的字符 感兴趣的可以自行拓展更多有关知识 这里用了之后就不用打转义的双引号了</p> </blockquote> <p>每次输出到文件时记得及时刷新<code>m_OutputStream.flush();</code>防止之后的线程出现毛病</p> <p>ok 现在我们可以这么用了</p> <pre><code class="language-cpp">int main() {     Instrumentor::Get().BeginSession();     benchMark(); //测试的函数放这里     Instrumentor::Get().EndSession(); }</code></pre> <h3 id="中间列表的填写">中间列表的填写</h3> <p>但是？最最最重要的中间列表的填写呢？</p> <p>在这里</p> <pre><code class="language-cpp">void WriteProfile(const ProfileResult &amp;result) {     if (!m_Fir) { //not add ',' when first time         m_OutputStream &lt;&lt; ',';     } else m_Fir = false;      string name(result.Name);     replace(name.begin(), name.end(), '"', '\'');     m_OutputStream &lt;&lt; R"({)";     m_OutputStream &lt;&lt; R"("cat":"function",)";     m_OutputStream &lt;&lt; R"("dur":)" &lt;&lt; result.end - result.start &lt;&lt; ",";     m_OutputStream &lt;&lt; R"("name":")" &lt;&lt; name &lt;&lt; "\",";     m_OutputStream &lt;&lt; R"("ph":"X",)";     m_OutputStream &lt;&lt; R"("pid":0,)";     m_OutputStream &lt;&lt; R"("tid":0,)";     m_OutputStream &lt;&lt; R"("ts":)" &lt;&lt; result.start;     m_OutputStream &lt;&lt; R"(})";     m_OutputStream.flush(); }</code></pre> <p>在InstrumentationTimer中的调用：</p> <pre><code class="language-cpp">//m_hint 是计时器注释  llst 开始时间戳  lled 结束时间戳 Instrumentor::Get().WriteProfile({m_hint, llst, lled});</code></pre> <p>定义传进来的参数 可以扩展</p> <pre><code class="language-cpp">struct ProfileResult {     string Name;     long long start, end; };</code></pre> <p>就是简单的往里面塞东西啦</p> <p>值得注意的是 chrome 的tracing 默认时间戳的单位时间是microseconds 即毫秒 所以要记得转换格式哦</p> <pre><code class="language-cpp">long long llst = chrono::time_point_cast&lt;chrono::microseconds&gt;(start).time_since_epoch().count(); long long lled = chrono::time_point_cast&lt;chrono::microseconds&gt;(end).time_since_epoch().count();</code></pre> <p>考虑到传进来的函数名字可能会带有<code>" "</code> 让json出错 所以退而求其次 把它转成<code>' '</code> (其实在前面加一个转义字符更好 但是实现起来太麻烦了)</p> <pre><code class="language-cpp">string name(result.Name); replace(name.begin(), name.end(), '"', '\'');</code></pre> <p>好啦 包装弄好了 下一步开始高效插桩</p> <h2 id="打桩">打桩</h2> <blockquote> <p>神说：“我怕麻烦。”</p> <p>于是就有了宏</p> </blockquote> <h3 id="低级打桩">低级打桩</h3> <p>先看</p> <pre><code class="language-cpp">void core1() {     InstrumentationTimer tt("halo world 0 to 9999");     for (int i = 0; i &lt; 10000; ++i) {         cout &lt;&lt; "Hello world #" &lt;&lt; i &lt;&lt; endl;     } }  void benchMark() {     InstrumentationTimer tt("shart benchMark");     core1(); }</code></pre> <p>在一个函数的开头放上计时器 计时器就会自动记录这个作用域自它定义开始到结束所经过的时间和有关的信息</p> <p>在计时器销毁前几微秒 它会将它所看到的的东西传给<code>Instrumentor</code>来记录所发生的事情</p> <p>但是！！这未免也太傻了</p> <p>为什么还要我手动给一个名字</p> <p>让它自动生成独一无二的名字就行了嘛</p> <h3 id="中级打桩">中级打桩</h3> <p>有那么个宏 是所有编辑器都能自动展开的 叫<code>__FUNCTION__</code>  它会变成它所在的函数的名字的字符串</p> <p>于是就有了</p> <pre><code class="language-cpp">#define PROFILE_SCOPE(name) InstrumentationTimer tt(name) #define PROFILE_FUNCTION() PROFILE_SCOPE(__FUNCTION__)</code></pre> <pre><code class="language-cpp">void core1() {     PROFILE_FUNCTION();     for (int i = 0; i &lt; 10000; ++i) {         cout &lt;&lt; "Hello world #" &lt;&lt; i &lt;&lt; endl;     } }  void benchMark() {     PROFILE_FUNCTION();     core1(); }</code></pre> <p>好 但还不够好</p> <p>所有的计时器都是一个名称 万一不小心重名了 那事情就不好整了</p> <p>又有一个宏 叫<code>__LINE__</code> 它会变成所在行号（数字）</p> <p>而宏能用神奇的<code>#</code>将东西黏在一起</p> <p>就有了</p> <pre><code class="language-cpp">#define PROFILE_SCOPE(name) InstrumentationTimer tt##__LINE__(name)</code></pre> <p>好 但还不够好</p> <p>万一我的函数是重载的 输出的是一样的函数名字 我咋知道调用的是哪个版本的函数</p> <p>又有一个宏 叫<code>__PRETTY_FUNCTION__</code>  MSVC是<code>__FUNCSIG__</code>它能变成完整的函数签名的字符串  就像<code>"void core1(int)"</code></p> <pre><code class="language-cpp">#define PROFILE_FUNCTION() PROFILE_SCOPE(__PRETTY_FUNCTION__)</code></pre> <p>好 但还不够好</p> <p>这个我可不想把它保留在release下 让用户也帮我测测时间 怎么才能方便的关掉呢</p> <p>对 还是宏</p> <h3 id="高级打桩">高级打桩</h3> <pre><code class="language-cpp">#define PROFILING 1 #if PROFILING #define PROFILE_SCOPE(name) InstrumentationTimer tt##__LINE__(name) #define PROFILE_FUNCTION() PROFILE_SCOPE(__PRETTY_FUNCTION__) #else #define PROFILE_SCOPE(name) #define PROFILE_FUNCTION() #endif  void core(int useless) {     PROFILE_FUNCTION();     for (int i = 0; i &lt; 10000; ++i) {         cout &lt;&lt; "Hello world #" &lt;&lt; i &lt;&lt; endl;     } }  void core() {     PROFILE_FUNCTION();     for (int i = 0; i &lt; 10000; ++i) {         cout &lt;&lt; "Hello world #" &lt;&lt; sqrt(i) &lt;&lt; endl;     } }  void benchMark() {     PROFILE_FUNCTION();     core(23333);     core(); }</code></pre> <p>这就是了 如果我想关掉测试 就把profiling设为1 这是所有测试都只是空行 而release对于没有使用的函数则自动删去了 丝毫不影响性能</p> <h2 id="多线程">多线程</h2> <h3 id="扩展">扩展</h3> <p>拓展ProfileResult</p> <pre><code class="language-cpp">struct ProfileResult {     string Name;     long long start, end;     uint32_t TheadID; };</code></pre> <p>更改输出</p> <pre><code class="language-cpp">m_OutputStream &lt;&lt; R"("tid":)" &lt;&lt; result.TheadID &lt;&lt; ",";</code></pre> <p>在Timer中捕获该线程的id 并用自带hash转换成uint32方便输出</p> <pre><code class="language-cpp">uint32_t threadID = hash&lt;std::thread::id&gt;{}(std::this_thread::get_id());</code></pre> <p>传递id</p> <pre><code class="language-cpp">Instrumentor::Get().WriteProfile({m_hint, llst, lled,threadID});</code></pre> <p>最后变成了这样</p> <pre><code class="language-cpp">~InstrumentationTimer() {     auto end = chrono::steady_clock::now();     cout &lt;&lt; m_hint &lt;&lt; ':' &lt;&lt; static_cast&lt;double&gt;((end - start).count()) / 1e6 &lt;&lt; "ms\n";     long long llst = chrono::time_point_cast&lt;chrono::microseconds&gt;(start).time_since_epoch().count();     long long lled = chrono::time_point_cast&lt;chrono::microseconds&gt;(end).time_since_epoch().count();      uint32_t threadID = hash&lt;std::thread::id&gt;{}(std::this_thread::get_id());      Instrumentor::Get().WriteProfile({m_hint, llst, lled,threadID}); }</code></pre> <h3 id="测试">测试</h3> <p>搞一个多线程出来</p> <pre><code class="language-cpp">void benchMark() {     PROFILE_FUNCTION();     cout &lt;&lt; "Running BenchMarks...\n";     thread a([]() { core(23333); });     thread b([]() { core(); });      a.join();     b.join(); }</code></pre> <p>用lamda可以非常简洁的开多线程重载函数</p> <p>最后加入2个join函数 这样在这两个线程都完成它们的工作之前 我们不会真正退出这个benchmark函数</p> <h2 id="完成">完成</h2> <p>好啦 我们的工作完成了 欣赏一下代码吧</p> <pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt; #include &lt;sstream&gt;  using namespace std;  struct ProfileResult {     string Name;     long long start, end;     uint32_t TheadID; };  class Instrumentor { private:     ofstream m_OutputStream;     bool m_Fir;  public:     Instrumentor() : m_Fir(true) {}      void BeginSession(const string &amp;filepath = "results.json") {         m_OutputStream.open(filepath);         WriteHeader();      }      void EndSession() {         WriteFooter();         m_OutputStream.close();         m_Fir = true;     }      void WriteProfile(const ProfileResult &amp;result) {         if (!m_Fir) { //not add ',' when first time             m_OutputStream &lt;&lt; ',';         } else m_Fir = false;          string name(result.Name);         replace(name.begin(), name.end(), '"', '\'');         m_OutputStream &lt;&lt; R"({)";         m_OutputStream &lt;&lt; R"("cat":"function",)";         m_OutputStream &lt;&lt; R"("dur":)" &lt;&lt; result.end - result.start &lt;&lt; ",";         m_OutputStream &lt;&lt; R"("name":")" &lt;&lt; name &lt;&lt; "\",";         m_OutputStream &lt;&lt; R"("ph":"X",)";         m_OutputStream &lt;&lt; R"("pid":0,)";         m_OutputStream &lt;&lt; R"("tid":)" &lt;&lt; result.TheadID &lt;&lt; ",";         m_OutputStream &lt;&lt; R"("ts":)" &lt;&lt; result.start;         m_OutputStream &lt;&lt; R"(})";         m_OutputStream.flush();     }      void WriteHeader() {         m_OutputStream &lt;&lt; R"({"otherData":{},"traceEvents":[)";         m_OutputStream.flush();     }      void WriteFooter() {         m_OutputStream &lt;&lt; "]}";         m_OutputStream.flush();     }      static Instrumentor &amp;Get() {         static auto instance = new Instrumentor();         return *instance;     } };   class InstrumentationTimer { private:     chrono::time_point&lt;chrono::steady_clock&gt; start;     const char *m_hint;  public:     explicit InstrumentationTimer(const char *hint) : m_hint(hint) {         start = chrono::steady_clock::now();     }       ~InstrumentationTimer() {         auto end = chrono::steady_clock::now();         cout &lt;&lt; m_hint &lt;&lt; ':' &lt;&lt; static_cast&lt;double&gt;((end - start).count()) / 1e6 &lt;&lt; "ms\n";         long long llst = chrono::time_point_cast&lt;chrono::microseconds&gt;(start).time_since_epoch().count();         long long lled = chrono::time_point_cast&lt;chrono::microseconds&gt;(end).time_since_epoch().count();          uint32_t threadID = hash&lt;std::thread::id&gt;{}(std::this_thread::get_id());          Instrumentor::Get().WriteProfile({m_hint, llst, lled,threadID});     } };  #define PROFILING 1 #if PROFILING #define PROFILE_SCOPE(name) InstrumentationTimer tt##__LINE__(name) #define PROFILE_FUNCTION() PROFILE_SCOPE(__PRETTY_FUNCTION__) #else #define PROFILE_SCOPE(name) #define PROFILE_FUNCTION() #endif  void core(int useless) {     PROFILE_FUNCTION();     for (int i = 0; i &lt; 10000; ++i) {         cout &lt;&lt; "Hello world #" &lt;&lt; i &lt;&lt; endl;     } }  void core() {     PROFILE_FUNCTION();     for (int i = 0; i &lt; 10000; ++i) {         cout &lt;&lt; "Hello world #" &lt;&lt; sqrt(i) &lt;&lt; endl;     } }  void benchMark() {     PROFILE_FUNCTION();     cout &lt;&lt; "Running BenchMarks...\n";     thread a([]() { core(23333); });     thread b([]() { core(); });      a.join();     b.join(); }   int main() {     Instrumentor::Get().BeginSession();     benchMark();     Instrumentor::Get().EndSession(); }</code></pre> <p>最后的json</p> <pre><code class="language-json">{   "otherData": {},   "traceEvents": [     {       "cat": "function",       "dur": 3844575,       "name": "void core(int)",       "ph": "X",       "pid": 0,       "tid": 1709724944,       "ts": 24887197644     },     {       "cat": "function",       "dur": 4039317,       "name": "void core()",       "ph": "X",       "pid": 0,       "tid": 2740856708,       "ts": 24887197714     },     {       "cat": "function",       "dur": 4040539,       "name": "void benchMark()",       "ph": "X",       "pid": 0,       "tid": 2850328247,       "ts": 24887196811     }   ] }</code></pre> <p>细心的小伙伴可以推一推运行这段代码时间是什么时候呢~</p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-42483.htm">SpringCloud第二季5-SpringConfig、Bus</a></p>
+                                        <p>下一个：<a href="/news/article-42975.htm">TypeScript与javascript优劣势</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-11-27-clash-v2ray-ss-ssr.htm" title="11月27日→22.3M/S|2024年最新免费节点Free V2ray订阅链接地址">11月27日→22.3M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-27-free-node-subscribe-links.htm" title="12月27日→22.8M/S|2024年最新免费节点Free V2ray订阅链接地址分享">12月27日→22.8M/S|2024年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-39996.htm" title="猫咪三针疫苗多少钱一只猫用（宠物猫三针疫苗多少钱）">猫咪三针疫苗多少钱一只猫用（宠物猫三针疫苗多少钱）</a></li>
+                        <li class="py-2"><a href="/news/article-21528.htm" title="宠物领养协议上可以写禁止弃养嘛为什么不能写 违背宠物领养协议">宠物领养协议上可以写禁止弃养嘛为什么不能写 违背宠物领养协议</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-9-free-high-speed-nodes.htm" title="12月9日→19.9M/S|2024年最新免费节点Free V2ray订阅链接地址">12月9日→19.9M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                        <li class="py-2"><a href="/news/article-35163.htm" title="动物打疫苗要多少钱 动物打疫苗要多少钱一针">动物打疫苗要多少钱 动物打疫苗要多少钱一针</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-28-free-v2ray.htm" title="12月28日→22M/S|2024年最新免费节点Free V2ray订阅链接地址分享">12月28日→22M/S|2024年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-23810.htm" title="宠物粮食哪里批发最便宜的呢（宠物粮食哪里批发最便宜的呢图片）">宠物粮食哪里批发最便宜的呢（宠物粮食哪里批发最便宜的呢图片）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-13-node-share-links.htm" title="1月13日→20.7M/S|2025年最新免费节点Free V2ray订阅链接地址分享">1月13日→20.7M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-39515.htm" title="动物打疫苗注意事项和禁忌有哪些（动物打疫苗图片）">动物打疫苗注意事项和禁忌有哪些（动物打疫苗图片）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">57</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">25</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- //progress section -->
+    <!--//testimonials-->
+        <!-- footer -->
+    <footer class="w3l-footer-16 py-5">
+        <div class="container">
+            <div class="below-section text-center">
+                <p class="copy-text">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                    <a href="/">Free V2ray免费梯子节点分享官网</a> 版权所有 Powered by WordPress
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- move top -->
+    <button onclick="topFunction()" id="movetop" title="Go to top">
+        <span class="fas fa-level-up-alt" aria-hidden="true"></span>
+    </button>
+    <script>
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {
+        scrollFunction()
+    };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("movetop").style.display = "block";
+        } else {
+            document.getElementById("movetop").style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+    </script>
+    <!-- //move top -->
+    <!-- common jquery plugin -->
+    <script src="/assets/website/js/frontend/free_v2ray/jquery-3.5.1.min.js"></script>
+    <!-- //common jquery plugin -->
+    <!-- counter for stats -->
+    <script src="/assets/website/js/frontend/free_v2ray/counter.js"></script>
+    <!-- //counter for stats -->
+    <!-- theme switch js (light and dark)-->
+    <script src="/assets/website/js/frontend/free_v2ray/theme-change.js"></script>
+    <script>
+    function autoType(elementClass, typingSpeed) {
+        var thhis = $(elementClass);
+        thhis.css({
+            "position": "relative",
+            "display": "inline-block"
+        });
+        thhis.prepend('<div class="cursor" style="right: initial; left:0;"></div>');
+        thhis = thhis.find(".text-js");
+        var text = thhis.text().trim().split('');
+        var amntOfChars = text.length;
+        var newString = "";
+        thhis.text("|");
+        setTimeout(function() {
+            thhis.css("opacity", 1);
+            thhis.prev().removeAttr("style");
+            thhis.text("");
+            for (var i = 0; i < amntOfChars; i++) {
+                (function(i, char) {
+                    setTimeout(function() {
+                        newString += char;
+                        thhis.text(newString);
+                    }, i * typingSpeed);
+                })(i + 1, text[i]);
+            }
+        }, 1500);
+    }
+
+    $(document).ready(function() {
+        // Now to start autoTyping just call the autoType function with the
+        // class of outer div
+        // The second paramter is the speed between each letter is typed.
+        autoType(".type-js", 200);
+    });
+    </script>
+    <!-- //theme switch js (light and dark)-->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!--bootstrap-->
+    <script src="/assets/website/js/frontend/free_v2ray/bootstrap.min.js"></script>
+    <!-- //bootstrap-->
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+    <!-- //Js scripts -->
+</body>
+
+</html>
