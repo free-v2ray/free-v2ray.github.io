@@ -1,0 +1,327 @@
+<!doctype html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://free-v2ray.github.io/news/article-43967.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>k8s入门之PV和PVC</title>
+        <meta name="description" content="某些应用是要持久化数据的，如果直接持久化在pod所在节点，当pod因为某种原因重建或被调度另外一台节点，是无法访问到之前持久化的数据，所以需要一个公共存储数据的地方，无论pod删除重建或重新调度到其他" />
+        <link rel="icon" href="/assets/website/img/free_v2ray/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="Free V2ray免费梯子节点分享官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://free-v2ray.github.io/news/article-43967.htm" />
+    <meta property="og:site_name" content="Free V2ray免费梯子节点分享官网" />
+    <meta property="og:title" content="k8s入门之PV和PVC" />
+    <meta property="og:image" content="https://free-v2ray.github.io/uploads/20240911-1/ca739634c266bae41556d27eeb274c60.webp" />
+        <meta property="og:release_date" content="2025-01-21T09:50:12" />
+    <meta property="og:updated_time" content="2025-01-21T09:50:12" />
+        <meta property="og:description" content="某些应用是要持久化数据的，如果直接持久化在pod所在节点，当pod因为某种原因重建或被调度另外一台节点，是无法访问到之前持久化的数据，所以需要一个公共存储数据的地方，无论pod删除重建或重新调度到其他" />
+        
+    <!-- google-fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- //google-fonts -->
+    <!-- Template CSS Style link -->
+    <link rel="stylesheet" href="/assets/website/css/free_v2ray/style-starter.css">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="k8s入门之PV和PVC">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EFW7LQ09JM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-EFW7LQ09JM');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <!--header-->
+<header id="site-header" class="fixed-top">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg stroke px-0">
+                        <a class="navbar-brand" href="/">
+                <span>
+                    Free V2ray
+                </span>
+            </a>
+                        <!-- if logo is image enable this
+    <a class="navbar-brand" href="#index.html">
+        <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
+    </a> -->
+            <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav ml-lg-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">首页</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">免费节点</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">新闻资讯</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="#">关于</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">联系</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- toggle switch for light and dark theme -->
+            <div class="cont-ser-position mt-lg-2">
+                <nav class="navigation">
+                    <div class="theme-switch-wrapper">
+                        <label class="theme-switch" for="checkbox">
+                            <input type="checkbox" id="checkbox">
+                            <div class="mode-container">
+                                <i class="gg-sun"></i>
+                                <i class="gg-moon"></i>
+                            </div>
+                        </label>
+                    </div>
+                </nav>
+            </div>
+            <!-- //toggle switch for light and dark theme -->
+        </nav>
+    </div>
+</header>
+<!--//header-->
+    <!-- inner banner -->
+    <div class="inner-banner">
+        <div class="w3l-breadcrumb">
+            <div class="container">
+                <h1 class="inner-text-title font-weight-bold">k8s入门之PV和PVC</h1>
+                <ul class="breadcrumbs-custom-path">
+                    <li><a href="/">首页</a></li>
+                    <li><i class="fas fa-angle-right mx-2"></i></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li class="active"><i class="fas fa-angle-right mx-2"></i>正文</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- //inner banner -->
+    <!-- progress section -->
+    <section class="w3l-about-2 py-5">
+        <div class="container py-2">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<p>某些应用是要持久化数据的，如果直接持久化在pod所在节点，当pod因为某种原因重建或被调度另外一台节点，是无法访问到之前持久化的数据，所以需要一个公共存储数据的地方，无论pod删除重建或重新调度到其他节点都能访问原来的数据，使用nfs就可以到达此目的。</p> <p><strong>一、安装nfs</strong></p> <p><strong>1.在k8sMaster主节点上安装nfs服务端</strong></p> <pre><code>apt install -y nfs-kernel-server systemctl start nfs-server systemctl enable nfs-server systemctl status nfs-server</code></pre> <p>查看安装后的状态为active</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/879cebab13db5835f7e4285ae6ae8dba.jpg" alt="k8s入门之PV和PVC"></p> <p>创建目录并设置权限</p> <pre><code>mkdir -p /nfs/data echo "/nfs/data/ *(insecure,rw,sync,no_root_squash)" &gt; /etc/exports</code></pre> <p>不要忘了重启nfs-server</p> <pre><code>systemctl restart nfs-server</code></pre> <p><strong>2.在两台k8sworker节点上安装nfs客户端</strong></p> <pre><code>apt install -y nfs-common mkdir -p /nfs/data # 把本地的/nfs/data挂载到主节点上 mount 192.168.59.110:/nfs/data /nfs/data</code></pre> <p><strong>3.测试</strong></p> <p>在某台worker节点上往目录中写入测试文件数据</p> <pre><code>echo "nfs data" &gt;&gt; /nfs/data/test.txt</code></pre> <p>在所有节点上都能查看到写入的数据，并且是一样的</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/d0733bdecbdd9fe156711c05d2b1406c.jpg" alt="k8s入门之PV和PVC"></p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/e757bc998a6abce471855a7a7ff5f10c.jpg" alt="k8s入门之PV和PVC"></p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/7cb643e3c01a69386a74146eda1eea0b.jpg" alt="k8s入门之PV和PVC"></p> <p><strong>二、使用原始方式挂载pod数据目录</strong></p> <p><strong>1.先删除之前dev名称空间下的所有资源</strong></p> <pre><code>kubectl delete ns dev</code></pre> <p><strong>2.把ns、deployment、svc资源的描述合并在一个yaml文件中</strong></p> <pre><code>vi nginx-deploy-svc.yaml</code></pre> <pre><code>apiVersion: v1 kind: Namespace metadata:   name: dev --- apiVersion: apps/v1 kind: Deployment metadata:   labels:     app: nginx   name: nginx   namespace: dev spec:   replicas: 3   selector:     matchLabels:       app: nginx   template:     metadata:       labels:         app: nginx     spec:       containers:       - image: nginx         name: nginx         volumeMounts:         - name: nginxvolume           mountPath: /usr/share/nginx/html       volumes:       - name: nginxvolume         #通过nfs服务挂载         nfs:           server: 192.168.59.110           # 此处要特别注意：一定要手动创建nginx子目录，否则pod在过载的时候会报目录不存在异常           path: /nfs/data/nginx --- apiVersion: v1 kind: Service metadata:   labels:     app: svc-nginx   name: svc-nginx   namespace: dev spec:   selector:     app: nginx   type: NodePort   ports:   - port: 8000     protocol: TCP     targetPort: 80</code></pre> <p><strong>3.创建资源对象</strong></p> <pre><code>kubectl apply -f nginx-deploy-svc.yaml</code></pre> <p>查看svc的ip与端口号</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/faa3957448e67853d2d9dc563fcc8224.jpg" alt="k8s入门之PV和PVC"></p> <p><strong>4.测试</strong></p> <p>在挂载目录中创建index.html</p> <pre><code>echo "hello,nfs" &gt;&gt; /nfs/data/nginx/index.html</code></pre> <p>通过ip端口访问，可以看到读取的就是nfs目录中的内容</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/c602dcb7183e54f2f1d553cdbfcc0edd.jpg" alt="k8s入门之PV和PVC"></p> <p>现在你可以把dev名称空间删除，然后重新创建这些资源，再次访问的时候，发现数据还在。</p> <p><strong>三、PV</strong></p> <p>PV：持久卷（Persistent Volume），将应用需要持久化的数据保存到指定位置，与namespace无关</p> <p><strong>1.先创建nfs目录</strong></p> <pre><code># 在master节点执行 mkdir -p /nfs/data/01 mkdir -p /nfs/data/02 mkdir -p /nfs/data/03</code></pre> <p><strong>2.创建基于nfs的pv对象</strong></p> <p>（1）创建pv资源文件</p> <pre><code>vi pv.yaml</code></pre> <p>（2）编写三个pv资源对象，大小分别是：10M，1G，5G</p> <pre><code>apiVersion: v1 kind: PersistentVolume metadata:   name: pv-10m spec:   capacity:     storage: 10M   accessModes:     - ReadWriteMany   storageClassName: nfs   nfs:     path: /nfs/data/01     server: 192.168.59.110 ---  apiVersion: v1 kind: PersistentVolume metadata:   name: pv-1gi spec:   capacity:     storage: 1Gi   accessModes:     - ReadWriteMany   storageClassName: nfs   nfs:     path: /nfs/data/02     server: 192.168.59.110 ---  apiVersion: v1 kind: PersistentVolume metadata:   name: pv-5gi spec:   capacity:     storage: 5Gi   accessModes:     - ReadWriteMany   storageClassName: nfs   nfs:     path: /nfs/data/03     server: 192.168.59.110</code></pre> <p>（3）创建pv对象</p> <pre><code>kubectl apply -f pv.yaml</code></pre> <p><strong>3.查看创建结果</strong></p> <pre><code>kubectl get pv</code></pre> <p>pv对象列表</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/8db63d2059dd5b170077a57224fbbff2.jpg" alt="k8s入门之PV和PVC"></p> <p>某个pv对象的详细信息</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/92b9f69416add6a9dff26473fdfb5e9c.jpg" alt="k8s入门之PV和PVC"></p> <p><strong>四、PVC</strong></p> <p>PVC：持久卷申明（Persistent Volume Claim），申明需要使用的持久卷规格</p> <p><strong>1.创建pvc</strong></p> <p>（1）创建pvc资源文件</p> <pre><code>vi pvc.yaml</code></pre> <p>（2）编写pvc资源申明信息</p> <pre><code>kind: PersistentVolumeClaim apiVersion: v1 metadata:   name: nginx-pvc   namespace: dev spec:   accessModes:     - ReadWriteMany   resources:     requests:       # 申请200M的空间       storage: 200Mi   storageClassName: nfs</code></pre> <p>（3）创建pvc对象</p> <pre><code>kubectl apply -f pvc.yaml</code></pre> <p><strong>2.查看创建结果</strong></p> <pre><code>kubectl get pvc -owide -n dev</code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/07ca156768fbf72114ce5488eb6e6c80.jpg" alt="k8s入门之PV和PVC"></p> <p>由于申请的是200M空间，可以看到k8s自定绑定到合适的pv对象上，即选择大小为1G的pv对象。</p> <p>再回过头来查看pv对象的绑定信息，可以看到已经和刚刚创建的pvc对象绑定了。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/dbc7ee03eb3611855b59b650887914df.jpg" alt="k8s入门之PV和PVC"></p> <p><strong>五、绑定pod与pvc</strong></p> <p><strong>1.创建新的yaml文件</strong></p> <p>（1）新建资源文件</p> <pre><code>vi nginx-dp-svc-pvc.yaml</code></pre> <p>（2）使用persistentVolumeClaim属性指定刚刚创建的nginx-pvc对象</p> <pre><code>apiVersion: v1 kind: Namespace metadata:   name: dev --- apiVersion: apps/v1 kind: Deployment metadata:   labels:     app: nginx   name: nginx   namespace: dev spec:   replicas: 3   selector:     matchLabels:       app: nginx   template:     metadata:       labels:         app: nginx     spec:       containers:       - image: nginx         name: nginx         volumeMounts:         - name: nginxvolume           mountPath: /usr/share/nginx/html       volumes:       - name: nginxvolume         # 使用pvc         persistentVolumeClaim:           claimName: nginx-pvc --- apiVersion: v1 kind: Service metadata:   labels:     app: svc-nginx   name: svc-nginx   namespace: dev spec:   selector:     app: nginx   type: NodePort   ports:   - port: 8000     protocol: TCP     targetPort: 80</code></pre> <p>（3）创建pod，svc对象</p> <pre><code>kubectl apply -f nginx-dp-svc-pvc.yaml</code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/ffc5f7f523bf11c8701b840fc7f2bdd2.jpg" alt="k8s入门之PV和PVC"></p> <p><strong>2.测试</strong></p> <p>由于申请的是pvc是与名称为pv-1gi的pv对象绑定的，所以往/nfs/data/02文件夹中写入index.htm文件进行测试</p> <pre><code>echo "hello,pv" &gt;&gt; /nfs/data/02/index.html</code></pre> <p>使用ip访问服务，可以看到正确输出了内容</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/f96076fb5aa52f923ffaa7dd68b24c73.jpg" alt="k8s入门之PV和PVC"></p> <p>再次查看pv,pvc信息</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/3e8c5c37d3f303aabc038d4fa75733f7.jpg" alt="k8s入门之PV和PVC"></p> <p><strong>3.删除pod</strong></p> <p>当删除pod，与之绑定的pvc对象也会被删除，pv对象的状态变成Released</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/b5a8f726d0e5a1b4cabd708888c9f8bf.jpg" alt="k8s入门之PV和PVC"></p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-43477.htm">宠物美容去哪里学（哪有学宠物美容）</a></p>
+                                        <p>下一个：<a href="/news/article-43969.htm">宠物医院办证流程图（宠物医院办证流程图）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-11-7-free-node-subscribe.htm" title="11月7日→21M/S|2024年最新免费节点Free V2ray订阅链接地址">11月7日→21M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-20-free-v2ray.htm" title="1月20日→22.6M/S|2025年最新免费节点Free V2ray订阅链接地址分享">1月20日→22.6M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-37038.htm" title="成都领养宠物贴吧（成都宠物领养吧领养代替购买）">成都领养宠物贴吧（成都宠物领养吧领养代替购买）</a></li>
+                        <li class="py-2"><a href="/news/article-38027.htm" title="win11系统怎么清理c盘垃圾文件">win11系统怎么清理c盘垃圾文件</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-12-free-node-subscribe.htm" title="12月12日→20.2M/S|2024年最新免费节点Free V2ray订阅链接地址">12月12日→20.2M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-20-clash-v2ray-ss-ssr.htm" title="12月20日→20.1M/S|2024年最新免费节点Free V2ray订阅链接地址">12月20日→20.1M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                        <li class="py-2"><a href="/news/article-27069.htm" title="动物疫苗批号怎么查（动物疫苗批签发查询）">动物疫苗批号怎么查（动物疫苗批签发查询）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-21-node-share.htm" title="11月21日→18.8M/S|2024年最新免费节点Free V2ray订阅链接地址">11月21日→18.8M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                        <li class="py-2"><a href="/news/article-25671.htm" title="自己买猫疫苗可以带去医院打（可以买疫苗自己给猫打吗）">自己买猫疫苗可以带去医院打（可以买疫苗自己给猫打吗）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-14-node-share.htm" title="10月14日→22.3M/S|2024年最新免费节点Free V2ray订阅链接地址">10月14日→22.3M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">66</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">25</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- //progress section -->
+    <!--//testimonials-->
+        <!-- footer -->
+    <footer class="w3l-footer-16 py-5">
+        <div class="container">
+            <div class="below-section text-center">
+                <p class="copy-text">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                    <a href="/">Free V2ray免费梯子节点分享官网</a> 版权所有 Powered by WordPress
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- move top -->
+    <button onclick="topFunction()" id="movetop" title="Go to top">
+        <span class="fas fa-level-up-alt" aria-hidden="true"></span>
+    </button>
+    <script>
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {
+        scrollFunction()
+    };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("movetop").style.display = "block";
+        } else {
+            document.getElementById("movetop").style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+    </script>
+    <!-- //move top -->
+    <!-- common jquery plugin -->
+    <script src="/assets/website/js/frontend/free_v2ray/jquery-3.5.1.min.js"></script>
+    <!-- //common jquery plugin -->
+    <!-- counter for stats -->
+    <script src="/assets/website/js/frontend/free_v2ray/counter.js"></script>
+    <!-- //counter for stats -->
+    <!-- theme switch js (light and dark)-->
+    <script src="/assets/website/js/frontend/free_v2ray/theme-change.js"></script>
+    <script>
+    function autoType(elementClass, typingSpeed) {
+        var thhis = $(elementClass);
+        thhis.css({
+            "position": "relative",
+            "display": "inline-block"
+        });
+        thhis.prepend('<div class="cursor" style="right: initial; left:0;"></div>');
+        thhis = thhis.find(".text-js");
+        var text = thhis.text().trim().split('');
+        var amntOfChars = text.length;
+        var newString = "";
+        thhis.text("|");
+        setTimeout(function() {
+            thhis.css("opacity", 1);
+            thhis.prev().removeAttr("style");
+            thhis.text("");
+            for (var i = 0; i < amntOfChars; i++) {
+                (function(i, char) {
+                    setTimeout(function() {
+                        newString += char;
+                        thhis.text(newString);
+                    }, i * typingSpeed);
+                })(i + 1, text[i]);
+            }
+        }, 1500);
+    }
+
+    $(document).ready(function() {
+        // Now to start autoTyping just call the autoType function with the
+        // class of outer div
+        // The second paramter is the speed between each letter is typed.
+        autoType(".type-js", 200);
+    });
+    </script>
+    <!-- //theme switch js (light and dark)-->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!--bootstrap-->
+    <script src="/assets/website/js/frontend/free_v2ray/bootstrap.min.js"></script>
+    <!-- //bootstrap-->
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+    <!-- //Js scripts -->
+</body>
+
+</html>
