@@ -138,6 +138,7 @@
                   				  				  				<div id="content_views" class="htmledit_views"> <div style="font-size:16px;"> <p>1.打开终端的命令模式：</p> <p>点击左上角的application 然后点击System Tools下拉菜单，再点击其展开的下拉菜单Terminal，这样就打开一个命令模式了。</p> <p>2.查找所要使用的命令模块的完全路径，以解决"command not found"问题：</p> <p>在命令模式下分别输入：which netconfig</p> <p>[root@localhost ~]# which netconfig</p> <p>看看其返回的结果是不是以下信息：</p> <p>/usr/sbin/netconfig</p> <p>如果有返回结果的话还可以继续使用两个命令："which ifconfig" 和 "which route" 查看 ifconfig 和 route 这两个命令的路径在甚么地方，以前我们都以其返回结果为：/sbin/ifconfig 和 /sbin/route 为例子；</p> <p>3.在命令模式下输入命令：/usr/sbin/netconfig</p> <p>这时就会显示一个ip设置的窗口,使用键盘就能对其进行设置了，将ip地址 和 子网掩码(netmask) 以及网关 输入进去后，选择OK 就可以了！</p> <p>4.设置完之后输入 /sbin/ifconfig 就可以查看其设置是否成功。如果成功的话在其显示的结果中你能看到：</p> <p>eth0 Link encap:Ethernet HWaddr 00:18:FE:28:1C:AA</p> <p>inet addr:"ip地址" Bcast:广播地址 Mask:子网掩码</p> <p>inet6 addr: fe80::218:feff:fe28:1caa/64 Scope:Link</p> <p>UP BROADCAST RUNNING MULTICAST MTU:1500 Metric:1</p> <p>RX packets:3579820 errors:0 dropped:0 overruns:0 frame:0</p> <p>TX packets:4311575 errors:0 dropped:0 overruns:0 carrier:0</p> <p>collisions:0 txqueuelen:1000</p> <p>RX bytes:316306869 (301.6 MiB) TX bytes:1919419606 (1.7 GiB)</p> <p>Interrupt:169</p> <p>lo Link encap:Local Loopback</p> <p>inet addr:127.0.0.1 Mask:255.0.0.0</p> <p>inet6 addr: ::1/128 Scope:Host</p> <p>UP LOOPBACK RUNNING MTU:16436 Metric:1</p> <p>RX packets:393012073 errors:0 dropped:0 overruns:0 frame:0</p> <p>TX packets:393012073 errors:0 dropped:0 overruns:0 carrier:0</p> <p>collisions:0 txqueuelen:0</p> <p>RX bytes:1274688659 (1.1 GiB) TX bytes:1274688659 (1.1 GiB)</p> <p>如果相应的ip地址和子网掩码都设置上了的话就证明没问题了！</p> <p>5.如果还是不行的话就用办法二：</p> <p>还是要先打开终端命令模式，然后输入："/sbin/ifconfig eth1 220.195.193.86(ip地址) netmask 255.255.255.240(子网掩码)"</p> <p>然后输入第二条命令："/sbin/route add default gw 211.91.88.129(网关)"</p> <p>备注：/sbin/ifconfig 这里的路径完全是使用which ifconfig 所返回的结果；</p> <p>6.测试是否能上网：输入命令ping 202.108.22.5 看看是否有返回数据。</p> <p>补充：</p> <p>方法一：命令A、linux的网卡IP地址信息存放在文件</p> <p>vi /etc/sysconfig/network-scripts/ifcfg-eth0 中</p> <p>编辑文件如下：</p> <p>DEVICE=eth0 //指出设备名称</p> <p>BOOTPROTO=static //启动类型 dhcp|static</p> <p>BROADCAST=192.168.1.255 //广播地址</p> <p>HWADDR=00:06:5B:FE:DF:7C //硬件Mac地址</p> <p>IPADDR=192.168.0.2 //IP地址</p> <p>NETMASK=255.255.255.0 //子网掩码</p> <p>NETWORK=192.168.0.0 //网络地址</p> <p>GATEWAY=192.168.0.1 //网关地址</p> <p>ONBOOT=yes //是否启动应用</p> <p>TYPE=Ethernet //网络类型</p> <p>B、修改主机名命令如下：</p> <p>vi /etc/sysconfig/network</p> <p>方法二：图形界面//手动修改iP地址(获取静态IP)</p> <p align="center"><img decoding="async" src="http://img.555519.xyz/uploads/20221113/f3e5a00e3f2d622f6e73eebef1956976.jpg" alt="Linux图形化界面ip,Linux系统下图形界面更改IP地址"></p> <p align="center"><img decoding="async" src="http://img.555519.xyz/uploads/20221113/36188fdf0c983a43ed97b51b079dc9aa.jpg" alt="Linux图形化界面ip,Linux系统下图形界面更改IP地址"></p> <p>Linux下载工具wget和axel简介</p> <p>WgetWget是一个十分常用命令行下载工具，Wget使用格式如下：#wget[选项][下载地址]Wget常用参数-b：后台下载，Wget默认的是把文件下载到当前目录。-O：将</p> <p>Linux 操作系统的用户和用户组管理</p> <p>Linux系统是一个多用户多任务的分时操作系统，任何一个要使用系统资源的用户，都必须首先向系统管理员申请一个账号，然后以这个账号的身份进入系</p> <p>linux系统rpm安装包详解</p> <p>rpm好像不能指定安装路径！1.安装一个包#rpm-ivh2.升级一个包#rpm-Uvh3.移走一个包#rpm-e4.安装参数--force即使覆盖属于其它包的文件也强迫安装--nodeps如果该RP</p> </div> </div> 			                <div class="clearfix"></div>
                 <div class="col-md-12 mt-5">
                                         <p>上一个：<a href="/news/article-45939.htm">我到今天才知道SQL92和SQL99</a></p>
+                                        <p>下一个：<a href="/news/article-46443.htm">青浦区二中最低分数线是多少2023（青浦二中高考录取率大概多少）</a></p>
                                     </div>
                                 </div>
                 <div class="col-md-3">
@@ -147,16 +148,16 @@
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/news/article-28000.htm" title="Spring mvc参数校验">Spring mvc参数校验</a></li>
-                        <li class="py-2"><a href="/news/article-29876.htm" title="openssl 3.0 和 1.1.x 区别">openssl 3.0 和 1.1.x 区别</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-2-free-node-subscribe-links.htm" title="11月2日→18.3M/S|2024年最新免费节点Free V2ray订阅链接地址">11月2日→18.3M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-10-free-node-subscribe.htm" title="11月10日→19.1M/S|2024年最新免费节点Free V2ray订阅链接地址">11月10日→19.1M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
-                        <li class="py-2"><a href="/news/article-44957.htm" title="哈尔滨东北农业大学宠物医院（东北农业大学动物医院门诊部怎么样）">哈尔滨东北农业大学宠物医院（东北农业大学动物医院门诊部怎么样）</a></li>
-                        <li class="py-2"><a href="/news/article-20145.htm" title="宠物狗疫苗能自己打吗多少钱（狗狗疫苗自己打可以办狗证吗）">宠物狗疫苗能自己打吗多少钱（狗狗疫苗自己打可以办狗证吗）</a></li>
-                        <li class="py-2"><a href="/news/article-38995.htm" title="被猫抓了十天后猫没死人安全吗（被猫抓了十天后猫没死人安全吗会死吗）">被猫抓了十天后猫没死人安全吗（被猫抓了十天后猫没死人安全吗会死吗）</a></li>
                         <li class="py-2"><a href="/news/article-30838.htm" title="Python生成迷宫">Python生成迷宫</a></li>
-                        <li class="py-2"><a href="/news/article-37038.htm" title="成都领养宠物贴吧（成都宠物领养吧领养代替购买）">成都领养宠物贴吧（成都宠物领养吧领养代替购买）</a></li>
-                        <li class="py-2"><a href="/news/article-21973.htm" title="动物打了疫苗的,抓伤了人怎么办（动物打疫苗后的不良反应）">动物打了疫苗的,抓伤了人怎么办（动物打疫苗后的不良反应）</a></li>
+                        <li class="py-2"><a href="/news/article-44466.htm" title="哪个品牌西洋参比较好(哪个品牌西洋参比较好百度百科)">哪个品牌西洋参比较好(哪个品牌西洋参比较好百度百科)</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-1-free-subscribe-node.htm" title="1月1日→18M/S|2025年最新免费节点Free V2ray订阅链接地址分享">1月1日→18M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-12-free-v2ray.htm" title="1月12日→19.3M/S|2025年最新免费节点Free V2ray订阅链接地址分享">1月12日→19.3M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-46443.htm" title="青浦区二中最低分数线是多少2023（青浦二中高考录取率大概多少）">青浦区二中最低分数线是多少2023（青浦二中高考录取率大概多少）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-16-node-share-links.htm" title="11月16日→21.3M/S|2024年最新免费节点Free V2ray订阅链接地址">11月16日→21.3M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                        <li class="py-2"><a href="/news/article-25208.htm" title="动物疫苗公司 上海 动物疫苗公司 上海有几家">动物疫苗公司 上海 动物疫苗公司 上海有几家</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-4-free-subscribe-node.htm" title="11月4日→20.7M/S|2024年最新免费节点Free V2ray订阅链接地址">11月4日→20.7M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                        <li class="py-2"><a href="/news/article-21526.htm" title="养猫后家里味道太大怎么处理（养猫后家里味道太大怎么处理 喷空气清新剂管用吗）">养猫后家里味道太大怎么处理（养猫后家里味道太大怎么处理 喷空气清新剂管用吗）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-18-clash-v2ray-ss-ssr.htm" title="10月18日→22.7M/S|2024年最新免费节点Free V2ray订阅链接地址">10月18日→22.7M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
                     </ul>
     </div>
 </div>
@@ -168,7 +169,7 @@
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">75</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
