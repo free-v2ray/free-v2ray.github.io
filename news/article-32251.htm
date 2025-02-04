@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN">
+<html xml:lang="zh-CN" lang="zh-CN">
 
 <head>
         <link rel="canonical" href="https://free-v2ray.github.io/news/article-32251.htm" />
@@ -9,11 +9,39 @@
     <title>Git恢复之前版本的两种方法reset、revert（图文详解）</title>
         <meta name="description" content="2019/7/27 修改更新  一、问题描述  在利用github实现多人合作程序开发的过程中，我们有时会出现错误提交的情况，此时我们希望能撤销提交操作，让程序回到提交前的样子，本文总结了两种解决方法" />
         <link rel="icon" href="/assets/website/img/free_v2ray/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="Free V2ray免费梯子节点分享官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://free-v2ray.github.io/news/article-32251.htm" />
+    <meta property="og:site_name" content="Free V2ray免费梯子节点分享官网" />
+    <meta property="og:title" content="Git恢复之前版本的两种方法reset、revert（图文详解）" />
+    <meta property="og:image" content="https://free-v2ray.github.io/uploads/20240911-1/1ad4d18af3a0a10eb07403871a0957a1.webp" />
+        <meta property="og:release_date" content="2024-12-28T10:06:15" />
+    <meta property="og:updated_time" content="2024-12-28T10:06:15" />
+        <meta property="og:description" content="2019/7/27 修改更新  一、问题描述  在利用github实现多人合作程序开发的过程中，我们有时会出现错误提交的情况，此时我们希望能撤销提交操作，让程序回到提交前的样子，本文总结了两种解决方法" />
+        
     <!-- google-fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
     <!-- //google-fonts -->
     <!-- Template CSS Style link -->
     <link rel="stylesheet" href="/assets/website/css/free_v2ray/style-starter.css">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Git恢复之前版本的两种方法reset、revert（图文详解）">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-EFW7LQ09JM"></script>
 <script>
@@ -120,16 +148,16 @@
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/news/article-27530.htm" title="重庆宠物狗狗免费领养中心（2021重庆免费领养狗狗贴吧）">重庆宠物狗狗免费领养中心（2021重庆免费领养狗狗贴吧）</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-24-free-subscribe-node.htm" title="11月24日→19.9M/S|2024年最新免费节点Free V2ray订阅链接地址">11月24日→19.9M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
-                        <li class="py-2"><a href="/news/article-21526.htm" title="养猫后家里味道太大怎么处理（养猫后家里味道太大怎么处理 喷空气清新剂管用吗）">养猫后家里味道太大怎么处理（养猫后家里味道太大怎么处理 喷空气清新剂管用吗）</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-9-13-node-share.htm" title="9月13日→20.9M/S|2024年最新免费节点Free V2ray订阅链接地址">9月13日→20.9M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
-                        <li class="py-2"><a href="/news/article-31769.htm" title="随系统字体放大，某个View内容显示不全问题怎么修改？">随系统字体放大，某个View内容显示不全问题怎么修改？</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-5-node-share-links.htm" title="11月5日→20.7M/S|2024年最新免费节点Free V2ray订阅链接地址">11月5日→20.7M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-15-free-node-subscribe.htm" title="10月15日→23M/S|2024年最新免费节点Free V2ray订阅链接地址">10月15日→23M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-4-free-high-speed-nodes.htm" title="12月4日→21.1M/S|2024年最新免费节点Free V2ray订阅链接地址">12月4日→21.1M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-9-12-node-share-links.htm" title="9月12日→22.9M/S|2024年最新免费节点Free V2ray订阅链接地址">9月12日→22.9M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-19-clash-v2ray-ss-ssr.htm" title="12月19日→20.9M/S|2024年最新免费节点Free V2ray订阅链接地址">12月19日→20.9M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-1-free-subscribe-node.htm" title="1月1日→18M/S|2025年最新免费节点Free V2ray订阅链接地址分享">1月1日→18M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-28001.htm" title="java springMVC之@RequestMapping注解">java springMVC之@RequestMapping注解</a></li>
+                        <li class="py-2"><a href="/news/article-39997.htm" title="怎样养猫家里才干净不臭 怎样养猫家里才干净不臭如果猫毛吃到肚子里怎么办">怎样养猫家里才干净不臭 怎样养猫家里才干净不臭如果猫毛吃到肚子里怎么办</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-10-free-node-subscribe.htm" title="11月10日→19.1M/S|2024年最新免费节点Free V2ray订阅链接地址">11月10日→19.1M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-18-free-v2ray-subscribe.htm" title="11月18日→18.1M/S|2024年最新免费节点Free V2ray订阅链接地址">11月18日→18.1M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                        <li class="py-2"><a href="/news/article-43969.htm" title="宠物医院办证流程图（宠物医院办证流程图）">宠物医院办证流程图（宠物医院办证流程图）</a></li>
+                        <li class="py-2"><a href="/news/article-43967.htm" title="k8s入门之PV和PVC">k8s入门之PV和PVC</a></li>
+                        <li class="py-2"><a href="/news/article-33198.htm" title="etcd分布式键值数据库安装（单机版）">etcd分布式键值数据库安装（单机版）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-11-free-high-speed-nodes.htm" title="12月11日→22M/S|2024年最新免费节点Free V2ray订阅链接地址">12月11日→22M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-22-free-subscribe-node.htm" title="1月22日→21.2M/S|2025年最新免费节点Free V2ray订阅链接地址分享">1月22日→21.2M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
                     </ul>
     </div>
 </div>
@@ -141,19 +169,16 @@
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">3</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
             </li>
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">20</span> <a href="/date/2024-09/" title="2024-09 归档">2024-09</a></h4>
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
             </li>
                     </ul>
     </div>

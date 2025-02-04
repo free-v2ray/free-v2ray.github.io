@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN">
+<html xml:lang="zh-CN" lang="zh-CN">
 
 <head>
         <link rel="canonical" href="https://free-v2ray.github.io/news/article-38510.htm" />
@@ -9,11 +9,39 @@
     <title>关于VUE中组件之间传值以及调用方法汇总</title>
         <meta name="description" content="VUE中组件之间传值，总结来讲有三种情况，分别是：父组件对子组件、子组件对父组件以及兄弟组件之间传值以及调用。    一、父组件==&gt;子组件  1.父组件传值给子组件，通过类似于属性绑定的方式，" />
         <link rel="icon" href="/assets/website/img/free_v2ray/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="Free V2ray免费梯子节点分享官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://free-v2ray.github.io/news/article-38510.htm" />
+    <meta property="og:site_name" content="Free V2ray免费梯子节点分享官网" />
+    <meta property="og:title" content="关于VUE中组件之间传值以及调用方法汇总" />
+    <meta property="og:image" content="https://free-v2ray.github.io/uploads/20240911-1/da1c40da7d37d433fea9bc011eb5432a.webp" />
+        <meta property="og:release_date" content="2025-01-10T10:43:34" />
+    <meta property="og:updated_time" content="2025-01-10T10:43:34" />
+        <meta property="og:description" content="VUE中组件之间传值，总结来讲有三种情况，分别是：父组件对子组件、子组件对父组件以及兄弟组件之间传值以及调用。    一、父组件==&gt;子组件  1.父组件传值给子组件，通过类似于属性绑定的方式，" />
+        
     <!-- google-fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
     <!-- //google-fonts -->
     <!-- Template CSS Style link -->
     <link rel="stylesheet" href="/assets/website/css/free_v2ray/style-starter.css">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="关于VUE中组件之间传值以及调用方法汇总">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-EFW7LQ09JM"></script>
 <script>
@@ -120,16 +148,16 @@
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/news/article-28928.htm" title="猫三联加上狂犬多少钱（猫三联狂犬一共多少钱）">猫三联加上狂犬多少钱（猫三联狂犬一共多少钱）</a></li>
-                        <li class="py-2"><a href="/news/article-22435.htm" title="我所在的城市有一家宠物医院英语翻译怎么说（在我的城市有一家宠物医院英文）">我所在的城市有一家宠物医院英语翻译怎么说（在我的城市有一家宠物医院英文）</a></li>
-                        <li class="py-2"><a href="/news/article-32252.htm" title="动物医院规模排名前十（动物医院全国排名）">动物医院规模排名前十（动物医院全国排名）</a></li>
-                        <li class="py-2"><a href="/news/article-37527.htm" title="dellbios设置硬盘启动模式（dellbios怎么设置硬盘启动）">dellbios设置硬盘启动模式（dellbios怎么设置硬盘启动）</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-4-free-subscribe-node.htm" title="11月4日→20.7M/S|2024年最新免费节点Free V2ray订阅链接地址">11月4日→20.7M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-1-8-free-subscribe-node.htm" title="1月8日→20.1M/S|2025年最新免费节点Free V2ray订阅链接地址分享">1月8日→20.1M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-28-free-high-speed-nodes.htm" title="11月28日→20.8M/S|2024年最新免费节点Free V2ray订阅链接地址">11月28日→20.8M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-2-free-node-subscribe-links.htm" title="12月2日→21.2M/S|2024年最新免费节点Free V2ray订阅链接地址">12月2日→21.2M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-14-free-high-speed-nodes.htm" title="11月14日→18.7M/S|2024年最新免费节点Free V2ray订阅链接地址">11月14日→18.7M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
-                        <li class="py-2"><a href="/news/article-24277.htm" title="宠物食品一手货源（宠物用品一手货源）">宠物食品一手货源（宠物用品一手货源）</a></li>
+                        <li class="py-2"><a href="/news/article-29876.htm" title="openssl 3.0 和 1.1.x 区别">openssl 3.0 和 1.1.x 区别</a></li>
+                        <li class="py-2"><a href="/news/article-26605.htm" title="长期上门收购各种宠物犬株洲（株洲哪里有收狗的）">长期上门收购各种宠物犬株洲（株洲哪里有收狗的）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-12-free-v2ray.htm" title="1月12日→19.3M/S|2025年最新免费节点Free V2ray订阅链接地址分享">1月12日→19.3M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-22438.htm" title="动物医院好评语100字通用（动物医院好评语100字通用版）">动物医院好评语100字通用（动物医院好评语100字通用版）</a></li>
+                        <li class="py-2"><a href="/news/article-23344.htm" title="C++入门   面向对象的基础">C++入门   面向对象的基础</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-30-clash-v2ray-ss-ssr.htm" title="12月30日→21.8M/S|2024年最新免费节点Free V2ray订阅链接地址分享">12月30日→21.8M/S|2024年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-38029.htm" title="南京宠物狗领养地址在哪里啊（南京宠物狗领养地址在哪里啊电话）">南京宠物狗领养地址在哪里啊（南京宠物狗领养地址在哪里啊电话）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-17-clash-v2ray-ss-ssr.htm" title="1月17日→21.8M/S|2025年最新免费节点Free V2ray订阅链接地址分享">1月17日→21.8M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-44958.htm" title="符合动物医院法定条件是什么意思呀英语（动物医院诊疗许可证需要提供什么）">符合动物医院法定条件是什么意思呀英语（动物医院诊疗许可证需要提供什么）</a></li>
+                        <li class="py-2"><a href="/news/article-24746.htm" title="动物疫苗冷藏温度是多少（动物疫苗的储存温度）">动物疫苗冷藏温度是多少（动物疫苗的储存温度）</a></li>
                     </ul>
     </div>
 </div>
@@ -141,16 +169,16 @@
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">36</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
             </li>
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">25</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
             </li>
                     </ul>
     </div>
