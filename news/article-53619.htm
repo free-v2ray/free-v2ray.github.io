@@ -1,0 +1,323 @@
+<!doctype html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://free-v2ray.github.io/news/article-53619.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>SpringSecurity核心过滤器-CsrfFilter</title>
+        <meta name="description" content="  Spring Security除了认证授权外功能外，还提供了安全防护功能。本文我们来介绍下SpringSecurity中是如何阻止CSRF攻击的。    跨站请求伪造（英语：Cross-site " />
+        <link rel="icon" href="/assets/website/img/free_v2ray/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="Free V2ray免费梯子节点分享官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://free-v2ray.github.io/news/article-53619.htm" />
+    <meta property="og:site_name" content="Free V2ray免费梯子节点分享官网" />
+    <meta property="og:title" content="SpringSecurity核心过滤器-CsrfFilter" />
+    <meta property="og:image" content="https://free-v2ray.github.io/uploads/20240911-1/ca739634c266bae41556d27eeb274c60.webp" />
+        <meta property="og:release_date" content="2025-02-09T10:04:40" />
+    <meta property="og:updated_time" content="2025-02-09T10:04:40" />
+        <meta property="og:description" content="  Spring Security除了认证授权外功能外，还提供了安全防护功能。本文我们来介绍下SpringSecurity中是如何阻止CSRF攻击的。    跨站请求伪造（英语：Cross-site " />
+        
+    <!-- google-fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- //google-fonts -->
+    <!-- Template CSS Style link -->
+    <link rel="stylesheet" href="/assets/website/css/free_v2ray/style-starter.css">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="SpringSecurity核心过滤器-CsrfFilter">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EFW7LQ09JM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-EFW7LQ09JM');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <!--header-->
+<header id="site-header" class="fixed-top">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg stroke px-0">
+                        <a class="navbar-brand" href="/">
+                <span>
+                    Free V2ray                </span>
+            </a>
+                        <!-- if logo is image enable this
+    <a class="navbar-brand" href="#index.html">
+        <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
+    </a> -->
+            <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav ml-lg-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">首页</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">免费节点</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/client.htm">客户端</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">新闻资讯</a>
+                    </li>
+                                    </ul>
+            </div>
+            <!-- toggle switch for light and dark theme -->
+            <div class="cont-ser-position mt-lg-2">
+                <nav class="navigation">
+                    <div class="theme-switch-wrapper">
+                        <label class="theme-switch" for="checkbox">
+                            <input type="checkbox" id="checkbox">
+                            <div class="mode-container">
+                                <i class="gg-sun"></i>
+                                <i class="gg-moon"></i>
+                            </div>
+                        </label>
+                    </div>
+                </nav>
+            </div>
+            <!-- //toggle switch for light and dark theme -->
+        </nav>
+    </div>
+</header>
+<!--//header-->
+    <!-- inner banner -->
+    <div class="inner-banner">
+        <div class="w3l-breadcrumb">
+            <div class="container">
+                <h1 class="inner-text-title font-weight-bold">SpringSecurity核心过滤器-CsrfFilter</h1>
+                <ul class="breadcrumbs-custom-path">
+                    <li><a href="/">首页</a></li>
+                    <li><i class="fas fa-angle-right mx-2"></i></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li class="active"><i class="fas fa-angle-right mx-2"></i>正文</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- //inner banner -->
+    <!-- progress section -->
+    <section class="w3l-about-2 py-5">
+        <div class="container py-2">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> </h1> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220602/f15fd16cf2a1c881400550accf67f7cf.jpg" alt="SpringSecurity核心过滤器-CsrfFilter"></p> <p>  Spring Security除了认证授权外功能外，还提供了安全防护功能。本文我们来介绍下SpringSecurity中是如何阻止CSRF攻击的。</p> </h1> <p>  跨站请求伪造（英语：Cross-site request forgery），也被称为 one-click attack 或者 session riding，通常缩写为 CSRF 或者 XSRF， 是一种挟制用户在当前已登录的 Web 应用程序上执行非本意的操作的攻击方法。跟跨网站脚本（XSS）相比，XSS利用的是用户对指定网站的信任，CSRF 利用的是网站对用户网页浏览器的信任。</p> <p>  跨站请求攻击，简单地说，是攻击者通过一些技术手段欺骗用户的浏览器去访问一个自己曾经认证过的网站并运行一些操作（如发邮件，发消息，甚至财产操作如转账和购买商品）。由于浏览器曾经认证过，所以被访问的网站会认为是真正的用户操作而去运行。这利用了 web 中用户身份验证的一个漏洞：简单的身份验证只能保证请求发自某个用户的浏览器，却不能保证请求本身是用户自愿发出的。举个例子如下：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220602/6367492f5d0f2e92cdb710b23b4c578c.jpg" alt="SpringSecurity核心过滤器-CsrfFilter"></p> </h1> <h2><a id="1Referer_16" rel="nofollow"></a>1.检查Referer字段</h2> <p>  HTTP头中有一个Referer字段，这个字段用以标明请求来源于哪个地址。在处理敏感数据请求时，通常来说，Referer字段应和请求的地址位于同一域名下。以上文银行操作为例，Referer字段地址通常应该是转账按钮所在的网页地址，应该也位于www.bankchina.com之下。而如果是CSRF攻击传来的请求，Referer字段会是包含恶意网址的地址，不会位于www.bankhacker.com之下，这时候服务器就能识别出恶意的访问。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220602/9fc08bce0004293c0889cae1b8853e88.jpg" alt="SpringSecurity核心过滤器-CsrfFilter"></p> <p>  这种办法简单易行，工作量低，仅需要在关键访问处增加一步校验。但这种办法也有其局限性，因其完全依赖浏览器发送正确的Referer字段。虽然http协议对此字段的内容有明确的规定，但并无法保证来访的浏览器的具体实现，亦无法保证浏览器没有安全漏洞影响到此字段。并且也存在攻击者攻击某些浏览器，篡改其Referer字段的可能。</p> <h2><a id="2CsrfToken_24" rel="nofollow"></a>2.CsrfToken</h2> <p>  其实CSRF攻击是在用户登录且没有退出浏览器的情况下访问了第三方的站点而被攻击的，完全是携带了认证的cookie来实现的，我们只需要在服务端响应给客户端的页面中绑定随机的信息，然后提交请求后在服务端校验，如果携带的数据和之前的不一致就认为是CSRF攻击，拒绝这些请求即可。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220602/600b6fc0c2a74e338e6a5e45770da756.jpg" alt="SpringSecurity核心过滤器-CsrfFilter"></p> </h1> <p>  首先从 Spring Security 4.0 开始，默认情况下会启用 CSRF 保护，以防止 CSRF 攻击应用程序，Spring Security CSRF 会针对 PATCH，POST，PUT 和 DELETE 方法进行防护。</p> <h2><a id="1CSRF_34" rel="nofollow"></a>1.开启关闭CSRF防御</h2> <p>  在SpringSecurity中默认是开启csrf防御的，我们可以通过一下配置来关闭csrf防御</p> <pre><code>http.csrf().disable();</code></pre> <p>或者在基于配置文件的使用中使用如下操作关闭</p> <pre><code class="prism language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">security:</span>csrf</span><span class="token attr-name">disabled</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>true<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span></code></pre> <h2><a id="2SpringSecurity_48" rel="nofollow"></a>2.SpringSecurity的实现</h2> <h3><a id="21_CSRF_50" rel="nofollow"></a>2.1 CSRF的原理</h3> <ol> <li>生成csrfToken保存到HttpSession或者Cookie中</li> <li>请求到来时，程序会从请求中获取提交的csrfToken，同时会从HttpSession中获取之前存储的csrfToken进行比较，如果相同则认为是合法的请求，继续后面的操作，如果不相等则认为是CSRF工具，拒绝该请求</li> </ol> <h3><a id="22__55" rel="nofollow"></a>2.2 源码分析</h3> <p>  然后我们来看下SpringSecurity中的代码是如何实现的。我们主要看的是 spring-security-web.jar中的</p> <p>org.springframework.security.web.csrf包下的源码。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220602/be1f2e80f82fea366134269add78316b.jpg" alt="SpringSecurity核心过滤器-CsrfFilter"></p> <h4><a id="221_CsrfToken_63" rel="nofollow"></a>2.2.1 CsrfToken</h4> <p>  CsrfToken是一个非常简单的接口，定义了Token令牌，消息头和请求参数。</p> <pre><code class="prism language-java"><span class="token keyword">public</span><span class="token keyword">interface</span><span class="token class-name">CsrfToken</span><span class="token keyword">extends</span><span class="token class-name">Serializable</span><span class="token punctuation">{<!-- --></span><span class="token comment">/** 	 * 获取我们放置在请求头中CSRF随机值的名称 	 */</span><span class="token class-name">String</span><span class="token function">getHeaderName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">/** 	 * 获取请求体中的csrf随机值的参数名称 	 */</span><span class="token class-name">String</span><span class="token function">getParameterName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">/** 	 * 返回具体的Token值 	 */</span><span class="token class-name">String</span><span class="token function">getToken</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span></code></pre> <p>CsrfToken的默认实现是DefaultCsrfToken。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220602/d505de2bc9d7ec1897c36d979e94bc6f.jpg" alt="SpringSecurity核心过滤器-CsrfFilter"></p> <h4><a id="222_CsrfTokenRepository_92" rel="nofollow"></a>2.2.2 CsrfTokenRepository</h4> <p>  CsrfTokenRepository接口也非常简单，定义了Token的生成，存储和获取的相关API</p> <pre><code class="prism language-java"><span class="token keyword">public</span><span class="token keyword">interface</span><span class="token class-name">CsrfTokenRepository</span><span class="token punctuation">{<!-- --></span><span class="token comment">/** 	 * 生成Token 	 */</span><span class="token class-name">CsrfToken</span><span class="token function">generateToken</span><span class="token punctuation">(</span><span class="token class-name">HttpServletRequest</span> request<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">/** 	 * 存储生成的Token 	 */</span><span class="token keyword">void</span><span class="token function">saveToken</span><span class="token punctuation">(</span><span class="token class-name">CsrfToken</span> token<span class="token punctuation">,</span><span class="token class-name">HttpServletRequest</span> request<span class="token punctuation">,</span><span class="token class-name">HttpServletResponse</span> response<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">/** 	 * 返回Token 	 */</span><span class="token class-name">CsrfToken</span><span class="token function">loadToken</span><span class="token punctuation">(</span><span class="token class-name">HttpServletRequest</span> request<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span></code></pre> <p>CsrfTokenRepository的实现在SpringSecurity中有两个实现。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220602/e7a451b9e0b608f88587e379cf25c46d.jpg" alt="SpringSecurity核心过滤器-CsrfFilter"></p> <p>默认的实现是HttpSessionCsrfTokenRepository。是一个基于HttpSession保存csrfToken的实现。</p> <pre><code class="prism language-java"><span class="token keyword">public</span><span class="token keyword">final</span><span class="token keyword">class</span><span class="token class-name">HttpSessionCsrfTokenRepository</span><span class="token keyword">implements</span><span class="token class-name">CsrfTokenRepository</span><span class="token punctuation">{<!-- --></span><span class="token keyword">private</span><span class="token keyword">static</span><span class="token keyword">final</span><span class="token class-name">String</span> DEFAULT_CSRF_PARAMETER_NAME<span class="token operator">=</span><span class="token string">"_csrf"</span><span class="token punctuation">;</span><span class="token keyword">private</span><span class="token keyword">static</span><span class="token keyword">final</span><span class="token class-name">String</span> DEFAULT_CSRF_HEADER_NAME<span class="token operator">=</span><span class="token string">"X-CSRF-TOKEN"</span><span class="token punctuation">;</span><span class="token keyword">private</span><span class="token keyword">static</span><span class="token keyword">final</span><span class="token class-name">String</span> DEFAULT_CSRF_TOKEN_ATTR_NAME<span class="token operator">=</span><span class="token class-name">HttpSessionCsrfTokenRepository</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">concat</span><span class="token punctuation">(</span><span class="token string">".CSRF_TOKEN"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token keyword">private</span><span class="token class-name">String</span> parameterName<span class="token operator">=</span> DEFAULT_CSRF_PARAMETER_NAME<span class="token punctuation">;</span><span class="token keyword">private</span><span class="token class-name">String</span> headerName<span class="token operator">=</span> DEFAULT_CSRF_HEADER_NAME<span class="token punctuation">;</span><span class="token keyword">private</span><span class="token class-name">String</span> sessionAttributeName<span class="token operator">=</span> DEFAULT_CSRF_TOKEN_ATTR_NAME<span class="token punctuation">;</span><span class="token comment">// 保存Token到session中</span><span class="token annotation punctuation">@Override</span><span class="token keyword">public</span><span class="token keyword">void</span><span class="token function">saveToken</span><span class="token punctuation">(</span><span class="token class-name">CsrfToken</span> token<span class="token punctuation">,</span><span class="token class-name">HttpServletRequest</span> request<span class="token punctuation">,</span><span class="token class-name">HttpServletResponse</span> response<span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token keyword">if</span><span class="token punctuation">(</span>token<span class="token operator">==</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token class-name">HttpSession</span> session<span class="token operator">=</span> request<span class="token punctuation">.</span><span class="token function">getSession</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token keyword">if</span><span class="token punctuation">(</span>session<span class="token operator">!=</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span> 				session<span class="token punctuation">.</span><span class="token function">removeAttribute</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>sessionAttributeName<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{<!-- --></span><span class="token class-name">HttpSession</span> session<span class="token operator">=</span> request<span class="token punctuation">.</span><span class="token function">getSession</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 			session<span class="token punctuation">.</span><span class="token function">setAttribute</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>sessionAttributeName<span class="token punctuation">,</span> token<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token comment">// 从session中加载token</span><span class="token annotation punctuation">@Override</span><span class="token keyword">public</span><span class="token class-name">CsrfToken</span><span class="token function">loadToken</span><span class="token punctuation">(</span><span class="token class-name">HttpServletRequest</span> request<span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token class-name">HttpSession</span> session<span class="token operator">=</span> request<span class="token punctuation">.</span><span class="token function">getSession</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token keyword">if</span><span class="token punctuation">(</span>session<span class="token operator">==</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token keyword">return</span><span class="token keyword">null</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token keyword">return</span><span class="token punctuation">(</span><span class="token class-name">CsrfToken</span><span class="token punctuation">)</span> session<span class="token punctuation">.</span><span class="token function">getAttribute</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>sessionAttributeName<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token comment">// 生成Token</span><span class="token annotation punctuation">@Override</span><span class="token keyword">public</span><span class="token class-name">CsrfToken</span><span class="token function">generateToken</span><span class="token punctuation">(</span><span class="token class-name">HttpServletRequest</span> request<span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token keyword">return</span><span class="token keyword">new</span><span class="token class-name">DefaultCsrfToken</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>headerName<span class="token punctuation">,</span><span class="token keyword">this</span><span class="token punctuation">.</span>parameterName<span class="token punctuation">,</span><span class="token function">createNewToken</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token comment">/** 	 * Sets the {@link HttpServletRequest} parameter name that the {@link CsrfToken} is 	 * expected to appear on 	 * @param parameterName the new parameter name to use 	 */</span><span class="token keyword">public</span><span class="token keyword">void</span><span class="token function">setParameterName</span><span class="token punctuation">(</span><span class="token class-name">String</span> parameterName<span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token class-name">Assert</span><span class="token punctuation">.</span><span class="token function">hasLength</span><span class="token punctuation">(</span>parameterName<span class="token punctuation">,</span><span class="token string">"parameterName cannot be null or empty"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token keyword">this</span><span class="token punctuation">.</span>parameterName<span class="token operator">=</span> parameterName<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token comment">/** 	 * Sets the header name that the {@link CsrfToken} is expected to appear on and the 	 * header that the response will contain the {@link CsrfToken}. 	 * @param headerName the new header name to use 	 */</span><span class="token keyword">public</span><span class="token keyword">void</span><span class="token function">setHeaderName</span><span class="token punctuation">(</span><span class="token class-name">String</span> headerName<span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token class-name">Assert</span><span class="token punctuation">.</span><span class="token function">hasLength</span><span class="token punctuation">(</span>headerName<span class="token punctuation">,</span><span class="token string">"headerName cannot be null or empty"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token keyword">this</span><span class="token punctuation">.</span>headerName<span class="token operator">=</span> headerName<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token comment">/** 	 * Sets the {@link HttpSession} attribute name that the {@link CsrfToken} is stored in 	 * @param sessionAttributeName the new attribute name to use 	 */</span><span class="token keyword">public</span><span class="token keyword">void</span><span class="token function">setSessionAttributeName</span><span class="token punctuation">(</span><span class="token class-name">String</span> sessionAttributeName<span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token class-name">Assert</span><span class="token punctuation">.</span><span class="token function">hasLength</span><span class="token punctuation">(</span>sessionAttributeName<span class="token punctuation">,</span><span class="token string">"sessionAttributename cannot be null or empty"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token keyword">this</span><span class="token punctuation">.</span>sessionAttributeName<span class="token operator">=</span> sessionAttributeName<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token comment">// 通过UUID来生成Token信息</span><span class="token keyword">private</span><span class="token class-name">String</span><span class="token function">createNewToken</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token keyword">return</span> UUID<span class="token punctuation">.</span><span class="token function">randomUUID</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">}</span></code></pre> <h4><a id="223_CsrfFilter_205" rel="nofollow"></a>2.2.3 CsrfFilter</h4> <p>  CsrfFilter用于处理跨站请求伪造。检查表单提交的_csrf隐藏域的value与内存中保存的的是否一致，如果一致框架则认为当然登录页面是安全的，如果不一致，会报403forbidden错误。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220602/a972fd0cbd1352f2c082ff8a0711a190.jpg" alt="SpringSecurity核心过滤器-CsrfFilter"></p> <p>具体处理请求的方法</p> <pre><code class="prism language-java"><span class="token annotation punctuation">@Override</span><span class="token keyword">protected</span><span class="token keyword">void</span><span class="token function">doFilterInternal</span><span class="token punctuation">(</span><span class="token class-name">HttpServletRequest</span> request<span class="token punctuation">,</span><span class="token class-name">HttpServletResponse</span> response<span class="token punctuation">,</span><span class="token class-name">FilterChain</span> filterChain<span class="token punctuation">)</span><span class="token keyword">throws</span><span class="token class-name">ServletException</span><span class="token punctuation">,</span><span class="token class-name">IOException</span><span class="token punctuation">{<!-- --></span> 		request<span class="token punctuation">.</span><span class="token function">setAttribute</span><span class="token punctuation">(</span><span class="token class-name">HttpServletResponse</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> response<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// 从session中加载 Token</span><span class="token class-name">CsrfToken</span> csrfToken<span class="token operator">=</span><span class="token keyword">this</span><span class="token punctuation">.</span>tokenRepository<span class="token punctuation">.</span><span class="token function">loadToken</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token keyword">boolean</span> missingToken<span class="token operator">=</span><span class="token punctuation">(</span>csrfToken<span class="token operator">==</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// 如果是第一次访问就生成Token信息</span><span class="token keyword">if</span><span class="token punctuation">(</span>missingToken<span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span> 			csrfToken<span class="token operator">=</span><span class="token keyword">this</span><span class="token punctuation">.</span>tokenRepository<span class="token punctuation">.</span><span class="token function">generateToken</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// 把生成的Token信息存储在Session中</span><span class="token keyword">this</span><span class="token punctuation">.</span>tokenRepository<span class="token punctuation">.</span><span class="token function">saveToken</span><span class="token punctuation">(</span>csrfToken<span class="token punctuation">,</span> request<span class="token punctuation">,</span> response<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span> 		request<span class="token punctuation">.</span><span class="token function">setAttribute</span><span class="token punctuation">(</span><span class="token class-name">CsrfToken</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> csrfToken<span class="token punctuation">)</span><span class="token punctuation">;</span> 		request<span class="token punctuation">.</span><span class="token function">setAttribute</span><span class="token punctuation">(</span>csrfToken<span class="token punctuation">.</span><span class="token function">getParameterName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> csrfToken<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// 匹配是否是需要做CSRF防御的相关请求</span><span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>requireCsrfProtectionMatcher<span class="token punctuation">.</span><span class="token function">matches</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>logger<span class="token punctuation">.</span><span class="token function">isTraceEnabled</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token keyword">this</span><span class="token punctuation">.</span>logger<span class="token punctuation">.</span><span class="token function">trace</span><span class="token punctuation">(</span><span class="token string">"Did not protect against CSRF since request did not match "</span><span class="token operator">+</span><span class="token keyword">this</span><span class="token punctuation">.</span>requireCsrfProtectionMatcher<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span> 			filterChain<span class="token punctuation">.</span><span class="token function">doFilter</span><span class="token punctuation">(</span>request<span class="token punctuation">,</span> response<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token keyword">return</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token comment">// 获取请求携带在header中的Token信息</span><span class="token class-name">String</span> actualToken<span class="token operator">=</span> request<span class="token punctuation">.</span><span class="token function">getHeader</span><span class="token punctuation">(</span>csrfToken<span class="token punctuation">.</span><span class="token function">getHeaderName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token keyword">if</span><span class="token punctuation">(</span>actualToken<span class="token operator">==</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token comment">// 从请求参数中获取Token信息</span> 			actualToken<span class="token operator">=</span> request<span class="token punctuation">.</span><span class="token function">getParameter</span><span class="token punctuation">(</span>csrfToken<span class="token punctuation">.</span><span class="token function">getParameterName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token comment">// 判断请求中的Token是否和Session中存储的Token相等</span><span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">equalsConstantTime</span><span class="token punctuation">(</span>csrfToken<span class="token punctuation">.</span><span class="token function">getToken</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> actualToken<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token keyword">this</span><span class="token punctuation">.</span>logger<span class="token punctuation">.</span><span class="token function">debug</span><span class="token punctuation">(</span><span class="token class-name">LogMessage</span><span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-&gt;</span><span class="token string">"Invalid CSRF token found for "</span><span class="token operator">+</span><span class="token class-name">UrlUtils</span><span class="token punctuation">.</span><span class="token function">buildFullRequestUrl</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// Token不相等，说明是CSRF攻击，抛出访问拒绝的异常</span><span class="token class-name">AccessDeniedException</span> exception<span class="token operator">=</span><span class="token punctuation">(</span><span class="token operator">!</span>missingToken<span class="token punctuation">)</span><span class="token operator">?</span><span class="token keyword">new</span><span class="token class-name">InvalidCsrfTokenException</span><span class="token punctuation">(</span>csrfToken<span class="token punctuation">,</span> actualToken<span class="token punctuation">)</span><span class="token operator">:</span><span class="token keyword">new</span><span class="token class-name">MissingCsrfTokenException</span><span class="token punctuation">(</span>actualToken<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token keyword">this</span><span class="token punctuation">.</span>accessDeniedHandler<span class="token punctuation">.</span><span class="token function">handle</span><span class="token punctuation">(</span>request<span class="token punctuation">,</span> response<span class="token punctuation">,</span> exception<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token keyword">return</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token comment">// 说明是正常的访问，放过</span> 		filterChain<span class="token punctuation">.</span><span class="token function">doFilter</span><span class="token punctuation">(</span>request<span class="token punctuation">,</span> response<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span></code></pre> <h2><a id="3Session_259" rel="nofollow"></a>3.分布式Session</h2> <p>  上面介绍的CsrfToken校验，生成的Token信息是存储在HttpSession中的，那么我们在分布式环境下，跨进程的场景下我们要如何实现Session共享呢？这时我们可以通过SpringSession来实现，但是这里有个前提就是分布式的项目必须都得是在一个一级域名下的多个二级域名是可以实现的。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220602/9c3c90b1589a6250032275ed7b3a9fa8.jpg" alt="SpringSecurity核心过滤器-CsrfFilter"></p> <h3><a id="31_SpringSession_265" rel="nofollow"></a>3.1 配置SpringSession</h3> <p>  配置SpringSession可以参考Spring的官网：https://docs.spring.io/spring-session/docs/2.5.6/reference/html5/ 因为在分布式Session我们需要把Session数据独立的存储在Redis服务中，所以还需要启动Redis服务。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220602/238c3c03720c3a70f14c4cc69a1e90d6.jpg" alt="SpringSecurity核心过滤器-CsrfFilter"></p> <p>添加相关依赖：</p> <pre><code class="prism language-java"><span class="token generics"><span class="token punctuation">&lt;</span>dependency<span class="token punctuation">&gt;</span></span><span class="token generics"><span class="token punctuation">&lt;</span>groupId<span class="token punctuation">&gt;</span></span>org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>session<span class="token operator">&lt;</span><span class="token operator">/</span>groupId<span class="token operator">&gt;</span><span class="token generics"><span class="token punctuation">&lt;</span>artifactId<span class="token punctuation">&gt;</span></span>spring<span class="token operator">-</span>session<span class="token operator">-</span>data<span class="token operator">-</span>redis<span class="token operator">&lt;</span><span class="token operator">/</span>artifactId<span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>dependency<span class="token operator">&gt;</span><span class="token generics"><span class="token punctuation">&lt;</span>dependency<span class="token punctuation">&gt;</span></span><span class="token generics"><span class="token punctuation">&lt;</span>groupId<span class="token punctuation">&gt;</span></span>org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>boot<span class="token operator">&lt;</span><span class="token operator">/</span>groupId<span class="token operator">&gt;</span><span class="token generics"><span class="token punctuation">&lt;</span>artifactId<span class="token punctuation">&gt;</span></span>spring<span class="token operator">-</span>boot<span class="token operator">-</span>starter<span class="token operator">-</span>data<span class="token operator">-</span>redis<span class="token operator">&lt;</span><span class="token operator">/</span>artifactId<span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>dependency<span class="token operator">&gt;</span></code></pre> <p>然后添加对应的配置</p> <pre><code class="prism language-properties">spring.redis.host=192.168.56.100 spring.redis.port=6379 spring.session.store-type=redis spring.session.redis.namespace=spring:session</code></pre> <p>修改host文件，设置域名关系</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220602/e68183c9e341d39232826ba35b81f90e.jpg" alt="SpringSecurity核心过滤器-CsrfFilter"></p> <p>添加配置文件，设置Cookie中的domain为一级域名</p> <pre><code class="prism language-java"><span class="token annotation punctuation">@Configuration</span><span class="token keyword">public</span><span class="token keyword">class</span><span class="token class-name">MySessionConfig</span><span class="token punctuation">{<!-- --></span><span class="token annotation punctuation">@Bean</span><span class="token keyword">public</span><span class="token class-name">CookieSerializer</span><span class="token function">cookieSerializer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token class-name">DefaultCookieSerializer</span> cookieSerializer<span class="token operator">=</span><span class="token keyword">new</span><span class="token class-name">DefaultCookieSerializer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         cookieSerializer<span class="token punctuation">.</span><span class="token function">setDomainName</span><span class="token punctuation">(</span><span class="token string">"msb.com"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         cookieSerializer<span class="token punctuation">.</span><span class="token function">setCookieName</span><span class="token punctuation">(</span><span class="token string">"csrfSession"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token keyword">return</span> cookieSerializer<span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">}</span></code></pre> <p>然后测试看效果，然后aa.msb.com:8080</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220602/9e30a08dbcca3ea703dac6d843378aff.jpg" alt="SpringSecurity核心过滤器-CsrfFilter"></p> <p>然后访问bb.msb.com:8081</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220602/f97194c93a8997ad8da60df6dc3e1f8c.jpg" alt="SpringSecurity核心过滤器-CsrfFilter"></p> <p>可以看到两个页面中生成的csrfToken是一样的，说明共享了数据，而且Cookie中的Session信息也一致。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220602/39608761046678f156673aa86ba6e19d.jpg" alt="SpringSecurity核心过滤器-CsrfFilter"></p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220602/d4a41653fd80229726e2b9b846f7095d.jpg" alt="SpringSecurity核心过滤器-CsrfFilter"></p> <p>搞定~</p> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-53077.htm">猫抓破是什么样子（猫抓破皮是什么样子的）</a></p>
+                                        <p>下一个：<a href="/news/article-53620.htm">网络协议之:socket协议详解之Unix domain Socket</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2025-2-7-node-share-links.htm" title="2月7日→22.7M/S|2025年最新免费节点Free V2ray订阅链接地址分享">2月7日→22.7M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-45473.htm" title="C ++程序，用于实现两个数相乘的Schonhage-Strassen算法">C ++程序，用于实现两个数相乘的Schonhage-Strassen算法</a></li>
+                        <li class="py-2"><a href="/news/article-23345.htm" title="victoriaMetrics之byteBuffer">victoriaMetrics之byteBuffer</a></li>
+                        <li class="py-2"><a href="/news/article-47914.htm" title="猫疫苗间隔两个月会失效吗（猫疫苗间隔20天）">猫疫苗间隔两个月会失效吗（猫疫苗间隔20天）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-18-node-share-links.htm" title="12月18日→19.2M/S|2024年最新免费节点Free V2ray订阅链接地址">12月18日→19.2M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                        <li class="py-2"><a href="/news/article-51498.htm" title="C语言实现顺序表的基本操作(简单版)">C语言实现顺序表的基本操作(简单版)</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-10-free-high-speed-nodes.htm" title="2月10日→18.5M/S|2025年最新免费节点Free V2ray订阅链接地址分享">2月10日→18.5M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-49415.htm" title="springboot配置多数据源（连接多个数据库）">springboot配置多数据源（连接多个数据库）</a></li>
+                        <li class="py-2"><a href="/news/article-33198.htm" title="etcd分布式键值数据库安装（单机版）">etcd分布式键值数据库安装（单机版）</a></li>
+                        <li class="py-2"><a href="/news/article-43967.htm" title="k8s入门之PV和PVC">k8s入门之PV和PVC</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- //progress section -->
+    <!--//testimonials-->
+        <!-- footer -->
+    <footer class="w3l-footer-16 py-5">
+        <div class="container">
+            <div class="below-section text-center">
+                <p class="copy-text">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                    <a href="/">Free V2ray免费梯子节点分享官网</a> 版权所有 Powered by WordPress
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- move top -->
+    <button onclick="topFunction()" id="movetop" title="Go to top">
+        <span class="fas fa-level-up-alt" aria-hidden="true"></span>
+    </button>
+    <script>
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {
+        scrollFunction()
+    };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("movetop").style.display = "block";
+        } else {
+            document.getElementById("movetop").style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+    </script>
+    <!-- //move top -->
+    <!-- common jquery plugin -->
+    <script src="/assets/website/js/frontend/free_v2ray/jquery-3.5.1.min.js"></script>
+    <!-- //common jquery plugin -->
+    <!-- counter for stats -->
+    <script src="/assets/website/js/frontend/free_v2ray/counter.js"></script>
+    <!-- //counter for stats -->
+    <!-- theme switch js (light and dark)-->
+    <script src="/assets/website/js/frontend/free_v2ray/theme-change.js"></script>
+    <script>
+    function autoType(elementClass, typingSpeed) {
+        var thhis = $(elementClass);
+        thhis.css({
+            "position": "relative",
+            "display": "inline-block"
+        });
+        thhis.prepend('<div class="cursor" style="right: initial; left:0;"></div>');
+        thhis = thhis.find(".text-js");
+        var text = thhis.text().trim().split('');
+        var amntOfChars = text.length;
+        var newString = "";
+        thhis.text("|");
+        setTimeout(function() {
+            thhis.css("opacity", 1);
+            thhis.prev().removeAttr("style");
+            thhis.text("");
+            for (var i = 0; i < amntOfChars; i++) {
+                (function(i, char) {
+                    setTimeout(function() {
+                        newString += char;
+                        thhis.text(newString);
+                    }, i * typingSpeed);
+                })(i + 1, text[i]);
+            }
+        }, 1500);
+    }
+
+    $(document).ready(function() {
+        // Now to start autoTyping just call the autoType function with the
+        // class of outer div
+        // The second paramter is the speed between each letter is typed.
+        autoType(".type-js", 200);
+    });
+    </script>
+    <!-- //theme switch js (light and dark)-->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!--bootstrap-->
+    <script src="/assets/website/js/frontend/free_v2ray/bootstrap.min.js"></script>
+    <!-- //bootstrap-->
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+    <!-- //Js scripts -->
+</body>
+
+</html>
