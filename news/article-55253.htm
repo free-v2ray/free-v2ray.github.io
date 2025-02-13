@@ -1,0 +1,323 @@
+<!doctype html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://free-v2ray.github.io/news/article-55253.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>springMvc+spring security 注解方式实现权限控制</title>
+        <meta name="description" content="一个项目，权限自然是少不了的，在我来公司一段时间后发现公司后台的管理系统既然没有权限模块，所有人都都是超级管理员，更让人嗤之以鼻的是，整个系统也没有任何操作日志记录，这怎么得了，数据是的何等重要，岂是" />
+        <link rel="icon" href="/assets/website/img/free_v2ray/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="Free V2ray免费梯子节点分享官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://free-v2ray.github.io/news/article-55253.htm" />
+    <meta property="og:site_name" content="Free V2ray免费梯子节点分享官网" />
+    <meta property="og:title" content="springMvc+spring security 注解方式实现权限控制" />
+    <meta property="og:image" content="https://free-v2ray.github.io/uploads/20240911-1/f99b3c98d8368cd5b417ac23388eab6b.webp" />
+        <meta property="og:release_date" content="2025-02-12T09:07:27" />
+    <meta property="og:updated_time" content="2025-02-12T09:07:27" />
+        <meta property="og:description" content="一个项目，权限自然是少不了的，在我来公司一段时间后发现公司后台的管理系统既然没有权限模块，所有人都都是超级管理员，更让人嗤之以鼻的是，整个系统也没有任何操作日志记录，这怎么得了，数据是的何等重要，岂是" />
+        
+    <!-- google-fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- //google-fonts -->
+    <!-- Template CSS Style link -->
+    <link rel="stylesheet" href="/assets/website/css/free_v2ray/style-starter.css">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="springMvc+spring security 注解方式实现权限控制">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EFW7LQ09JM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-EFW7LQ09JM');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <!--header-->
+<header id="site-header" class="fixed-top">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg stroke px-0">
+                        <a class="navbar-brand" href="/">
+                <span>
+                    Free V2ray                </span>
+            </a>
+                        <!-- if logo is image enable this
+    <a class="navbar-brand" href="#index.html">
+        <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
+    </a> -->
+            <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav ml-lg-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">首页</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">免费节点</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/client.htm">客户端</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">新闻资讯</a>
+                    </li>
+                                    </ul>
+            </div>
+            <!-- toggle switch for light and dark theme -->
+            <div class="cont-ser-position mt-lg-2">
+                <nav class="navigation">
+                    <div class="theme-switch-wrapper">
+                        <label class="theme-switch" for="checkbox">
+                            <input type="checkbox" id="checkbox">
+                            <div class="mode-container">
+                                <i class="gg-sun"></i>
+                                <i class="gg-moon"></i>
+                            </div>
+                        </label>
+                    </div>
+                </nav>
+            </div>
+            <!-- //toggle switch for light and dark theme -->
+        </nav>
+    </div>
+</header>
+<!--//header-->
+    <!-- inner banner -->
+    <div class="inner-banner">
+        <div class="w3l-breadcrumb">
+            <div class="container">
+                <h1 class="inner-text-title font-weight-bold">springMvc+spring security 注解方式实现权限控制</h1>
+                <ul class="breadcrumbs-custom-path">
+                    <li><a href="/">首页</a></li>
+                    <li><i class="fas fa-angle-right mx-2"></i></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li class="active"><i class="fas fa-angle-right mx-2"></i>正文</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- //inner banner -->
+    <!-- progress section -->
+    <section class="w3l-about-2 py-5">
+        <div class="container py-2">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="htmledit_views"> </h1> <p>一个项目，权限自然是少不了的，在我来公司一段时间后发现公司后台的管理系统既然没有权限模块，所有人都都是超级管理员，更让人嗤之以鼻的是，整个系统也没有任何操作日志记录，这怎么得了，数据是的何等重要，岂是任谁都能操作的，且不说大家都很正常的使用，万一随便谁有个失误，那可是大事情，没有任何的操作记录，除了问题谁负责呢。所以来公司不久忙里偷闲先将权限搞定，接下来就是操作日志了。但是本人刚入行不是很久，对于权限的实现还是很懵逼的状态，没办法，谁让我很有责任心呢（得意的表情），说干就干，那就先找从喝地方入手了。第一步，当然是技术选型了，目前对于权限的实现有很多种方式喝技术，我了解的只有shrio与spring security了，之前有接触过shrio，不知为何，对shrio没啥好感（有时候女生的感觉还真没啥理由哈），那就security了。因为对security真的只是基于听过的层面，这一路走来真的就是磕磕绊绊，幸好最后完整的实现了，虽然遇到很多问题，现在也依然不完美。但能很有效的使用，此处为自己的一次成长鼓个掌。好了，废话不多说，接下来这篇文章简单介绍下与springMvc整合的配置，以及在jsp，js中如何控制按钮权限。</p> <p style="margin-left:0cm;">pom.xml添加</p> <p style="margin-left:0cm;"><img fetchpriority="high" decoding="async" alt="" class="has" height="274" src="http://img.555519.xyz/uploads3/20220723/2d5c6e88cd81b9ff6ae42c70fdf4ae06.jpg"></p> <p style="margin-left:0cm;">与springMvc 整合</p> <p style="margin-left:0cm;">在web.xml中加入security的过滤器</p> <p style="margin-left:0cm;"><img decoding="async" alt="" class="has" height="197" src="http://img.555519.xyz/uploads3/20220723/3f1db2501cf37da93c23da8efe3c023a.jpg"></p> <p style="margin-left:0cm;">初始化WebSecurity，加载WebSecurityConfigurers</p> <p style="margin-left:0cm;"><img decoding="async" alt="" class="has" height="115" src="http://img.555519.xyz/uploads3/20220723/24b3c8c575e2fe15e6283b84ee8c733a.jpg"></p> <p style="margin-left:0cm;"><span style="color:#4f4f4f;">WebSecurityConfig</span><span style="color:#4f4f4f;">上加入注解</span><span style="color:#4f4f4f;">@EnableWebSecurity</span><span style="color:#4f4f4f;">，该注解将</span><span style="color:#4f4f4f;">WebSecurityConfiguration</span><span style="color:#4f4f4f;">类引入；</span><span style="color:#4f4f4f;">同时自己也被</span><span style="color:#4f4f4f;">Configuration</span><span style="color:#4f4f4f;">所注解，</span></p> <p style="margin-left:0cm;"><img loading="lazy" decoding="async" alt="" class="has" height="249" src="http://img.555519.xyz/uploads3/20220723/a2c9081720e3db8bb44028bf3848e4f6.jpg"></p> <p style="margin-left:0cm;"><span style="color:#4f4f4f;">WebSecurityConfiguration</span><span style="color:#4f4f4f;">创建了</span><span style="color:#4f4f4f;">WebSecurity</span><span style="color:#4f4f4f;">对象，并且通过</span><span style="color:#4f4f4f;">WebSecurity</span><span style="color:#4f4f4f;">对象创建了</span><span style="color:#4f4f4f;">springSecurityFilterChain</span><span style="color:#4f4f4f;">的</span><span style="color:#4f4f4f;">Filter</span><span style="color:#4f4f4f;">加注解后再继承自</span><span style="color:#4f4f4f;">WebSecurityConfigurerAdapter</span><span style="color:#4f4f4f;">类</span><span style="color:#4f4f4f;">，继承该类后，将会自动添加如表单登录、记住用户名密码等十来个个</span><span style="color:#4f4f4f;">Filter</span><span style="color:#4f4f4f;">，这些</span><span style="color:#4f4f4f;">Filter</span><span style="color:#4f4f4f;">是在</span><span style="color:#4f4f4f;">HttpSecurity</span><span style="color:#4f4f4f;">中定义的；</span><span style="color:#4f4f4f;">而</span><span style="color:#4f4f4f;">HttpSecurity</span><span style="color:#4f4f4f;">又是在</span><span style="color:#4f4f4f;">WebSecurityConfigurerAdapter</span><span style="color:#4f4f4f;">中创建的使用的</span></p> <p style="margin-left:0cm;"><img loading="lazy" decoding="async" alt="" class="has" height="97" src="http://img.555519.xyz/uploads3/20220723/07fdea6ebb0927b1037a9d77b4af1925.jpg"></p> <p style="margin-left:0cm;"><span style="color:#4f4f4f;">HttpSecurity</span><span style="color:#4f4f4f;">用于提供一系列的</span><span style="color:#4f4f4f;">Security</span><span style="color:#4f4f4f;">默认的</span><span style="color:#4f4f4f;">Filter</span><span style="color:#4f4f4f;">，这个过程中一是生成默认的</span><span style="color:#4f4f4f;">FilterConfigurer</span><span style="color:#4f4f4f;">对象并添加到其</span><span style="color:#4f4f4f;">filters</span><span style="color:#4f4f4f;">属性中存储</span><span style="color:#4f4f4f;">；二是调用其</span><span style="color:#4f4f4f;">performBuild</span><span style="color:#4f4f4f;">方法生成</span><span style="color:#4f4f4f;">DefaultSecurityFilterChain</span><span style="color:#4f4f4f;">对象；在</span><span style="color:#4f4f4f;">WebSecurityConfig</span><span style="color:#4f4f4f;">中重载了</span><span style="color:#4f4f4f;">WebSecurityConfigurerAdapter</span><span style="color:#4f4f4f;">的</span><span style="color:#4f4f4f;">configure</span><span style="color:#4f4f4f;">方法，利用</span><span style="color:#4f4f4f;">HttpSercurity</span><span style="color:#4f4f4f;">对象提供的一些</span><span style="color:#4f4f4f;">filter</span><span style="color:#4f4f4f;">去实现我们自己的业务。</span></p> <p style="margin-left:0cm;"><img loading="lazy" decoding="async" alt="" class="has" height="428" src="http://img.555519.xyz/uploads3/20220723/a01dcfdde6f4112613bcf1d02e01b3fb.jpg"></p> <p style="margin-left:0cm;">如图中所示，MySecurityFilter是自己定义的一个过滤器，继承自AbstractSecurityInterceptor。也就是在使用我们我们自定义的过滤器之前使用HttpFilter去过滤我们的登录等不需要使用权限的资源。</p> <p style="margin-left:0cm;"><img loading="lazy" decoding="async" alt="" class="has" height="80" src="http://img.555519.xyz/uploads3/20220723/40bc2f97d478b41ea416e9ec80ddc067.jpg"></p> <p style="margin-left:0cm;">该过滤器的主要作用是通过spring的Ioc生成securityMetadataSource，</p> <p style="margin-left:0cm;"><img loading="lazy" decoding="async" alt="" class="has" height="122" src="http://img.555519.xyz/uploads3/20220723/dbb22ca8a6edcf967cbb50f99df1df14.jpg"></p> <p style="margin-left:0cm;"> <p style="margin-left:0cm;"><span style="color:#333333;">登陆后，每次访问资源都会被这个拦截器拦截，会执行</span><span style="color:#333333;">doFilter</span><span style="color:#333333;">这个方法，这个方法调用了</span><span style="color:#333333;">invoke</span><span style="color:#333333;">方法</span></p> <p style="margin-left:0cm;"><img loading="lazy" decoding="async" alt="" class="has" height="483" src="http://img.555519.xyz/uploads3/20220723/c49d5f4527618ce17ef84e34460a9e28.jpg"></p> <p style="margin-left:0cm;"><span style="color:#333333;">Invoke</span><span style="color:#333333;">中调用的</span><span style="color:#333333;">beforeInvocation</span><span style="color:#333333;">这个方法，它首先会调用</span><span style="color:#333333;">MyInvocationSecurityMetadataSource</span><span style="color:#333333;">类的</span><span style="color:#333333;">getAttributes</span><span style="color:#333333;">方法获取被拦截</span><span style="color:#333333;">url</span><span style="color:#333333;">所需的权限，在调用</span><span style="color:#333333;">MyAccessDecisionManager</span><span style="color:#333333;">类</span><span style="color:#333333;">decide</span><span style="color:#333333;">方法判断用户是否够权限。弄完这一切就会执行下一个拦截器。</span></p> <p style="margin-left:0cm;">在这个过滤器中配置了三个处理类。</p> <p style="margin-left:0cm;">（1）这个MyInvocationSecurityMetadaSourceService的作用是从数据库中提取权限资源，供Spring security使用，用于权限校验。</p> <p style="margin-left:0cm;"><img loading="lazy" decoding="async" alt="" class="has" height="183" src="http://img.555519.xyz/uploads3/20220723/7c2afde082e4e32ced95b3c96268fbcd.jpg"></p> <p style="margin-left:0cm;">在初始化时，取到所有我们定义的Url资源，以及对应的角色。将Url资源与角色对应的数据封装到一个map中，格式为：{url : [ role1 , role2 ，…]} ,一般规定url为key，权限为value(即以ROLE_为前缀的角色)，一个资源可以由多个权限来访问。</p> <p style="margin-left:0cm;"><span style="color:#333333;">该类中的</span><span style="color:#333333;">loadResourceDefine</span><span style="color:#333333;">只是加载所有的资源与权限的对应关系存到</span><span style="color:#333333;">map</span><span style="color:#333333;">中，避免每次获取权限都访问数据库（提高性能），然后</span><span style="color:#333333;">getAttributes</span><span style="color:#333333;">根据参数（被拦截</span><span style="color:#333333;">url</span><span style="color:#333333;">）返回权限集合。</span></p> <p style="margin-left:0cm;"><img loading="lazy" decoding="async" alt="" class="has" height="747" src="http://img.555519.xyz/uploads3/20220723/7ba62d1975f1623bf4c1e3e523d6ffbe.jpg"></p> <p style="margin-left:0cm;"><span style="color:#4f4f4f;">（</span><span style="color:#4f4f4f;">2</span><span style="color:#4f4f4f;">）</span><span style="color:#000000;">authenticationManager</span><span style="color:#000000;">这个是处理验证用的，作用是为了拿到用户的验证信息，在登录时调用，这个类实际上是</span><span style="color:#333333;">AuthenticationProcessingFilter</span><span style="color:#333333;">拦截器调用的。</span></p> <p style="margin-left:0cm;"><img loading="lazy" decoding="async" alt="" class="has" height="87" src="http://img.555519.xyz/uploads3/20220723/9c684f7a59e6d56fd80211e91d379ff8.jpg"></p> <p style="margin-left:0cm;"><span style="color:#333333;">该类可以有许多</span><span style="color:#333333;">provider</span><span style="color:#333333;">（提供者）提供用户验证信息，这里自己写了一个类</span><span style="color:#333333;">myUserDetailService</span><span style="color:#333333;">来获取用户信息。</span></p> <p style="margin-left:0cm;"><img loading="lazy" decoding="async" alt="" class="has" height="175" src="http://img.555519.xyz/uploads3/20220723/3e8bfcee963f1fdb7b989bac8e7ce7d0.jpg"></p> <p style="margin-left:0cm;"><span style="color:#333333;">通过</span><span style="color:#333333;">MyUserDetailService</span><span style="color:#333333;">拿到用户信息后，</span><span style="color:#333333;">authenticationManager</span><span style="color:#333333;">对比用户的密码（即验证用户），然后这个</span><span style="color:#333333;">AuthenticationProcessingFilter</span><span style="color:#333333;">拦截器就过滤。</span></p> <p style="margin-left:0cm;"><span style="color:#333333;">这个类中只有一个方法</span></p> <p style="margin-left:0cm;"><img loading="lazy" decoding="async" alt="" class="has" height="726" src="http://img.555519.xyz/uploads3/20220723/6b5689d7599ce3ea04ae2783b9904acf.jpg"></p> <p style="margin-left:0cm;"><span style="color:#333333;">而返回的</span><span style="color:#333333;">UserDtails</span><span style="color:#333333;">对象中返回了登录用户所拥有的角色</span></p> <p style="margin-left:0cm;"><img loading="lazy" decoding="async" alt="" class="has" height="225" src="http://img.555519.xyz/uploads3/20220723/c0cd768cd7929a50b48d73439ddfc0ff.jpg"></p> <p style="margin-left:0cm;"><span style="color:#4f4f4f;">（</span><span style="color:#4f4f4f;">3</span><span style="color:#4f4f4f;">）</span><span style="color:#333333;">accessDecisionManager</span><span style="color:#333333;">这个也称为授权器，通过登录用户的权限信息、资源、获取资源所需的权限来根据不同的授权策略来判断用户是否有权限访问资源。</span></p> <p style="margin-left:0cm;"><img loading="lazy" decoding="async" alt="" class="has" height="714" src="http://img.555519.xyz/uploads3/20220723/6dff5b3257af4d1f0ad5a8171b0360fb.jpg"></p> <p style="margin-left:0cm;"><span style="color:#333333;">decide</span><span style="color:#333333;">方法里面写的就是授权策略了，没有明说需要权限的（即没有对应的权限的资源，例如某个请求地址并没有加入到授权地址资源中）可以访问，用户具有其中一个或多个以上的权限的可以访问。</span></p> <p style="margin-left:0cm;"><span style="color:#333333;">在</span><span style="color:#333333;">JSP</span><span style="color:#333333;">中，使用的是</span><span style="color:#333333;">security</span><span style="color:#333333;">的标签库，结合自定义标签属性实现权限。</span></p> <p style="margin-left:0cm;"><img loading="lazy" decoding="async" alt="" class="has" height="71" src="http://img.555519.xyz/uploads3/20220723/79cefc39a1323df6de7dd16943012b59.jpg"></p> <p style="margin-left:0cm;"><img loading="lazy" decoding="async" alt="" class="has" height="88" src="http://img.555519.xyz/uploads3/20220723/3ede99504bbe2ebc9b44885fea37e520.jpg"></p> <p style="margin-left:0cm;"> <p style="margin-left:0cm;">AuthorizeTag为自定义标签类，</p> <p style="margin-left:0cm;"><img loading="lazy" decoding="async" alt="" class="has" height="222" src="http://img.555519.xyz/uploads3/20220723/f53672fdeba53f22427917f910406ebf.jpg"></p> <p style="margin-left:0cm;">该类只有一个方法，继承自TagSupport, doStartTag()方法，遇到标签开始时会呼叫的方法，结合返回值控制是否显示被标签标记得按钮。</p> <p style="margin-left:0cm;"><img loading="lazy" decoding="async" alt="" class="has" height="619" src="http://img.555519.xyz/uploads3/20220723/fd668a908718cfe14fa1b7691223788d.jpg"></p> <p style="margin-left:0cm;">在js中实现按钮控制权限</p> <p style="margin-left:0cm;">&nbsp;getBackList方法返回的是当前登录用户无权限的授权地址,此处将无权限的授权地址作为返回值的目的是因为对某个地址<span style="color:#333333;">没有明说需要权限的情况下允许访问。</span></p> <p style="margin-left:0cm;"><img loading="lazy" decoding="async" alt="" class="has" height="353" src="http://img.555519.xyz/uploads3/20220723/71560399ef7ed6e59b3ce3fddca3fea0.jpg"></p> <p style="margin-left:0cm;">AppendBtn方法为具体的使用方法，authUrl为该按钮操作的授权地址，控制按钮是否显示。</p> <p style="margin-left:0cm;">以上就简单记录下自己在使用过程中的配置，关于security的原理以及执行流程下篇文章自会为大家意义解析，本文为一个小菜鸟的原创，有问题请大家多多交流、指教。感谢阅读，祝步步高升！</p> <p style="margin-left:0cm;"> <p style="margin-left:0cm;"> <p style="margin-left:0cm;"> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-54700.htm">vue.js实现标签页切换</a></p>
+                                        <p>下一个：<a href="/news/article-55254.htm">动物疫苗监管（动物疫苗由哪里监管）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2025-2-2-free-high-speed-nodes.htm" title="2月2日→18M/S|2025年最新免费节点Free V2ray订阅链接地址分享">2月2日→18M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-34151.htm" title="Spring Security核心类详解">Spring Security核心类详解</a></li>
+                        <li class="py-2"><a href="/news/article-30350.htm" title="动物打疫苗在哪打 动物打疫苗在哪打的">动物打疫苗在哪打 动物打疫苗在哪打的</a></li>
+                        <li class="py-2"><a href="/news/article-33684.htm" title="动物打的疫苗是什么疫苗啊（给动物打的疫苗是什么）">动物打的疫苗是什么疫苗啊（给动物打的疫苗是什么）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-17-free-node-subscribe-links.htm" title="12月17日→19.5M/S|2024年最新免费节点Free V2ray订阅链接地址">12月17日→19.5M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                        <li class="py-2"><a href="/news/article-38029.htm" title="南京宠物狗领养地址在哪里啊（南京宠物狗领养地址在哪里啊电话）">南京宠物狗领养地址在哪里啊（南京宠物狗领养地址在哪里啊电话）</a></li>
+                        <li class="py-2"><a href="/news/article-34633.htm" title="重庆领养猫的平台电话（重庆领养猫吧）">重庆领养猫的平台电话（重庆领养猫吧）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-30-free-v2ray.htm" title="11月30日→19.8M/S|2024年最新免费节点Free V2ray订阅链接地址">11月30日→19.8M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                        <li class="py-2"><a href="/news/article-45940.htm" title="Linux图形化界面ip,Linux系统下图形界面更改IP地址">Linux图形化界面ip,Linux系统下图形界面更改IP地址</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-14-clash-v2ray-ss-ssr.htm" title="12月14日→18.8M/S|2024年最新免费节点Free V2ray订阅链接地址">12月14日→18.8M/S|2024年最新免费节点Free V2ray订阅链接地址</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">39</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- //progress section -->
+    <!--//testimonials-->
+        <!-- footer -->
+    <footer class="w3l-footer-16 py-5">
+        <div class="container">
+            <div class="below-section text-center">
+                <p class="copy-text">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                    <a href="/">Free V2ray免费梯子节点分享官网</a> 版权所有 Powered by WordPress
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- move top -->
+    <button onclick="topFunction()" id="movetop" title="Go to top">
+        <span class="fas fa-level-up-alt" aria-hidden="true"></span>
+    </button>
+    <script>
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {
+        scrollFunction()
+    };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("movetop").style.display = "block";
+        } else {
+            document.getElementById("movetop").style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+    </script>
+    <!-- //move top -->
+    <!-- common jquery plugin -->
+    <script src="/assets/website/js/frontend/free_v2ray/jquery-3.5.1.min.js"></script>
+    <!-- //common jquery plugin -->
+    <!-- counter for stats -->
+    <script src="/assets/website/js/frontend/free_v2ray/counter.js"></script>
+    <!-- //counter for stats -->
+    <!-- theme switch js (light and dark)-->
+    <script src="/assets/website/js/frontend/free_v2ray/theme-change.js"></script>
+    <script>
+    function autoType(elementClass, typingSpeed) {
+        var thhis = $(elementClass);
+        thhis.css({
+            "position": "relative",
+            "display": "inline-block"
+        });
+        thhis.prepend('<div class="cursor" style="right: initial; left:0;"></div>');
+        thhis = thhis.find(".text-js");
+        var text = thhis.text().trim().split('');
+        var amntOfChars = text.length;
+        var newString = "";
+        thhis.text("|");
+        setTimeout(function() {
+            thhis.css("opacity", 1);
+            thhis.prev().removeAttr("style");
+            thhis.text("");
+            for (var i = 0; i < amntOfChars; i++) {
+                (function(i, char) {
+                    setTimeout(function() {
+                        newString += char;
+                        thhis.text(newString);
+                    }, i * typingSpeed);
+                })(i + 1, text[i]);
+            }
+        }, 1500);
+    }
+
+    $(document).ready(function() {
+        // Now to start autoTyping just call the autoType function with the
+        // class of outer div
+        // The second paramter is the speed between each letter is typed.
+        autoType(".type-js", 200);
+    });
+    </script>
+    <!-- //theme switch js (light and dark)-->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!--bootstrap-->
+    <script src="/assets/website/js/frontend/free_v2ray/bootstrap.min.js"></script>
+    <!-- //bootstrap-->
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+    <!-- //Js scripts -->
+</body>
+
+</html>
