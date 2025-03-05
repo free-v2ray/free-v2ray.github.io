@@ -1,0 +1,320 @@
+<!doctype html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://free-v2ray.github.io/news/article-67656.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>js promise 详解</title>
+        <meta name="description" content="在promise产生之前，js 处理异步的方式是使用回调函数，一个回调函数执行完成，进行下一个回调函数。这样会导致层层嵌套，代码不清晰。容易进入回调地狱   promise的状态  promise 有" />
+        <link rel="icon" href="/assets/website/img/free_v2ray/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="Free V2ray免费梯子节点分享官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://free-v2ray.github.io/news/article-67656.htm" />
+    <meta property="og:site_name" content="Free V2ray免费梯子节点分享官网" />
+    <meta property="og:title" content="js promise 详解" />
+    <meta property="og:image" content="https://free-v2ray.github.io/uploads/20240911-1/c73a9b9834fb261052ba75d57192284a.webp" />
+        <meta property="og:release_date" content="2025-03-05T11:11:36" />
+    <meta property="og:updated_time" content="2025-03-05T11:11:36" />
+        <meta property="og:description" content="在promise产生之前，js 处理异步的方式是使用回调函数，一个回调函数执行完成，进行下一个回调函数。这样会导致层层嵌套，代码不清晰。容易进入回调地狱   promise的状态  promise 有" />
+        
+    <!-- google-fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- //google-fonts -->
+    <!-- Template CSS Style link -->
+    <link rel="stylesheet" href="/assets/website/css/free_v2ray/style-starter.css">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="js promise 详解">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EFW7LQ09JM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-EFW7LQ09JM');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <!--header-->
+<header id="site-header" class="fixed-top">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg stroke px-0">
+                        <a class="navbar-brand" href="/">
+                <span>
+                    Free V2ray                </span>
+            </a>
+                        <!-- if logo is image enable this
+    <a class="navbar-brand" href="#index.html">
+        <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
+    </a> -->
+            <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav ml-lg-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">首页</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">免费节点</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/client.htm">客户端</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">新闻资讯</a>
+                    </li>
+                                    </ul>
+            </div>
+            <!-- toggle switch for light and dark theme -->
+            <div class="cont-ser-position mt-lg-2">
+                <nav class="navigation">
+                    <div class="theme-switch-wrapper">
+                        <label class="theme-switch" for="checkbox">
+                            <input type="checkbox" id="checkbox">
+                            <div class="mode-container">
+                                <i class="gg-sun"></i>
+                                <i class="gg-moon"></i>
+                            </div>
+                        </label>
+                    </div>
+                </nav>
+            </div>
+            <!-- //toggle switch for light and dark theme -->
+        </nav>
+    </div>
+</header>
+<!--//header-->
+    <!-- inner banner -->
+    <div class="inner-banner">
+        <div class="w3l-breadcrumb">
+            <div class="container">
+                <h1 class="inner-text-title font-weight-bold">js promise 详解</h1>
+                <ul class="breadcrumbs-custom-path">
+                    <li><a href="/">首页</a></li>
+                    <li><i class="fas fa-angle-right mx-2"></i></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li class="active"><i class="fas fa-angle-right mx-2"></i>正文</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- //inner banner -->
+    <!-- progress section -->
+    <section class="w3l-about-2 py-5">
+        <div class="container py-2">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="htmledit_views"> </h1> <blockquote> <p>在promise产生之前，js 处理异步的方式是使用回调函数，一个回调函数执行完成，进行下一个回调函数。这样会导致层层嵌套，代码不清晰。容易进入回调地狱</p> </blockquote> </h1> <h2>promise的状态</h2> <blockquote> <p>promise 有三种状态&nbsp; pending(进行中)，resolved(成功)，rejected(失败)</p> <p>promise的状态是不可逆的</p> <p>pending---&gt;resolved&nbsp;</p> <p>或者</p> <p>pending---&gt;rejected</p> </blockquote> <h2>promise 的两个回调函数&nbsp; resolved&nbsp; rejected</h2> <blockquote> <p>promise 的参数是一个函数，函数里还有两个参数&nbsp; resolved&nbsp; rejected</p> <p>resolved(res) 处理成功的&nbsp;函数&nbsp; 它传递的参数 会在then方法里输出</p> <p>rejected(err) 处理失败的函数&nbsp; 它传递的参数 会在 catch方法里输出</p> </blockquote> <pre><code class="language-javascript">let p1 = new Promise((resolved, rejected) =&gt; {   let randomVal = Math.random();   if (randomVal &gt; 0.5) {     resolved(randomVal + "成功");   } else {     rejected(randomVal + "失败");   } })   .then((res) =&gt; {     console.log(res)//0.6423699367939153成功   })   .catch((err) =&gt; {     console.log(err)//0.3423699367939153失败   }); </code></pre> <h3>promise.all&nbsp; 同时执行多个promise</h3> <p>promise.all 的参数是多个promise函数，直到慢的一个promise执行完毕才返回所有的promise的结果，有一个promise函数崩溃，整个promise就崩溃，所以要慎用</p> <pre><code class="language-javascript">let p1 = new Promise((resolved, rejected) =&gt; {   let randomVal = Math.random();   if (randomVal &gt; 0.1) {     resolved(randomVal + "成功");   } else {     rejected(randomVal + "失败");   } })  let p2 = new Promise((resolved, rejected) =&gt; {   let randomVal = Math.random();   setTimeout(() =&gt; {     if (randomVal &gt; 0.9) {       resolved("成功" + randomVal);     } else {       rejected("失败" + randomVal);     }   }, 200); });  Promise.all([p1,p2]).then(resList=&gt;{     console.log(resList) }).catch(err=&gt;{     console.log("错误err"+err) }).finally(result=&gt;{     console.log("无论成功或者失败都会执行",result) })</code></pre> <h2>promise.race 多个promise 执行速度pk看谁的速度最快，返回最快的promise的结果</h2> <pre><code class="language-javascript">let p1 = new Promise((resolved, rejected) =&gt; {   let randomVal = Math.random();   if (randomVal &gt; 0.1) {     resolved(randomVal + "成功");   } else {     rejected(randomVal + "失败");   } })  let p2 = new Promise((resolved, rejected) =&gt; {   let randomVal = Math.random();   setTimeout(() =&gt; {     if (randomVal &gt; 0.9) {       resolved("成功" + randomVal);     } else {       rejected("失败" + randomVal);     }   }, 200); });  Promise.race([p1,p2]).then(resList=&gt;{     console.log(resList) }).catch(err=&gt;{     console.log("错误err"+err) }).finally(result=&gt;{     console.log("无论成功或者失败都会执行",result) })</code></pre> </h1> <h3>常见的 宏任务</h3> <p>setTimeout&nbsp; setInterval</p> <h3>常见的微任务</h3> <p>Promise.then Promise.catch Promise.finally</p> <p>MutationObserver</p> <p>process.nextTIck(nodejs里的)</p> <h3>执行顺序</h3> <p>同一层的 先执行主线层然后执行微任务，最后执行 红任务</p> <h2>几道有意思的promise面试题</h2> <h3>场景1&nbsp;</h3> <blockquote> <p>promise resolved函数执行完毕之后才执行 then的方法</p> </blockquote> <pre><code class="language-javascript"> new Promise((resolved,rejected)=&gt;{     console.log("1") }).then(res=&gt;{     console.log("2")     console.log(res) }) console.log("4")</code></pre> <p><span style="color:#fe2c24;">错误解法 和错误的思路</span><br /><s><span style="color:#0d0016;">错误答案&nbsp; 1，4，2 ，1</span></s></p> <p><s><span style="color:#0d0016;">错误思路，</span></s></p> <p><s><span style="color:#0d0016;">一般人想 主线程 同步任务走完，然后走 微任务</span></s></p> <p><span style="color:#0d0016;">实际上 promise里没有走resovled函数的时候是不会走 then里的</span></p> <p><span style="color:#0d0016;">同理&nbsp; promise里没有走rejected函数的时候是不会走 catch里的</span></p> <p><span style="color:#0d0016;">所以正确的答案是</span></p> <p>1 4&nbsp;</p> <h3>场景 2&nbsp;</h3> <blockquote> <p>resovled函数外边包裹了定时器，得定时器计时结束才能 调用resolved，最后走then</p> </blockquote> <pre><code class="language-javascript">new Promise((resolved, rejected) =&gt; {     console.log("1")   setTimeout(() =&gt; {     resolved("2");   }, 20);    console.log("3"); }).then((res) =&gt; {   console.log("4");   console.log(res); }); console.log("5"); setTimeout(ele=&gt;{   console.log("6") },0)</code></pre> <p>这题直接上正确答案</p> <p>1，3，5，6，4，2&nbsp; &nbsp; &nbsp;</p> <p>答案解析</p> <p>1 promise主体函数的代码，是同步主线程的优先执行</p> <p>3 同1&nbsp;</p> <p>5 是主线程</p> <p>6 和 2 4&nbsp; res(2) 相比都是定时器里的代码（红任务），只是 6的延时时间较少，所以优先执行6</p> <p>4 2 是promise 里的resolved走完之后，执行then 里的&nbsp; 4&nbsp; &nbsp; res是 resolved("2")里返回的2,所以打印出 2</p> <h3>场景3 主线程 宏任务 微任务 综合</h3> <pre><code class="language-javascript">console.log("1"); setTimeout(function() {   console.log("2");   process.nextTick(function() {     console.log("3");   });   new Promise(function(resolve) {     console.log("4");     resolve();   }).then(function() {     console.log("5");   }); }); process.nextTick(function() {   console.log("6"); }); new Promise(function(resolve) {   console.log("7");   resolve(); }).then(function() {   console.log("8"); }); setTimeout(function() {   console.log("9");   process.nextTick(function() {     console.log("10");   });   new Promise(function(resolve) {     console.log("11");     resolve();   }).then(function() {     console.log("12");   }); });</code></pre> <p>答案</p> <p>&nbsp; 1 &nbsp;7 6 8 2 4 3 5 9 11 10 12</p> <p>1 主线程</p> <p>7 promis主体函数里的代码 主线程</p> <p>6 process.nextTick 微任务</p> <p>8&nbsp; promise resolve函数处理过走 then&nbsp;</p> <p>2&nbsp; 2345 和 9101112 分别在两个定时器里 由于两个定时器的时间是一致的，所以根据先后i顺序执行，先执行上面的，再执行下边的</p> <p>2345&nbsp; 2是主线程&nbsp;</p> <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 4是主线程</p> <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 3 是微任务</p> <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 5是微任务</p> <p>9101112</p> <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;9 是主线程</p> <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;11 是主线程&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p> <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;10 是微任务</p> <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 12 是微任务</p> <p>总结</p> <p>&nbsp; &nbsp; &nbsp; &nbsp; 当主线程 红任务 微任务在一起的时候，先执行主线程，然后执行微任务，最后执行红任务</p> <h3>场景4 promise.resolve().then 和 setTimeout(()=&gt;{},0) pk</h3> <p>首先我们了解一下 promise.resolve()是什么的简写</p> <pre><code class="language-javascript">new Promise((resolve)=&gt;{     resolve() }).then(res=&gt;{     console.log("123") })</code></pre> <p>那么一下两个哪个更快呢</p> <pre><code class="language-javascript">setTimeout(ele=&gt;{     console.log("2") }) Promise.resolve().then(res=&gt;{     console.log("1") })</code></pre> <p>将 Promise.resolve().then 转换成上一个写法可以知道 1 是微任务，2 是宏任务，</p> <p>所以先走1 再走 2</p> <p>我们接下来再看一题</p> <pre><code class="language-javascript">setTimeout(ele=&gt;{     console.log("1")     Promise.resolve().then(res=&gt;{         console.log("2")     }) }) Promise.resolve().then(res=&gt;{     console.log("3")     setTimeout(ele=&gt;{         console.log("4")     }) })</code></pre> <p>先走 微任务 3&nbsp;</p> <p>然后走 上边定时器里的&nbsp;</p> <p>&nbsp; &nbsp; &nbsp; &nbsp; 走主线程 1</p> <p>&nbsp; &nbsp; &nbsp; &nbsp; 走微任务 2</p> <p>然后走下边的 宏任务</p> <p>注意</p> <p>&nbsp; &nbsp;<span style="color:#fe2c24;"> &nbsp; &nbsp; </span><u><span style="color:#fe2c24;">当出现定时器时 按照 延迟时间和创建先后顺序 这两个条件 先后执行定时器，并且只有执行完一个定时器之后，才执行下一个定时器</span></u></p> <h3>场景5 定时器嵌套</h3> <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p> <pre><code class="language-javascript">setTimeout((ele) =&gt; {   console.log(1);   setTimeout(() =&gt; {     console.log(2);   }, 40); }, 20); setTimeout((ele) =&gt; {   console.log(3); }, 30);</code></pre> <p>这一题</p> <p><s>很多人的答案时1 2 3</s></p> <p><s>他们想的是先走完第一个定时器里的再走第二个定时器里的</s></p> <p>实际上 第一个嵌套的定时器会产生叠加&nbsp;</p> <p>2&nbsp; 的执行时间时 20 + 40 也就是 60</p> <p>而 3 的时间时30 所以时 1&nbsp; 3&nbsp; 2&nbsp;</p> <p><span style="color:#fe2c24;">注意当定时器嵌套时 ，里边的执行时间是会和上边的叠加的</span></p> <p><span style="color:#0d0016;">以上是我对红任务微任务的一些理解，希望对大家能有所帮助，记得点个赞哦</span></p> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-67047.htm">猫三联是三针还是一针好（猫三联一针是什么意思）</a></p>
+                                        <p>下一个：<a href="/news/article-67659.htm">1970年6月27日农历是多少（1970年阳历6月26号阴历是多少）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-35820.htm" title="Python3 MySQL 数据库连接">Python3 MySQL 数据库连接</a></li>
+                        <li class="py-2"><a href="/news/article-55805.htm" title="被猫抓了把血挤出来了并打疫苗（被猫抓了把血挤出来了并打疫苗可以吗）">被猫抓了把血挤出来了并打疫苗（被猫抓了把血挤出来了并打疫苗可以吗）</a></li>
+                        <li class="py-2"><a href="/news/article-40485.htm" title="宠物领养协议书怎么写的（宠物领养协议书范本）">宠物领养协议书怎么写的（宠物领养协议书范本）</a></li>
+                        <li class="py-2"><a href="/news/article-54162.htm" title="springcloudalibaba架构(12):Feign整合Sentinel实现服务容错">springcloudalibaba架构(12):Feign整合Sentinel实现服务容错</a></li>
+                        <li class="py-2"><a href="/news/article-60939.htm" title="解决 “TypeError Cannot read properties of undefined (reading ‘xxx‘)“">解决 “TypeError Cannot read properties of undefined (reading ‘xxx‘)“</a></li>
+                        <li class="py-2"><a href="/news/article-47914.htm" title="猫疫苗间隔两个月会失效吗（猫疫苗间隔20天）">猫疫苗间隔两个月会失效吗（猫疫苗间隔20天）</a></li>
+                        <li class="py-2"><a href="/news/article-43477.htm" title="宠物美容去哪里学（哪有学宠物美容）">宠物美容去哪里学（哪有学宠物美容）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-3-node-share-links.htm" title="2月3日→22.7M/S|2025年最新免费节点Free V2ray订阅链接地址分享">2月3日→22.7M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-39996.htm" title="猫咪三针疫苗多少钱一只猫用（宠物猫三针疫苗多少钱）">猫咪三针疫苗多少钱一只猫用（宠物猫三针疫苗多少钱）</a></li>
+                        <li class="py-2"><a href="/news/article-48327.htm" title="中国农业大学动物医院预约（中国农业大学动物医院怎么预约）">中国农业大学动物医院预约（中国农业大学动物医院怎么预约）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">15</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- //progress section -->
+    <!--//testimonials-->
+        <!-- footer -->
+    <footer class="w3l-footer-16 py-5">
+        <div class="container">
+            <div class="below-section text-center">
+                <p class="copy-text">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                    <a href="/">Free V2ray免费梯子节点分享官网</a> 版权所有 Powered by WordPress
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- move top -->
+    <button onclick="topFunction()" id="movetop" title="Go to top">
+        <span class="fas fa-level-up-alt" aria-hidden="true"></span>
+    </button>
+    <script>
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {
+        scrollFunction()
+    };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("movetop").style.display = "block";
+        } else {
+            document.getElementById("movetop").style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+    </script>
+    <!-- //move top -->
+    <!-- common jquery plugin -->
+    <script src="/assets/website/js/frontend/free_v2ray/jquery-3.5.1.min.js"></script>
+    <!-- //common jquery plugin -->
+    <!-- counter for stats -->
+    <script src="/assets/website/js/frontend/free_v2ray/counter.js"></script>
+    <!-- //counter for stats -->
+    <!-- theme switch js (light and dark)-->
+    <script src="/assets/website/js/frontend/free_v2ray/theme-change.js"></script>
+    <script>
+    function autoType(elementClass, typingSpeed) {
+        var thhis = $(elementClass);
+        thhis.css({
+            "position": "relative",
+            "display": "inline-block"
+        });
+        thhis.prepend('<div class="cursor" style="right: initial; left:0;"></div>');
+        thhis = thhis.find(".text-js");
+        var text = thhis.text().trim().split('');
+        var amntOfChars = text.length;
+        var newString = "";
+        thhis.text("|");
+        setTimeout(function() {
+            thhis.css("opacity", 1);
+            thhis.prev().removeAttr("style");
+            thhis.text("");
+            for (var i = 0; i < amntOfChars; i++) {
+                (function(i, char) {
+                    setTimeout(function() {
+                        newString += char;
+                        thhis.text(newString);
+                    }, i * typingSpeed);
+                })(i + 1, text[i]);
+            }
+        }, 1500);
+    }
+
+    $(document).ready(function() {
+        // Now to start autoTyping just call the autoType function with the
+        // class of outer div
+        // The second paramter is the speed between each letter is typed.
+        autoType(".type-js", 200);
+    });
+    </script>
+    <!-- //theme switch js (light and dark)-->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!--bootstrap-->
+    <script src="/assets/website/js/frontend/free_v2ray/bootstrap.min.js"></script>
+    <!-- //bootstrap-->
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+    <!-- //Js scripts -->
+</body>
+
+</html>
