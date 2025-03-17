@@ -1,0 +1,320 @@
+<!doctype html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://free-v2ray.github.io/news/article-74208.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Java空指针异常和解决办法</title>
+        <meta name="description" content="目录  问题描述：   尝试1： 尝试2：   使用Optional防止出现空指针异常 引用    public class Main20220419 {     public static void" />
+        <link rel="icon" href="/assets/website/img/free_v2ray/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="Free V2ray免费梯子节点分享官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://free-v2ray.github.io/news/article-74208.htm" />
+    <meta property="og:site_name" content="Free V2ray免费梯子节点分享官网" />
+    <meta property="og:title" content="Java空指针异常和解决办法" />
+    <meta property="og:image" content="https://free-v2ray.github.io/uploads/20240911-1/6ee5727823a196438872ebbc598aadc9.webp" />
+        <meta property="og:release_date" content="2025-03-15T07:19:53" />
+    <meta property="og:updated_time" content="2025-03-15T07:19:53" />
+        <meta property="og:description" content="目录  问题描述：   尝试1： 尝试2：   使用Optional防止出现空指针异常 引用    public class Main20220419 {     public static void" />
+        
+    <!-- google-fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- //google-fonts -->
+    <!-- Template CSS Style link -->
+    <link rel="stylesheet" href="/assets/website/css/free_v2ray/style-starter.css">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Java空指针异常和解决办法">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EFW7LQ09JM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-EFW7LQ09JM');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <!--header-->
+<header id="site-header" class="fixed-top">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg stroke px-0">
+                        <a class="navbar-brand" href="/">
+                <span>
+                    Free V2ray                </span>
+            </a>
+                        <!-- if logo is image enable this
+    <a class="navbar-brand" href="#index.html">
+        <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
+    </a> -->
+            <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav ml-lg-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">首页</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">免费节点</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/client.htm">客户端</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">新闻资讯</a>
+                    </li>
+                                    </ul>
+            </div>
+            <!-- toggle switch for light and dark theme -->
+            <div class="cont-ser-position mt-lg-2">
+                <nav class="navigation">
+                    <div class="theme-switch-wrapper">
+                        <label class="theme-switch" for="checkbox">
+                            <input type="checkbox" id="checkbox">
+                            <div class="mode-container">
+                                <i class="gg-sun"></i>
+                                <i class="gg-moon"></i>
+                            </div>
+                        </label>
+                    </div>
+                </nav>
+            </div>
+            <!-- //toggle switch for light and dark theme -->
+        </nav>
+    </div>
+</header>
+<!--//header-->
+    <!-- inner banner -->
+    <div class="inner-banner">
+        <div class="w3l-breadcrumb">
+            <div class="container">
+                <h1 class="inner-text-title font-weight-bold">Java空指针异常和解决办法</h1>
+                <ul class="breadcrumbs-custom-path">
+                    <li><a href="/">首页</a></li>
+                    <li><i class="fas fa-angle-right mx-2"></i></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li class="active"><i class="fas fa-angle-right mx-2"></i>正文</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- //inner banner -->
+    <!-- progress section -->
+    <section class="w3l-about-2 py-5">
+        <div class="container py-2">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> <div class="toc"> <h3>目录</h3> <ul> <li><a href="#_1" rel="nofollow">问题描述：</a></li> <li> <ul> <li><a href="#1_28" rel="nofollow">尝试1：</a></li> <li><a href="#2_33" rel="nofollow">尝试2：</a></li> </ul> </li> <li><a href="#Optional_36" rel="nofollow">使用Optional防止出现空指针异常</a></li> <li><a href="#_61" rel="nofollow">引用</a></li> </ul> </div> </h1> <pre><code class="prism language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Main20220419</span> <span class="token punctuation">{<!-- --></span>     <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>         <span class="token class-name">String</span> id <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>         <span class="token class-name">Item</span> item <span class="token operator">=</span> <span class="token class-name">ItemService</span><span class="token punctuation">.</span><span class="token function">getItemById</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>item<span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token punctuation">}</span>     <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">ItemService</span> <span class="token punctuation">{<!-- --></span>         <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">Item</span> <span class="token function">getItemById</span><span class="token punctuation">(</span><span class="token class-name">String</span> id<span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span>             <span class="token keyword">return</span> id<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span><span class="token string">"1"</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token keyword">new</span> <span class="token class-name">Item</span><span class="token punctuation">(</span><span class="token string">"iphone13"</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">;</span>         <span class="token punctuation">}</span>     <span class="token punctuation">}</span>     <span class="token keyword">static</span> <span class="token keyword">class</span>  <span class="token class-name">Item</span><span class="token punctuation">{<!-- --></span>         <span class="token keyword">private</span>  <span class="token class-name">String</span> name<span class="token punctuation">;</span>         <span class="token keyword">private</span> <span class="token class-name">String</span> id<span class="token punctuation">;</span>         <span class="token keyword">public</span>  <span class="token class-name">Item</span><span class="token punctuation">(</span><span class="token class-name">String</span> name<span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span>             <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>         <span class="token punctuation">}</span>     <span class="token punctuation">}</span> <span class="token punctuation">}</span> </code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads/20230205/2ec7a649762e366abfb80697648ed832.jpg" alt="Java空指针异常和解决办法"><br /> 在<code> return id.equals("1") ? new Item("iphone13"): null;</code>报了空指针异常。</p> <p><strong>分析原因：id为null，一个null对象是没有equals方法的的。</strong></p> <h2> <a id="1_28" rel="nofollow"></a>尝试1：</h2> <p>修改为<code> return “1”.equals(id) ? new Item("iphone13"): null;</code> "1"自动封装为一个String对象，可以调用equals方法。<br /> 重新运行，依然报控指针异常：<br /><img decoding="async" src="http://img.555519.xyz/uploads/20230205/079f4a578d130c1f56853f1df81209de.jpg" alt="Java空指针异常和解决办法"><br /> 分析原因：得到的item为空，item（null）没有任何属性，所以依然抱错。</p> <h2> <a id="2_33" rel="nofollow"></a>尝试2：</h2> <p>在操作item属性之前应该判断对象是否为null。<code>if(item!=null){ System.out.println(item.name); }</code></p> </h1> <p>总结以上两种出现空指针异常的的原因，都是访问了null对象的属性和方法。操作可能为空的对象之前，提前使用if进行判断，虽然可以解决问题。大量的if会降低业务代码的理解难度。java 8 提供了避免出现空指针异常的Optiona类，使用Optional的orElse()方法和map（）方法可以降低空指针异常的发生。</p> <pre><code class="prism language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>         <span class="token class-name">String</span> id <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>         <span class="token class-name">Optional</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Item</span><span class="token punctuation">&gt;</span></span> item <span class="token operator">=</span> <span class="token class-name">ItemService</span><span class="token punctuation">.</span><span class="token function">getItemById</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>item<span class="token punctuation">.</span><span class="token function">orElse</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Item</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token punctuation">}</span>     <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">ItemService</span> <span class="token punctuation">{<!-- --></span>         <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">Optional</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Item</span><span class="token punctuation">&gt;</span></span> <span class="token function">getItemById</span><span class="token punctuation">(</span><span class="token class-name">String</span> id<span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span>             <span class="token keyword">return</span> <span class="token class-name">Optional</span><span class="token punctuation">.</span><span class="token function">ofNullable</span><span class="token punctuation">(</span> <span class="token string">"1"</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token keyword">new</span> <span class="token class-name">Item</span><span class="token punctuation">(</span><span class="token string">"iphone13"</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token punctuation">}</span>     <span class="token punctuation">}</span>     <span class="token keyword">static</span> <span class="token keyword">class</span>  <span class="token class-name">Item</span><span class="token punctuation">{<!-- --></span>          <span class="token keyword">private</span>  <span class="token class-name">String</span> name<span class="token punctuation">;</span>         <span class="token keyword">private</span> <span class="token class-name">String</span> id<span class="token punctuation">;</span>         <span class="token keyword">public</span>  <span class="token class-name">Item</span><span class="token punctuation">(</span><span class="token class-name">String</span> name<span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span>             <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>         <span class="token punctuation">}</span>         <span class="token keyword">public</span> <span class="token class-name">Item</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token punctuation">}</span>     <span class="token punctuation">}</span>  <span class="token punctuation">}</span> </code></pre> </h1> <p>[1] <a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://lw900925.github.io/java/java8-optional.html"  rel="nofollow">https://lw900925.github.io/java/java8-optional.html</a><br /> [2] <a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://blog.csdn.net/chenping1993/article/details/120491115"  rel="nofollow">https://blog.csdn.net/chenping1993/article/details/120491115</a></p> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-73550.htm">2022公务员国考报考条件及时间（2022公务员国考报考条件及时间表）</a></p>
+                                        <p>下一个：<a href="/news/article-74209.htm">数据库事务四大特性以及四大隔离级别</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-55254.htm" title="动物疫苗监管（动物疫苗由哪里监管）">动物疫苗监管（动物疫苗由哪里监管）</a></li>
+                        <li class="py-2"><a href="/news/article-38995.htm" title="被猫抓了十天后猫没死人安全吗（被猫抓了十天后猫没死人安全吗会死吗）">被猫抓了十天后猫没死人安全吗（被猫抓了十天后猫没死人安全吗会死吗）</a></li>
+                        <li class="py-2"><a href="/news/article-53076.htm" title="打动物疫苗去哪打的（动物疫苗归哪个部门管）">打动物疫苗去哪打的（动物疫苗归哪个部门管）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-4-node-share-links.htm" title="1月4日→19.7M/S|2025年最新免费节点Free V2ray订阅链接地址分享">1月4日→19.7M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-46444.htm" title="动物诊疗许可证需要多少钱一个（动物诊疗许可证要钱吗）">动物诊疗许可证需要多少钱一个（动物诊疗许可证要钱吗）</a></li>
+                        <li class="py-2"><a href="/news/article-37038.htm" title="成都领养宠物贴吧（成都宠物领养吧领养代替购买）">成都领养宠物贴吧（成都宠物领养吧领养代替购买）</a></li>
+                        <li class="py-2"><a href="/news/article-45939.htm" title="我到今天才知道SQL92和SQL99">我到今天才知道SQL92和SQL99</a></li>
+                        <li class="py-2"><a href="/news/article-59203.htm" title="动物疫苗价格排行榜前十的有哪些种类（动物疫苗有哪几种）">动物疫苗价格排行榜前十的有哪些种类（动物疫苗有哪几种）</a></li>
+                        <li class="py-2"><a href="/news/article-73550.htm" title="2022公务员国考报考条件及时间（2022公务员国考报考条件及时间表）">2022公务员国考报考条件及时间（2022公务员国考报考条件及时间表）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-25-free-node-subscribe-links.htm" title="2月25日→21.2M/S|2025年最新免费节点Free V2ray订阅链接地址分享">2月25日→21.2M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">51</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- //progress section -->
+    <!--//testimonials-->
+        <!-- footer -->
+    <footer class="w3l-footer-16 py-5">
+        <div class="container">
+            <div class="below-section text-center">
+                <p class="copy-text">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                    <a href="/">Free V2ray免费梯子节点分享官网</a> 版权所有 Powered by WordPress
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- move top -->
+    <button onclick="topFunction()" id="movetop" title="Go to top">
+        <span class="fas fa-level-up-alt" aria-hidden="true"></span>
+    </button>
+    <script>
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {
+        scrollFunction()
+    };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("movetop").style.display = "block";
+        } else {
+            document.getElementById("movetop").style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+    </script>
+    <!-- //move top -->
+    <!-- common jquery plugin -->
+    <script src="/assets/website/js/frontend/free_v2ray/jquery-3.5.1.min.js"></script>
+    <!-- //common jquery plugin -->
+    <!-- counter for stats -->
+    <script src="/assets/website/js/frontend/free_v2ray/counter.js"></script>
+    <!-- //counter for stats -->
+    <!-- theme switch js (light and dark)-->
+    <script src="/assets/website/js/frontend/free_v2ray/theme-change.js"></script>
+    <script>
+    function autoType(elementClass, typingSpeed) {
+        var thhis = $(elementClass);
+        thhis.css({
+            "position": "relative",
+            "display": "inline-block"
+        });
+        thhis.prepend('<div class="cursor" style="right: initial; left:0;"></div>');
+        thhis = thhis.find(".text-js");
+        var text = thhis.text().trim().split('');
+        var amntOfChars = text.length;
+        var newString = "";
+        thhis.text("|");
+        setTimeout(function() {
+            thhis.css("opacity", 1);
+            thhis.prev().removeAttr("style");
+            thhis.text("");
+            for (var i = 0; i < amntOfChars; i++) {
+                (function(i, char) {
+                    setTimeout(function() {
+                        newString += char;
+                        thhis.text(newString);
+                    }, i * typingSpeed);
+                })(i + 1, text[i]);
+            }
+        }, 1500);
+    }
+
+    $(document).ready(function() {
+        // Now to start autoTyping just call the autoType function with the
+        // class of outer div
+        // The second paramter is the speed between each letter is typed.
+        autoType(".type-js", 200);
+    });
+    </script>
+    <!-- //theme switch js (light and dark)-->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!--bootstrap-->
+    <script src="/assets/website/js/frontend/free_v2ray/bootstrap.min.js"></script>
+    <!-- //bootstrap-->
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+    <!-- //Js scripts -->
+</body>
+
+</html>
