@@ -1,0 +1,319 @@
+<!doctype html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://free-v2ray.github.io/news/article-91897.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Java中的多线程你只要看这一篇就够了</title>
+        <meta name="description" content="引 如果对什么是线程、什么是进程仍存有疑惑，请先Google之，因为这两个概念不在本文的范围之内。 用多线程只有一个目的，那就是更好的利用CPU的资源，因为所有的多线程代码都可以用单线程来实现。说这个" />
+        <link rel="icon" href="/assets/website/img/free_v2ray/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="Free V2ray免费梯子节点分享官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://free-v2ray.github.io/news/article-91897.htm" />
+    <meta property="og:site_name" content="Free V2ray免费梯子节点分享官网" />
+    <meta property="og:title" content="Java中的多线程你只要看这一篇就够了" />
+    <meta property="og:image" content="https://free-v2ray.github.io/uploads/20240911-1/21e1a1b89f172bac195b7daef4bdc760.webp" />
+        <meta property="og:release_date" content="2025-04-09T09:17:03" />
+    <meta property="og:updated_time" content="2025-04-09T09:17:03" />
+        <meta property="og:description" content="引 如果对什么是线程、什么是进程仍存有疑惑，请先Google之，因为这两个概念不在本文的范围之内。 用多线程只有一个目的，那就是更好的利用CPU的资源，因为所有的多线程代码都可以用单线程来实现。说这个" />
+        
+    <!-- google-fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- //google-fonts -->
+    <!-- Template CSS Style link -->
+    <link rel="stylesheet" href="/assets/website/css/free_v2ray/style-starter.css">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Java中的多线程你只要看这一篇就够了">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EFW7LQ09JM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-EFW7LQ09JM');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <!--header-->
+<header id="site-header" class="fixed-top">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg stroke px-0">
+                        <a class="navbar-brand" href="/">
+                <span>
+                    Free V2ray                </span>
+            </a>
+                        <!-- if logo is image enable this
+    <a class="navbar-brand" href="#index.html">
+        <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
+    </a> -->
+            <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav ml-lg-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">首页</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">免费节点</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/client.htm">客户端</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">新闻资讯</a>
+                    </li>
+                                    </ul>
+            </div>
+            <!-- toggle switch for light and dark theme -->
+            <div class="cont-ser-position mt-lg-2">
+                <nav class="navigation">
+                    <div class="theme-switch-wrapper">
+                        <label class="theme-switch" for="checkbox">
+                            <input type="checkbox" id="checkbox">
+                            <div class="mode-container">
+                                <i class="gg-sun"></i>
+                                <i class="gg-moon"></i>
+                            </div>
+                        </label>
+                    </div>
+                </nav>
+            </div>
+            <!-- //toggle switch for light and dark theme -->
+        </nav>
+    </div>
+</header>
+<!--//header-->
+    <!-- inner banner -->
+    <div class="inner-banner">
+        <div class="w3l-breadcrumb">
+            <div class="container">
+                <h1 class="inner-text-title font-weight-bold">Java中的多线程你只要看这一篇就够了</h1>
+                <ul class="breadcrumbs-custom-path">
+                    <li><a href="/">首页</a></li>
+                    <li><i class="fas fa-angle-right mx-2"></i></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li class="active"><i class="fas fa-angle-right mx-2"></i>正文</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- //inner banner -->
+    <!-- progress section -->
+    <section class="w3l-about-2 py-5">
+        <div class="container py-2">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-dark"> <h2><a id="_0" rel="nofollow"></a>引</h2> <p>如果对什么是线程、什么是进程仍存有疑惑，请先Google之，因为这两个概念不在本文的范围之内。<br /> 用多线程只有一个目的，那就是更好的利用CPU的资源，因为所有的多线程代码都可以用单线程来实现。说这个的话其实只对了一半，因为反应“多角色”的程序代码，最起码每个角色要给他一个线程吧，否则连时实际场景都无法模拟，当然也没法说能用单线程来实现：比如最常见的生产者，消费者模型。</p> <ul> <li>多线程：指的是这个程序（一个进程）运行时产生了不止一个线程</li> <li>并行与并发：<br /> ~并行：多个CPU实例或者多台机器同时执行一段处理器逻辑，是真正的同时。<br /> ~并发：通过CPU的调度算法，让用户看上去同时执行，实际上从CPU层面不是真正的同时。并发往往在场景中有公共资源，那么针对这个公用资源往往产生瓶颈，我们会用TPS或者QPS来反应这个系统的处理能力。<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220723/5f5c91b053870c1a3b4b6474ca14d0e8.jpg" alt="Java中的多线程你只要看这一篇就够了"><br /> 并发与并行<br /><strong>线程安全</strong>：经常用来描绘一段代码。指在并发的情况之下，该代码经过多线程使用，线程的调度顺序不影响任何结果。这个时候使用多线程，我们只需要关注系统的内存，cup是不是够用即可。反过来，线程不安全就意味着线程的调度顺序会影响最终的结果，如不加事物的转账代码：</li> </ul> <pre><code class="prism language-java"><span class="token keyword">void</span><span class="token function">transferMoney</span><span class="token punctuation">(</span>User from<span class="token punctuation">,</span> User to<span class="token punctuation">,</span><span class="token keyword">float</span> amount<span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span> 	to<span class="token punctuation">.</span><span class="token function">setMoney</span><span class="token punctuation">(</span>to<span class="token punctuation">.</span><span class="token function">getBalance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">+</span> amount<span class="token punctuation">)</span><span class="token punctuation">;</span> 	from<span class="token punctuation">.</span><span class="token function">setMoney</span><span class="token punctuation">(</span>from<span class="token punctuation">.</span><span class="token function">getBalance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span> amount<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span></code></pre> <p><strong>同步</strong>：Java中的同步指的是通过人为的控制和调度，保证共享资源的多线程访问成为线程安全，来保证结果的准确。如上面的代码简单加入@synchronized关键字。来保证结果准确的同时，提高性能，才是优秀的程序。线程安全的优先级高于性能。</p> <p>好了，让我们开始吧。我准备分成几部分来总结涉及到多线程的内容：<br /> 1、扎好马步：线程的状态<br /> 2、内功心法：每个对象都有的方法（机制）<br /> 3、太祖长拳：基本线程类<br /> 4、九阴真经：高级多线程控制类</p> <h2><a id="_24" rel="nofollow"></a><strong>扎好马步：线程的状态</strong></h2> <p>先来两张图：<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220723/fcc130336c4eb58c2ddbfb31c9dd16fb.jpg" alt="Java中的多线程你只要看这一篇就够了"><br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220723/69e6b9d48c2dc2fcaa72d72906ced6db.jpg" alt="Java中的多线程你只要看这一篇就够了"><br /> 线程状态转换</p> <p>各种状态一目了然，值得一提的是"blocked"这个状态：<br /> 线程在Running的过程中可能会遇到阻塞(Blocked)情况<br /> 1、调用join()和sleep()方法，sleep()时间结束或被打断，join()中断，IO完成都会回到Runnable状态，等待JVM的调度。<br /> 2、调用wait()，使该线程处于等待池（wait blocked pool）,知道notify()/notifyAll()，线程被唤醒被放到锁定池（lock blocked pool.），释放同步锁使线程回到可运行状态（Runnable）<br /> 3、对Running状态的线程加同步锁（Synchronized）使其进入（lock blocked pool）,同步锁被释放进入可运行状态（Runnable）</p> <p>此外，在runnable状态的线程是处于被调度的线程，此时的调度顺序是不一定的。Thread类中的yield方法可以让一个running状态的线程转入runnable。</p> <h2><a id="_38" rel="nofollow"></a><strong>内功心法：每个对象都有的方法（机制）</strong></h2> <p>synchronized, wait, notify 是任何对象都具有的同步工具。让我们先来了解他们<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220723/725b29dea0ede7f0784fff07b3a8fb44.jpg" alt="Java中的多线程你只要看这一篇就够了"><br /> monitor</p> <p>他们是应用于同步问题的人工线程调度工具。讲其本质，首先就要明确monitor的概念，Java中的每个对象都有一个监视器，来监测并发代码的重入。在非多线程编码时该监视器不发挥作用，反之如果在synchronized 范围内，监视器发挥作用。</p> <p>wait/notify必须存在于synchronized块中。并且，这三个关键字针对的是同一个监视器（某对象的监视器）。这意味着wait之后，其他线程可以进入同步块执行。</p> <p>当某代码并不持有监视器的使用权时（如图中5的状态，即脱离同步块）去wait或notify，会抛出java.lang.IllegalMonitorStateException。也包括在synchronized块中去调用另一个对象的wait/notify，因为不同对象的监视器不同，同样会抛出此异常。</p> <p><strong>再讲用法：</strong></p> <ul> <li>synchronized单独使用：<br /> 代码块：如下，在多线程环境下，synchronized块中的方法获取了lock实例的monitor，如果实例相同，那么只有一个线程能执行该块内容</li> </ul> <pre><code class="prism language-java"><span class="token keyword">public</span><span class="token keyword">class</span><span class="token class-name">Thread1</span><span class="token keyword">implements</span><span class="token class-name">Runnable</span><span class="token punctuation">{<!-- --></span>    Object lock<span class="token punctuation">;</span><span class="token keyword">public</span><span class="token keyword">void</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token keyword">synchronized</span><span class="token punctuation">(</span>lock<span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token keyword">do</span> something<span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">}</span></code></pre> <p>直接用于方法： 相当于上面代码中用lock来锁定的效果，实际获取的是Thread1类的monitor。更进一步，如果修饰的是static方法，则锁定该类所有实例。</p> <pre><code class="prism language-java"><span class="token keyword">public</span><span class="token keyword">class</span><span class="token class-name">Thread1</span><span class="token keyword">implements</span><span class="token class-name">Runnable</span><span class="token punctuation">{<!-- --></span><span class="token keyword">public</span><span class="token keyword">synchronized</span><span class="token keyword">void</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token keyword">do</span> something<span class="token punctuation">}</span><span class="token punctuation">}</span></code></pre> <ul> <li>synchronized, wait, notify结合:典型场景生产者消费者问题</li> </ul> <pre><code class="prism language-java"><span class="token comment">/**    * 生产者生产出来的产品交给店员    */</span><span class="token keyword">public</span><span class="token keyword">synchronized</span><span class="token keyword">void</span><span class="token function">produce</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>product<span class="token operator">&gt;=</span> MAX_PRODUCT<span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token keyword">try</span><span class="token punctuation">{<!-- --></span><span class="token function">wait</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                 System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"产品已满,请稍候再生产"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token keyword">catch</span><span class="token punctuation">(</span>InterruptedException e<span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span>               e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token keyword">return</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token keyword">this</span><span class="token punctuation">.</span>product<span class="token operator">++</span><span class="token punctuation">;</span>       System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"生产者生产第"</span><span class="token operator">+</span><span class="token keyword">this</span><span class="token punctuation">.</span>product<span class="token operator">+</span><span class="token string">"个产品."</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token function">notifyAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//通知等待区的消费者可以取出产品了</span><span class="token punctuation">}</span><span class="token comment">/**    * 消费者从店员取产品    */</span><span class="token keyword">public</span><span class="token keyword">synchronized</span><span class="token keyword">void</span><span class="token function">consume</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>product<span class="token operator">&lt;=</span> MIN_PRODUCT<span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token keyword">try</span><span class="token punctuation">{<!-- --></span><span class="token function">wait</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"缺货,稍候再取"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token keyword">catch</span><span class="token punctuation">(</span><span class="token class-name">InterruptedException</span> e<span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span>               e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token keyword">return</span><span class="token punctuation">;</span><span class="token punctuation">}</span>        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"消费者取走了第"</span><span class="token operator">+</span><span class="token keyword">this</span><span class="token punctuation">.</span>product<span class="token operator">+</span><span class="token string">"个产品."</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token keyword">this</span><span class="token punctuation">.</span>product<span class="token operator">--</span><span class="token punctuation">;</span><span class="token function">notifyAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//通知等待去的生产者可以生产产品了</span><span class="token punctuation">}</span></code></pre> <p>volatile<br /> 多线程的内存模型：main memory（主存）、working memory（线程栈），在处理数据时，线程会把值从主存load到本地栈，完成操作后再save回去（volatile关键词的作用：每次针对该变量的操作都激发一次load and save）。<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220723/aa20d754a1d4251b574698e4ab48865e.jpg" alt="Java中的多线程你只要看这一篇就够了"><br /> 针对多线程使用的变量如果不是volatile或者final修饰的，很有可能产生不可预知的结果（另一个线程修改了这个值，但是之后在某线程看到的是修改之前的值）。其实道理上讲同一实例的同一属性本身只有一个副本。但是多线程是会缓存值的，本质上，volatile就是不去缓存，直接取值。在线程安全的情况下加volatile会牺牲性能。</p> <h2><a id="_127" rel="nofollow"></a><strong>太祖长拳：基本线程类</strong></h2> <p>基本线程类指的是Thread类，Runnable接口，Callable接口<br /> Thread 类实现了Runnable接口，启动一个线程的方法：</p> <pre><code class="prism language-java">MyThread my<span class="token operator">=</span><span class="token keyword">new</span><span class="token class-name">MyThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> my<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre> <p>Thread类相关方法：</p> <pre><code class="prism language-java"><span class="token comment">//当前可转让CPU控制权，让别的就绪状态线程运行（切换）</span><span class="token keyword">public</span><span class="token keyword">static</span> Thread<span class="token punctuation">.</span><span class="token function">yield</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token comment">//暂停一段时间</span><span class="token keyword">public</span><span class="token keyword">static</span> Thread<span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token comment">//在一个线程中调用other.join(),将等待other执行完后才继续本线程。</span><span class="token keyword">public</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token comment">//后两个函数皆可以被打断</span><span class="token keyword">public</span><span class="token function">interrupte</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre> <p><strong>关于中断：</strong> 它并不像stop方法那样会中断一个正在运行的线程。线程会不时地检测中断标识位，以判断线程是否应该被中断（中断标识值是否为true）。终端只会影响到wait状态、sleep状态和join状态。被打断的线程会抛出InterruptedException。</p> <p>Thread.interrupted()检查当前线程是否发生中断，返回boolean<br /> synchronized在获锁的过程中是不能被中断的。</p> <p>中断是一个状态！interrupt()方法只是将这个状态置为true而已。所以说正常运行的程序不去检测状态，就不会终止，而wait等阻塞方法会去检查并抛出异常。如果在正常运行的程序中添加while(!Thread.interrupted()) ，则同样可以在中断后离开代码体</p> <p><strong>Thread类最佳实践：</strong><br /> 写的时候最好要设置线程名称 Thread.name，并设置线程组 ThreadGroup，目的是方便管理。在出现问题的时候，打印线程栈 (jstack -pid) 一眼就可以看出是哪个线程出的问题，这个线程是干什么的。</p> <p><strong>如何获取线程中的异常</strong><br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220723/1a68f2f8ab2113faa1c46484efdf284e.jpg" alt="Java中的多线程你只要看这一篇就够了"><br /> 不能用try,catch来获取线程中的异常<br /><strong>Runnable</strong><br /> 与Thread类似</p> <p><strong>Callable</strong><br /> future模式：并发模式的一种，可以有两种形式，即无阻塞和阻塞，分别是isDone和get。其中Future对象用来存放该线程的返回值以及状态</p> <pre><code class="prism language-java">ExecutorService e<span class="token operator">=</span> Executors<span class="token punctuation">.</span><span class="token function">newFixedThreadPool</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//submit方法有多重参数版本，及支持callable也能够支持runnable接口类型.</span> Future future<span class="token operator">=</span> e<span class="token punctuation">.</span><span class="token function">submit</span><span class="token punctuation">(</span><span class="token keyword">new</span><span class="token class-name">myCallable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> future<span class="token punctuation">.</span><span class="token function">isDone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token comment">//return true,false 无阻塞</span> future<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token comment">// return 返回值，阻塞直到该线程运行结束</span></code></pre> <h2><a id="_172" rel="nofollow"></a><strong>九阴真经：高级多线程控制类</strong></h2> <p>以上都属于内功心法，接下来是实际项目中常用到的工具了，Java1.5提供了一个非常高效实用的多线程包:java.util.concurrent, 提供了大量高级工具,可以帮助开发者编写高效、易维护、结构清晰的Java多线程程序。</p> <p><strong>1.ThreadLocal类</strong><br /> 用处：保存线程的独立变量。对一个线程类（继承自Thread)<br /> 当使用ThreadLocal维护变量时，ThreadLocal为每个使用该变量的线程提供独立的变量副本，所以每一个线程都可以独立地改变自己的副本，而不会影响其它线程所对应的副本。常用于用户登录控制，如记录session信息。</p> <p>实现：每个Thread都持有一个TreadLocalMap类型的变量（该类是一个轻量级的Map，功能与map一样，区别是桶里放的是entry而不是entry的链表。功能还是一个map。）以本身为key，以目标为value。<br /> 主要方法是get()和set(T a)，set之后在map里维护一个threadLocal -&gt; a，get时将a返回。ThreadLocal是一个特殊的容器。</p> <p><strong>2.原子类（AtomicInteger、AtomicBoolean……）</strong><br /> 如果使用atomic wrapper class如atomicInteger，或者使用自己保证原子的操作，则等同于synchronized</p> <pre><code class="prism language-java"><span class="token comment">//返回值为boolean</span> AtomicInteger<span class="token punctuation">.</span><span class="token function">compareAndSet</span><span class="token punctuation">(</span><span class="token keyword">int</span> expect<span class="token punctuation">,</span><span class="token keyword">int</span> update<span class="token punctuation">)</span></code></pre> <p>该方法可用于实现乐观锁，考虑文中最初提到的如下场景：a给b付款10元，a扣了10元，b要加10元。此时c给b2元，但是b的加十元代码约为：</p> <pre><code class="prism language-java"><span class="token keyword">if</span><span class="token punctuation">(</span>b<span class="token punctuation">.</span>value<span class="token punctuation">.</span><span class="token function">compareAndSet</span><span class="token punctuation">(</span>old<span class="token punctuation">,</span> value<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{<!-- --></span><span class="token keyword">return</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{<!-- --></span><span class="token comment">//try again</span><span class="token comment">// if that fails, rollback and log</span><span class="token punctuation">}</span></code></pre> <p><strong>AtomicReference</strong><br /> 对于AtomicReference 来讲，也许对象会出现，属性丢失的情况，即oldObject == current，但是oldObject.getPropertyA != current.getPropertyA。<br /> 这时候，AtomicStampedReference就派上用场了。这也是一个很常用的思路，即加上版本号</p> <p><strong>3.Lock类</strong><br /> lock: 在java.util.concurrent包内。共有三个实现：</p> <pre><code class="prism language-java">ReentrantLock ReentrantReadWriteLock<span class="token punctuation">.</span>ReadLock ReentrantReadWriteLock<span class="token punctuation">.</span>WriteLock</code></pre> <p>主要目的是和synchronized一样， 两者都是为了解决同步问题，处理资源争端而产生的技术。功能类似但有一些区别。</p> <p>区别如下：</p> <pre><code class="prism language-java">lock更灵活，可以自由定义多把锁的枷锁解锁顺序（<span class="token keyword">synchronized</span>要按照先加的后解顺序） 提供多种加锁方案，lock 阻塞式<span class="token punctuation">,</span> trylock 无阻塞式<span class="token punctuation">,</span> lockInterruptily 可打断式， 还有trylock的带超时时间版本。 本质上和监视器锁（即<span class="token keyword">synchronized</span>是一样的） 能力越大，责任越大，必须控制好加锁和解锁，否则会导致灾难。 和Condition类的结合。 性能更高，对比如下图：</code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220723/8575f799f9dbce39bfc0e18150deb91d.jpg" alt="Java中的多线程你只要看这一篇就够了"><br /> synchronized和Lock性能对比<br /><strong>ReentrantLock</strong><br /> 可重入的意义在于持有锁的线程可以继续持有，并且要释放对等的次数后才真正释放该锁。<br /> 使用方法是：</p> <p>1.先new一个实例</p> <pre><code class="prism language-java"><span class="token keyword">static</span> ReentrantLock r<span class="token operator">=</span><span class="token keyword">new</span><span class="token class-name">ReentrantLock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre> <p>2.加锁</p> <pre><code class="prism language-java">r<span class="token punctuation">.</span><span class="token function">lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span>或r<span class="token punctuation">.</span><span class="token function">lockInterruptibly</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre> <p>此处也是个不同，后者可被打断。当a线程lock后，b线程阻塞，此时如果是lockInterruptibly，那么在调用b.interrupt()之后，b线程退出阻塞，并放弃对资源的争抢，进入catch块。（如果使用后者，必须throw interruptable exception 或catch）</p> <p>3.释放锁</p> <pre><code class="prism language-java">r<span class="token punctuation">.</span><span class="token function">unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre> <p>必须做！何为必须做呢，要放在finally里面。以防止异常跳出了正常流程，导致灾难。这里补充一个小知识点，finally是可以信任的：经过测试，哪怕是发生了OutofMemoryError，finally块中的语句执行也能够得到保证。</p> <p><strong>ReentrantReadWriteLock</strong></p> <p>可重入读写锁（读写锁的一个实现）</p> <pre><code class="prism language-java">ReentrantReadWriteLock lock<span class="token operator">=</span><span class="token keyword">new</span><span class="token class-name">ReentrantReadWriteLock</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 　　ReadLock r<span class="token operator">=</span> lock<span class="token punctuation">.</span><span class="token function">readLock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 　　WriteLock w<span class="token operator">=</span> lock<span class="token punctuation">.</span><span class="token function">writeLock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre> <p>两者都有lock,unlock方法。写写，写读互斥；读读不互斥。可以实现并发读的高效线程安全代码</p> <p><strong>4.容器类</strong><br /> 这里就讨论比较常用的两个：</p> <pre><code class="prism language-java">BlockingQueue ConcurrentHashMap</code></pre> <p><strong>BlockingQueue</strong><br /> 阻塞队列。该类是java.util.concurrent包下的重要类，通过对Queue的学习可以得知，这个queue是单向队列，可以在队列头添加元素和在队尾删除或取出元素。类似于一个管　　道，特别适用于先进先出策略的一些应用场景。普通的queue接口主要实现有PriorityQueue（优先队列），有兴趣可以研究</p> <p>BlockingQueue在队列的基础上添加了多线程协作的功能：<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220723/72f70548492ddc8d11dbcd25667b70ce.jpg" alt="Java中的多线程你只要看这一篇就够了"></p> <p><strong>BlockingQueue</strong></p> <p>除了传统的queue功能（表格左边的两列）之外，还提供了阻塞接口put和take，带超时功能的阻塞接口offer和poll。put会在队列满的时候阻塞，直到有空间时被唤醒；take在队　列空的时候阻塞，直到有东西拿的时候才被唤醒。用于生产者-消费者模型尤其好用，堪称神器。</p> <p>常见的阻塞队列有：</p> <pre><code class="prism language-java">ArrayListBlockingQueue LinkedListBlockingQueue DelayQueue SynchronousQueue</code></pre> <p><strong>ConcurrentHashMap</strong><br /> 高效的线程安全哈希map。请对比hashTable , concurrentHashMap, HashMap</p> <p><strong>5.管理类</strong><br /> 管理类的概念比较泛，用于管理线程，本身不是多线程的，但提供了一些机制来利用上述的工具做一些封装。<br /> 了解到的值得一提的管理类：ThreadPoolExecutor和 JMX框架下的系统级管理类 ThreadMXBean<br /> ThreadPoolExecutor<br /> 如果不了解这个类，应该了解前面提到的ExecutorService，开一个自己的线程池非常方便：</p> <pre><code class="prism language-java">ExecutorService e<span class="token operator">=</span> Executors<span class="token punctuation">.</span><span class="token function">newCachedThreadPool</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     ExecutorService e<span class="token operator">=</span> Executors<span class="token punctuation">.</span><span class="token function">newSingleThreadExecutor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>     ExecutorService e<span class="token operator">=</span> Executors<span class="token punctuation">.</span><span class="token function">newFixedThreadPool</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// 第一种是可变大小线程池，按照任务数来分配线程，</span><span class="token comment">// 第二种是单线程池，相当于FixedThreadPool(1)</span><span class="token comment">// 第三种是固定大小线程池。</span><span class="token comment">// 然后运行</span>     e<span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token keyword">new</span><span class="token class-name">MyRunnableImpl</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre> <p>该类内部是通过ThreadPoolExecutor实现的，掌握该类有助于理解线程池的管理，本质上，他们都是ThreadPoolExecutor类的各种实现版本。请参见javadoc：<br /><img decoding="async" src="http://img.555519.xyz/uploads3/20220723/24e734afb7c9e787a553624e7091598d.jpg" alt="Java中的多线程你只要看这一篇就够了"><br /> ThreadPoolExecutor参数解释</p> <p>翻译一下：</p> <pre><code class="prism language-java">corePoolSize<span class="token operator">:</span>池内线程初始值与最小值，就算是空闲状态，也会保持该数量线程。 maximumPoolSize<span class="token operator">:</span>线程最大值，线程的增长始终不会超过该值。 keepAliveTime：当池内线程数高于corePoolSize时，经过多少时间多余的空闲线程才会被回收。回收前处于wait状态 unit： 时间单位，可以使用TimeUnit的实例，如TimeUnit<span class="token punctuation">.</span>MILLISECONDS　 workQueue<span class="token operator">:</span>待入任务（Runnable）的等待场所，该参数主要影响调度策略，如公平与否，是否产生饿死<span class="token punctuation">(</span>starving<span class="token punctuation">)</span> threadFactory<span class="token operator">:</span>线程工厂类，有默认实现，如果有自定义的需要则需要自己实现ThreadFactory接口并作为参数传入</code></pre> <p>转载至：<br /> Kyrie lrving<br /> https://www.cnblogs.com/wxd0108/p/5479442.html</p> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-91408.htm">动物接种疫苗多少钱一针啊图片及价格（动物疫苗一般多少钱）</a></p>
+                                        <p>下一个：<a href="/news/article-91899.htm">中国兽药网价格表（兽药报价网）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2025-4-3-node-share-links.htm" title="4月3日→19.4M/S|2025年最新免费节点Free V2ray订阅链接地址分享">4月3日→19.4M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-86016.htm" title="延吉宠物美容哪家好（延吉宠物店电话号码）">延吉宠物美容哪家好（延吉宠物店电话号码）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-7-free-subscribe-node.htm" title="4月7日→18.2M/S|2025年最新免费节点Free V2ray订阅链接地址分享">4月7日→18.2M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-81053.htm" title="天照宠物医院杜坤简历介绍（天照宠物医院大兴店）">天照宠物医院杜坤简历介绍（天照宠物医院大兴店）</a></li>
+                        <li class="py-2"><a href="/news/article-65787.htm" title="宠物医院好评100字通用评论 宠物店优质点评100字">宠物医院好评100字通用评论 宠物店优质点评100字</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-29-node-share-links.htm" title="3月29日→20.8M/S|2025年最新免费节点Free V2ray订阅链接地址分享">3月29日→20.8M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-82444.htm" title="500公斤饲料粉碎搅拌机视频讲解（五百公斤饲料粉碎搅拌机）">500公斤饲料粉碎搅拌机视频讲解（五百公斤饲料粉碎搅拌机）</a></li>
+                        <li class="py-2"><a href="/news/article-70918.htm" title="动物灭活疫苗过期处理（疫苗过期了给动物打上会死吗）">动物灭活疫苗过期处理（疫苗过期了给动物打上会死吗）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-17-clash-v2ray-ss-ssr.htm" title="3月17日→19.7M/S|2025年最新免费节点Free V2ray订阅链接地址分享">3月17日→19.7M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-68962.htm" title="宠物粮从哪里进货便宜又好吃呢图片（宠物粮在哪里买比较放心）">宠物粮从哪里进货便宜又好吃呢图片（宠物粮在哪里买比较放心）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">27</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">90</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- //progress section -->
+    <!--//testimonials-->
+        <!-- footer -->
+    <footer class="w3l-footer-16 py-5">
+        <div class="container">
+            <div class="below-section text-center">
+                <p class="copy-text">
+                                        <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                    <a href="/">Free V2ray免费梯子节点分享官网</a> 版权所有 Powered by WordPress
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- move top -->
+    <button onclick="topFunction()" id="movetop" title="Go to top">
+        <span class="fas fa-level-up-alt" aria-hidden="true"></span>
+    </button>
+    <script>
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {
+        scrollFunction()
+    };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("movetop").style.display = "block";
+        } else {
+            document.getElementById("movetop").style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+    </script>
+    <!-- //move top -->
+    <!-- common jquery plugin -->
+    <script src="/assets/website/js/frontend/free_v2ray/jquery-3.5.1.min.js"></script>
+    <!-- //common jquery plugin -->
+    <!-- counter for stats -->
+    <script src="/assets/website/js/frontend/free_v2ray/counter.js"></script>
+    <!-- //counter for stats -->
+    <!-- theme switch js (light and dark)-->
+    <script src="/assets/website/js/frontend/free_v2ray/theme-change.js"></script>
+    <script>
+    function autoType(elementClass, typingSpeed) {
+        var thhis = $(elementClass);
+        thhis.css({
+            "position": "relative",
+            "display": "inline-block"
+        });
+        thhis.prepend('<div class="cursor" style="right: initial; left:0;"></div>');
+        thhis = thhis.find(".text-js");
+        var text = thhis.text().trim().split('');
+        var amntOfChars = text.length;
+        var newString = "";
+        thhis.text("|");
+        setTimeout(function() {
+            thhis.css("opacity", 1);
+            thhis.prev().removeAttr("style");
+            thhis.text("");
+            for (var i = 0; i < amntOfChars; i++) {
+                (function(i, char) {
+                    setTimeout(function() {
+                        newString += char;
+                        thhis.text(newString);
+                    }, i * typingSpeed);
+                })(i + 1, text[i]);
+            }
+        }, 1500);
+    }
+
+    $(document).ready(function() {
+        // Now to start autoTyping just call the autoType function with the
+        // class of outer div
+        // The second paramter is the speed between each letter is typed.
+        autoType(".type-js", 200);
+    });
+    </script>
+    <!-- //theme switch js (light and dark)-->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!--bootstrap-->
+    <script src="/assets/website/js/frontend/free_v2ray/bootstrap.min.js"></script>
+    <!-- //bootstrap-->
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+    <!-- //Js scripts -->
+</body>
+
+</html>
