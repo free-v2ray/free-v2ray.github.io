@@ -1,0 +1,319 @@
+<!doctype html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://free-v2ray.github.io/news/article-92622.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>模型的威力：基于模型，快速梳理源码_在线工具</title>
+        <meta name="description" content="上一篇我们将梳理的核心流程整合进了概念模型，得到了一个相对详细的流程。本篇是《如何高效阅读源码》专题的第十篇，我们来通过阅读源码来验证上面得到的流程图是否正确，同时进一步细化，从核心流程向外围流程进行" />
+        <link rel="icon" href="/assets/website/img/free_v2ray/favicon.ico" type="image/x-icon"/>
+
+    <meta name="author" content="Free V2ray免费梯子节点分享官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://free-v2ray.github.io/news/article-92622.htm" />
+    <meta property="og:site_name" content="Free V2ray免费梯子节点分享官网" />
+    <meta property="og:title" content="模型的威力：基于模型，快速梳理源码_在线工具" />
+    <meta property="og:image" content="https://free-v2ray.github.io/uploads/20240911-1/ca739634c266bae41556d27eeb274c60.webp" />
+        <meta property="og:release_date" content="2025-04-10T08:17:29" />
+    <meta property="og:updated_time" content="2025-04-10T08:17:29" />
+        <meta property="og:description" content="上一篇我们将梳理的核心流程整合进了概念模型，得到了一个相对详细的流程。本篇是《如何高效阅读源码》专题的第十篇，我们来通过阅读源码来验证上面得到的流程图是否正确，同时进一步细化，从核心流程向外围流程进行" />
+        
+    <!-- google-fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- //google-fonts -->
+    <!-- Template CSS Style link -->
+    <link rel="stylesheet" href="/assets/website/css/free_v2ray/style-starter.css">
+
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="模型的威力：基于模型，快速梳理源码_在线工具">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EFW7LQ09JM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-EFW7LQ09JM');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+    <!--header-->
+<header id="site-header" class="fixed-top">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg stroke px-0">
+                        <a class="navbar-brand" href="/">
+                <span>
+                    Free V2ray                </span>
+            </a>
+                        <!-- if logo is image enable this
+    <a class="navbar-brand" href="#index.html">
+        <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
+    </a> -->
+            <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav ml-lg-auto">
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/">首页</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/free-nodes/">免费节点</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/client.htm">客户端</a>
+                    </li>
+                                        <li class="nav-item">
+                        <a class="nav-link" href="/news/">新闻资讯</a>
+                    </li>
+                                    </ul>
+            </div>
+            <!-- toggle switch for light and dark theme -->
+            <div class="cont-ser-position mt-lg-2">
+                <nav class="navigation">
+                    <div class="theme-switch-wrapper">
+                        <label class="theme-switch" for="checkbox">
+                            <input type="checkbox" id="checkbox">
+                            <div class="mode-container">
+                                <i class="gg-sun"></i>
+                                <i class="gg-moon"></i>
+                            </div>
+                        </label>
+                    </div>
+                </nav>
+            </div>
+            <!-- //toggle switch for light and dark theme -->
+        </nav>
+    </div>
+</header>
+<!--//header-->
+    <!-- inner banner -->
+    <div class="inner-banner">
+        <div class="w3l-breadcrumb">
+            <div class="container">
+                <h1 class="inner-text-title font-weight-bold">模型的威力：基于模型，快速梳理源码_在线工具</h1>
+                <ul class="breadcrumbs-custom-path">
+                    <li><a href="/">首页</a></li>
+                    <li><i class="fas fa-angle-right mx-2"></i></li>
+                    <li><a href="/news/">新闻资讯</a></li>
+                    <li class="active"><i class="fas fa-angle-right mx-2"></i>正文</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- //inner banner -->
+    <!-- progress section -->
+    <section class="w3l-about-2 py-5">
+        <div class="container py-2">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="" data-url="">
+                  				  				  				<blockquote> <p><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=http://mp.weixin.qq.com/s?__biz=MzA4MjQ1ODIzMA==&amp;mid=2652200478&amp;idx=1&amp;sn=be9e2878530d56641cab0dcd101e2e31&amp;chksm=84649d07b313141191afca7bea0bd5e3a998422b96c2fdd5b7145dbe118b0d4a8e24de65f14e&amp;scene=21#wechat_redirect"  target="_blank" data-itemshowtype="0" data-linktype="2"  rel="nofollow">上一篇</a>我们将梳理的核心流程整合进了概念模型，得到了一个相对详细的流程。<br />本篇是《如何高效阅读源码》专题的第十篇，我们来通过阅读源码来验证上面得到的流程图是否正确，同时进一步细化，从核心流程向外围流程进行梳理，构建一个更完整的流程。</p> </blockquote> <p>本节主要内容：</p> <ul class="list-paddingleft-2"> <li> <p>从调用关系确定调用类</p> </li> <li> <p>梳理调用类结构</p> </li> <li> <p>梳理调用类核心流程</p> </li> <li> <p>完善流程图</p> </li> </ul> </h1> <p>前文我们得到了下面这张图：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220430/ae1ef6ba3c4758dc72da14437cd3c7e1.jpg" alt="模型的威力：基于模型，快速梳理源码_在线工具"></p> <p> </p> <p> </p> <p>我们猜测TestRunners会通过测试的Class来构建TestClass，现在我们通过源码来验证这个猜测。<br />我们在TestClass的构造方法上按下ALT+F7，IDEA就会列出调用TestClass构造方法的类。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220430/6e82f5edd603fbcbdd0d19fbc65c6f81.jpg" alt="模型的威力：基于模型，快速梳理源码_在线工具"></p> <p> </p> <p> </p> <p>有很多的测试类，<strong>结合前面的核心包分析</strong>，我们可以直接定位到runners包，runners包中有个JUnit4类。这个类应该就是我们阅读扩展模块的入口了！</p> </h1> <p>我们通过JUnit4这个类来构建TestRunners的UML结构。直接在JUnit4上右击，选择Diagrams即可。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220430/8aeec5afe2f4867996dca65685473bcb.jpg" alt="模型的威力：基于模型，快速梳理源码_在线工具"></p> <p> </p> <p> </p> <p>从上图我们可以看到JUnit4有三个父类，一共实现了四个接口。<br />这里还有个小技巧，IDEA提供了一个功能，能区分各个类是否在同一个包下，只需要选中某个类，如果哪些类和选中的类不在同一个包下，则会被置灰。</p> <p>例如，我们选中JUnit4，从下图可以看到，除了ParentRunner和BlockJUnit4ClassRunner，其它类都被置灰了。说明其它类和JUnit4不在同一个包下，而ParentRunner和BlockJUnit4ClassRunner与JUnit4同属于org.junit.runners包。结合前面的包关系图，我们可以知道JUnit4与哪些包有关系。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220430/cb69446d10859006dd60615495851855.jpg" alt="模型的威力：基于模型，快速梳理源码_在线工具"></p> <p> </p> <p> </p> <p>梳理出了大致的调用类模型，我们可以基于这个模型来梳理流程，在梳理流程的同时，再反过来完善调用类模型。</p> </h1> <p>为了便于梳理，我们先忽略那四个接口，直接看类。<br />首先，我们注意到Runner和ParentRunner是两个抽象类。好，这里我们停下来回想一下，我们<strong>使用抽象类的作用是什么</strong>？一般就三个作用：</p> <ul class="list-paddingleft-2"> <li> <p>提供子类公用的方法</p> </li> <li> <p>定义流程，比如模板方法模式</p> </li> <li> <p>定义子类需要实现的抽象方法</p> </li> </ul> <p>所以我们可以从这三个角度来看这两个抽象类。我们从最上层的Runner开始。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220430/29b842b9969661770913f53a67453ee9.jpg" alt="模型的威力：基于模型，快速梳理源码_在线工具"></p> <p> </p> <p> </p> <p>这个类非常的简单，我们一眼就能看到那个最核心的方法---run方法。我们直接去找run方法的实现。假设你点击IDE右侧的按钮，展示子类，你会发现有很多的子类实现，想要找到具体的实现，是不是要疯？<strong>回想一下，你使用debug来读源码的时候，是不是经常遇到这样的问题</strong>？</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220430/03095b9ad0067cd48fb10655f3f2bd57.jpg" alt="模型的威力：基于模型，快速梳理源码_在线工具"></p> <p> </p> <p> </p> <p>我们在前面梳理出的模型，在这里就起到了非常大的作用，限定了Runner的子类就是ParentRunner，所以我们直接到ParentRunner中去找run方法的实现。<strong>这也是先建模再梳理流程的优势之一。</strong></p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220430/13bddb0f54f12a0d7152974ed64276b2.jpg" alt="模型的威力：基于模型，快速梳理源码_在线工具"></p> <p> </p> <p> </p> <p>这里的核心是通过classBlock方法构建了一个Statement，然后调用了evaluate方法并通过RunNotifier对象来监听执行过程。从这里我们知道Statement是个执行类，用于执行测试用，TestNotifier是个通知类，用于将执行信息通知给对应的类，所以我们将其加入到调用模型中。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220430/e78072b38129654541e4ce1c68297aa0.jpg" alt="模型的威力：基于模型，快速梳理源码_在线工具"></p> <p> </p> <p> </p> <ul class="list-paddingleft-2"> <li> <p>为什么使用Statement类？作用是什么？</p> </li> <li> <p>RunNotifier如何进行监听的？</p> </li> </ul> <p>这里我们先提出疑问，记录下来，先梳理流程，后面再进行解答。<br />我们深入到classBlock方法中。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220430/fe2d79d7ad6d1b9b9124ce2ca3c82b83.jpg" alt="模型的威力：基于模型，快速梳理源码_在线工具"></p> <p> </p> <p> </p> <p>这里通过childrenInvoker方法来构建了Statement。<br />if判断里的逻辑是干什么用的呢？看方法名好像和BeforeClass、AfterClass注解有关系，它是怎么处理的呢？<br />我们先直接跳到childrenInvoker方法来将流程走完。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220430/bc2b2d3ba705456a989b825d39f3b4c3.jpg" alt="模型的威力：基于模型，快速梳理源码_在线工具"></p> <p> </p> <p> </p> <p>从这里可以看到，这里实际上创建了一个Statement的匿名类，调用的是ParentRunner中的runChildren方法。<br />为什么要用Statement封装一层？都在ParentRunner类里面，直接调用不就好了吗？</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220430/8325076d96dfedca0723569308180cce.jpg" alt="模型的威力：基于模型，快速梳理源码_在线工具"></p> <p> </p> <p> </p> <p>runChildren通过getFilteredChildren方法遍历子元素，通过runChild来执行。<br />为什么这里要构建一个Runnable来执行呢？</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220430/bbbfb398a6d5febcde4d97d5c8962a0f.jpg" alt="模型的威力：基于模型，快速梳理源码_在线工具"></p> <p> </p> <p> </p> <p>getFilteredChildren方法使用了DCL来加锁，实际调用getChildren来获取子元素，而getChildren是个抽象方法，由子类来实现。具体是哪个子类实现的呢？<strong>这里再一次提现了建模的优势</strong>。想一想，如果是debug的话，这里是不是又要迷失在一堆子类中了？而我们一开始就限定了需要阅读的类，所以我们可以直接定位到BlockJUnit4ClassRunner这个类，看它的getChildren实现。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220430/691a2794d98ad8fbee1945ce0e130ee4.jpg" alt="模型的威力：基于模型，快速梳理源码_在线工具"></p> <p> </p> <p> </p> <p>这里可以看到和前面的TestClass关联上了，去获取的是TestClass中的所有包含了Test注解的方法，然后去执行。</p> </h1> <p>至此，我们梳理出了TestRunner调用TestClass的流程：</p> <ul class="list-paddingleft-2"> <li> <p>某个类会创建一个Runner的实例，创建的可能是BlockJUnit4ClassRunner，也可能是JUnit4</p> </li> <li> <p>然后调用其run方法来执行测试</p> </li> <li> <p>此方法通过RunNotifier来通知对应的类，通过Statement类来执行</p> </li> <li> <p>执行方式是查找测试类中，所有包含了Test注解的方法，一个个的去执行</p> </li> </ul> <p>我们将这个流程添加到流程图中，进一步完善流程。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220430/abe25851918b0e391e5034e6cfc626b8.jpg" alt="模型的威力：基于模型，快速梳理源码_在线工具"></p> <p> </p> <p> </p> </h1> <p>本文通过调用关系，梳理出了TestRunner调用核心模型的流程。通过此方法不断的向外梳理，你就能构建出完整的项目流程图。<br />下节将对本节梳理出的问题做出解答，理解为什么这么设计。</p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-92621.htm">json数据交互——@RequestBody与@ResponseBody</a></p>
+                                        <p>下一个：<a href="/news/article-93372.htm">Redis：内存淘汰机制</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-67047.htm" title="猫三联是三针还是一针好（猫三联一针是什么意思）">猫三联是三针还是一针好（猫三联一针是什么意思）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-3-free-v2ray-subscribe.htm" title="3月3日→20.6M/S|2025年最新免费节点Free V2ray订阅链接地址分享">3月3日→20.6M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-83150.htm" title="宠物粮行业分析报告范文大全图片（宠物粮行业分析报告范文大全图片高清）">宠物粮行业分析报告范文大全图片（宠物粮行业分析报告范文大全图片高清）</a></li>
+                        <li class="py-2"><a href="/news/article-88179.htm" title="宠物粮销售渠道策划方案 宠物粮销售渠道策划方案怎么写">宠物粮销售渠道策划方案 宠物粮销售渠道策划方案怎么写</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-5-free-node-subscribe.htm" title="4月5日→18.1M/S|2025年最新免费节点Free V2ray订阅链接地址分享">4月5日→18.1M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/news/article-67046.htm" title="让猫挠了轻微出血有事吗过了24小时没事了（让猫挠了轻微出血有事吗过了24小时没事了怎么办）">让猫挠了轻微出血有事吗过了24小时没事了（让猫挠了轻微出血有事吗过了24小时没事了怎么办）</a></li>
+                        <li class="py-2"><a href="/news/article-67659.htm" title="1970年6月27日农历是多少（1970年阳历6月26号阴历是多少）">1970年6月27日农历是多少（1970年阳历6月26号阴历是多少）</a></li>
+                        <li class="py-2"><a href="/news/article-68963.htm" title="哈尔滨农业大学动物医院怎么样知乎（哈尔滨农业大学动物医院电话）">哈尔滨农业大学动物医院怎么样知乎（哈尔滨农业大学动物医院电话）</a></li>
+                        <li class="py-2"><a href="/news/article-94893.htm" title="养猫会出现的问题（养猫会有病吗）">养猫会出现的问题（养猫会有病吗）</a></li>
+                        <li class="py-2"><a href="/news/article-80384.htm" title="DRF-认证权限频率">DRF-认证权限频率</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">39</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">90</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- //progress section -->
+    <!--//testimonials-->
+        <!-- footer -->
+    <footer class="w3l-footer-16 py-5">
+        <div class="container">
+            <div class="below-section text-center">
+                <p class="copy-text">
+                                        <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                    <a href="/">Free V2ray免费梯子节点分享官网</a> 版权所有 Powered by WordPress
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- move top -->
+    <button onclick="topFunction()" id="movetop" title="Go to top">
+        <span class="fas fa-level-up-alt" aria-hidden="true"></span>
+    </button>
+    <script>
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {
+        scrollFunction()
+    };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("movetop").style.display = "block";
+        } else {
+            document.getElementById("movetop").style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+    </script>
+    <!-- //move top -->
+    <!-- common jquery plugin -->
+    <script src="/assets/website/js/frontend/free_v2ray/jquery-3.5.1.min.js"></script>
+    <!-- //common jquery plugin -->
+    <!-- counter for stats -->
+    <script src="/assets/website/js/frontend/free_v2ray/counter.js"></script>
+    <!-- //counter for stats -->
+    <!-- theme switch js (light and dark)-->
+    <script src="/assets/website/js/frontend/free_v2ray/theme-change.js"></script>
+    <script>
+    function autoType(elementClass, typingSpeed) {
+        var thhis = $(elementClass);
+        thhis.css({
+            "position": "relative",
+            "display": "inline-block"
+        });
+        thhis.prepend('<div class="cursor" style="right: initial; left:0;"></div>');
+        thhis = thhis.find(".text-js");
+        var text = thhis.text().trim().split('');
+        var amntOfChars = text.length;
+        var newString = "";
+        thhis.text("|");
+        setTimeout(function() {
+            thhis.css("opacity", 1);
+            thhis.prev().removeAttr("style");
+            thhis.text("");
+            for (var i = 0; i < amntOfChars; i++) {
+                (function(i, char) {
+                    setTimeout(function() {
+                        newString += char;
+                        thhis.text(newString);
+                    }, i * typingSpeed);
+                })(i + 1, text[i]);
+            }
+        }, 1500);
+    }
+
+    $(document).ready(function() {
+        // Now to start autoTyping just call the autoType function with the
+        // class of outer div
+        // The second paramter is the speed between each letter is typed.
+        autoType(".type-js", 200);
+    });
+    </script>
+    <!-- //theme switch js (light and dark)-->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!--bootstrap-->
+    <script src="/assets/website/js/frontend/free_v2ray/bootstrap.min.js"></script>
+    <!-- //bootstrap-->
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+    <!-- //Js scripts -->
+</body>
+
+</html>
