@@ -246,14 +246,9 @@ sudo apt install unzip tar
     </div>
 <h4>FAQ</h4>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Hiddify Next 如何设置流量配额限制？</h5></div>
+    <div class="panel-heading"><h5>WinXray 的多出口节点如何优化访问速度？</h5></div>
     <div class="panel-body">
-        管理员可在 Hiddify Next 面板为每个用户设置流量上限或带宽限制。超过配额后可自动阻止或降速，保证服务器资源合理分配，防止单用户占用过多带宽。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>V2Ray QUIC 传输适合什么网络环境？</h5></div>
-    <div class="panel-body">
-        QUIC 基于 UDP 支持多路复用和零握手，降低延迟，提高吞吐量。适合高丢包、不稳定网络环境，可保证视频、游戏和即时通讯流量的稳定性和流畅体验。<hr />    </div>
+        通过为不同流量类型设置不同出口节点，WinXray 可以自动选择延迟最低的节点处理请求。结合策略组，可提高网页访问、视频播放和游戏等应用的速度与稳定性。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>如何提高 Vmess 协议的安全性？</h5></div>
@@ -261,9 +256,9 @@ sudo apt install unzip tar
         可通过启用 TLS 加密、使用安全端口（如 443）、结合 WebSocket 或 gRPC 传输方式来提升安全性。同时，避免公开分享 UUID，定期更换节点参数能进一步减少被封风险。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>VMess AEAD 加密在高封锁网络的作用？</h5></div>
+    <div class="panel-heading"><h5>Hiddify Next 用户带宽限制如何配置？</h5></div>
     <div class="panel-body">
-        AEAD 加密可防止数据篡改和流量特征泄露，降低被封锁和 DPI 检测风险。保证节点长期可用，提高数据传输安全性和访问可靠性，优化用户科学上网体验。<hr />    </div>
+        管理员可为每个用户设置上传、下载和总流量上限，超出限制可自动降速或阻止访问。保证服务器资源合理分配，避免单用户占用过多带宽，提高整体公平性。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>Trojan 的伪装域名配置有哪些注意事项？</h5></div>
@@ -271,19 +266,9 @@ sudo apt install unzip tar
         伪装域名必须真实可访问且证书有效，否则无法建立连接。正确配置可隐藏真实流量特征，降低被封锁和检测风险，提高节点安全性和长期可用性。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>WinXray 的多出口节点如何优化访问速度？</h5></div>
+    <div class="panel-heading"><h5>V2Ray QUIC 传输适合什么网络环境？</h5></div>
     <div class="panel-body">
-        通过为不同流量类型设置不同出口节点，WinXray 可以自动选择延迟最低的节点处理请求。结合策略组，可提高网页访问、视频播放和游戏等应用的速度与稳定性。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>WinXray 节点健康检测如何提高稳定性？</h5></div>
-    <div class="panel-body">
-        WinXray 会定期检测节点延迟和丢包率，并结合策略组自动切换到最优节点。避免高延迟或失效节点，提高网页浏览、视频播放和游戏连接的速度和稳定性。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Mellow 是否支持自定义 DNS？</h5></div>
-    <div class="panel-body">
-        支持。Mellow 的配置文件中可设置 DNS 服务器地址及模式（如 DoH、DoT）。用户可使用安全 DNS，如 Cloudflare 1.1.1.1 或 Google DNS，以减少污染风险。<hr />    </div>
+        QUIC 基于 UDP 支持多路复用和零握手，降低延迟，提高吞吐量。适合高丢包、不稳定网络环境，可保证视频、游戏和即时通讯流量的稳定性和流畅体验。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>Nekoray 节点订阅自动更新如何配置？</h5></div>
@@ -291,9 +276,24 @@ sudo apt install unzip tar
         用户可添加订阅 URL，Nekoray 会定期下载并替换旧节点。这样可保证节点列表始终最新，减少手动维护，提高使用效率，同时保证网络访问稳定可靠。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Hiddify Next 用户带宽限制如何配置？</h5></div>
+    <div class="panel-heading"><h5>Mellow 是否支持自定义 DNS？</h5></div>
     <div class="panel-body">
-        管理员可为每个用户设置上传、下载和总流量上限，超出限制可自动降速或阻止访问。保证服务器资源合理分配，避免单用户占用过多带宽，提高整体公平性。    </div>
+        支持。Mellow 的配置文件中可设置 DNS 服务器地址及模式（如 DoH、DoT）。用户可使用安全 DNS，如 Cloudflare 1.1.1.1 或 Google DNS，以减少污染风险。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>VMess AEAD 加密在高封锁网络的作用？</h5></div>
+    <div class="panel-body">
+        AEAD 加密可防止数据篡改和流量特征泄露，降低被封锁和 DPI 检测风险。保证节点长期可用，提高数据传输安全性和访问可靠性，优化用户科学上网体验。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Hiddify Next 如何设置流量配额限制？</h5></div>
+    <div class="panel-body">
+        管理员可在 Hiddify Next 面板为每个用户设置流量上限或带宽限制。超过配额后可自动阻止或降速，保证服务器资源合理分配，防止单用户占用过多带宽。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>WinXray 节点健康检测如何提高稳定性？</h5></div>
+    <div class="panel-body">
+        WinXray 会定期检测节点延迟和丢包率，并结合策略组自动切换到最优节点。避免高延迟或失效节点，提高网页浏览、视频播放和游戏连接的速度和稳定性。    </div>
 </div>
 <div class="panel panel-default mt-5">
     <div class="panel-heading">
@@ -322,16 +322,16 @@ sudo apt install unzip tar
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2025-10-7-shadowrocket-node.htm" title="10月7日→18M/S|2025年最新免费节点Free V2ray订阅链接地址分享">10月7日→18M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-10-24-free-clash-subscribe.htm" title="10月24日→20.1M/S|2025年最新免费节点Free V2ray订阅链接地址分享">10月24日→20.1M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-10-5-free-shadowrocket-node.htm" title="10月5日→21M/S|2025年最新免费节点Free V2ray订阅链接地址分享">10月5日→21M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-10-12-free-v2ray.htm" title="10月12日→19.1M/S|2025年最新免费节点Free V2ray订阅链接地址分享">10月12日→19.1M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
                         <li class="py-2"><a href="/free-nodes/2025-10-8-node-share-links.htm" title="10月8日→20.8M/S|2025年最新免费节点Free V2ray订阅链接地址分享">10月8日→20.8M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-10-21-free-ssr-node.htm" title="10月21日→19.4M/S|2025年最新免费节点Free V2ray订阅链接地址分享">10月21日→19.4M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-10-6-clash-node.htm" title="10月6日→21.8M/S|2025年最新免费节点Free V2ray订阅链接地址分享">10月6日→21.8M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-11-2-free-clash.htm" title="11月2日→20.7M/S|2025年最新免费节点Free V2ray订阅链接地址分享">11月2日→20.7M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-10-22-node-share.htm" title="10月22日→22.4M/S|2025年最新免费节点Free V2ray订阅链接地址分享">10月22日→22.4M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-11-free-v2ray.htm" title="11月11日→22.8M/S|2025年最新免费节点Free V2ray订阅链接地址分享">11月11日→22.8M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-10-4-shadowrocket-node.htm" title="10月4日→20.9M/S|2025年最新免费节点Free V2ray订阅链接地址分享">10月4日→20.9M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-10-25-clash-windows.htm" title="10月25日→21.6M/S|2025年最新免费节点Free V2ray订阅链接地址分享">10月25日→21.6M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-4-free-high-speed-nodes.htm" title="11月4日→19.5M/S|2025年最新免费节点Free V2ray订阅链接地址分享">11月4日→19.5M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
                         <li class="py-2"><a href="/free-nodes/2025-11-3-free-ssr-subscribe.htm" title="11月3日→19.2M/S|2025年最新免费节点Free V2ray订阅链接地址分享">11月3日→19.2M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-10-3-free-node-subscribe.htm" title="10月3日→19.7M/S|2025年最新免费节点Free V2ray订阅链接地址分享">10月3日→19.7M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-10-15-free-clash-subscribe.htm" title="10月15日→22.2M/S|2025年最新免费节点Free V2ray订阅链接地址分享">10月15日→22.2M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-10-20-clash-windows.htm" title="10月20日→18.2M/S|2025年最新免费节点Free V2ray订阅链接地址分享">10月20日→18.2M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-10-9-shadowrocket-node.htm" title="10月9日→18.6M/S|2025年最新免费节点Free V2ray订阅链接地址分享">10月9日→18.6M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
                     </ul>
     </div>
 </div>
@@ -343,7 +343,7 @@ sudo apt install unzip tar
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">5</span> <a href="/date/2025-11/" title="2025-11 归档">2025-11</a></h4>
+                <h4><span class="badge" style="float: right;">11</span> <a href="/date/2025-11/" title="2025-11 归档">2025-11</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">26</span> <a href="/date/2025-10/" title="2025-10 归档">2025-10</a></h4>
