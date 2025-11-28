@@ -1,4 +1,4 @@
-# 11月19日→18M/S|2025年最新免费节点Free V2ray订阅链接地址分享  更新时间 2025-11-19 08:12:39
+# 11月28日→19.6M/S|2025年最新免费节点Free V2ray订阅链接地址分享  更新时间 2025-11-28 09:37:33
 所有免费clash节点都爬取自网络，请勿用于非法用途 。节点地址：<a href="https://free-v2ray.github.io" target="_blank">点击跳转</a>
 
 ## clash使用教程：
@@ -9,23 +9,23 @@
 
 ### 免费Clash节点订阅链接
 
-- https://free-v2ray.github.io/uploads/2025/11/0-20251119.yaml
-- https://free-v2ray.github.io/uploads/2025/11/1-20251119.yaml
-- https://free-v2ray.github.io/uploads/2025/11/2-20251119.yaml
-- https://free-v2ray.github.io/uploads/2025/11/3-20251119.yaml
-- https://free-v2ray.github.io/uploads/2025/11/4-20251119.yaml
+- https://free-v2ray.github.io/uploads/2025/11/0-20251128.yaml
+- https://free-v2ray.github.io/uploads/2025/11/1-20251128.yaml
+- https://free-v2ray.github.io/uploads/2025/11/2-20251128.yaml
+- https://free-v2ray.github.io/uploads/2025/11/3-20251128.yaml
+- https://free-v2ray.github.io/uploads/2025/11/4-20251128.yaml
 
 ### 免费V2ray节点订阅链接
 
-- https://free-v2ray.github.io/uploads/2025/11/0-20251119.txt
-- https://free-v2ray.github.io/uploads/2025/11/1-20251119.txt
-- https://free-v2ray.github.io/uploads/2025/11/2-20251119.txt
-- https://free-v2ray.github.io/uploads/2025/11/3-20251119.txt
-- https://free-v2ray.github.io/uploads/2025/11/4-20251119.txt
+- https://free-v2ray.github.io/uploads/2025/11/0-20251128.txt
+- https://free-v2ray.github.io/uploads/2025/11/1-20251128.txt
+- https://free-v2ray.github.io/uploads/2025/11/2-20251128.txt
+- https://free-v2ray.github.io/uploads/2025/11/3-20251128.txt
+- https://free-v2ray.github.io/uploads/2025/11/4-20251128.txt
 
 ### 免费Sing-box节点订阅链接
 
-- https://free-v2ray.github.io/uploads/2025/11/20251119.json
+- https://free-v2ray.github.io/uploads/2025/11/20251128.json
 
 ## 更多Clash节点订阅 ：
 
