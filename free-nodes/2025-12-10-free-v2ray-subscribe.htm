@@ -167,9 +167,9 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
     </div>
 <h4>FAQ</h4>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Hiddify Next 如何设置用户带宽限制？</h5></div>
+    <div class="panel-heading"><h5>Vmess 节点使用 WebSocket + TLS 时应注意哪些参数？</h5></div>
     <div class="panel-body">
-        管理员可为每个用户设置上传和下载带宽上限。超出限制可自动降速或阻止访问，保证服务器资源合理分配，避免单用户占用过多带宽，提高整体公平性和使用效率。<hr />    </div>
+        需确保路径（path）与主机名（host）匹配服务器配置，TLS 证书有效，端口与防火墙设置开放。建议开启 mux 与 keepalive 优化连接稳定性，并定期测试延迟避免 CDN 缓存导致连接异常。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>Potatso Lite 手动节点切换有哪些优点？</h5></div>
@@ -177,19 +177,24 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
         手动切换节点可以根据延迟和用途选择最佳节点，适合在节点不稳定或特殊需求下使用。虽然不支持自动订阅更新，但足够满足轻量用户对节点管理和分流的需求。<hr />    </div>
 </div>
 <div class="panel panel-default">
+    <div class="panel-heading"><h5>V2RayN 订阅更新后节点重复如何清理？</h5></div>
+    <div class="panel-body">
+        V2RayN 在导入订阅时有时会产生重复节点，可以点击右键菜单选择“删除重复项”。若仍存在旧节点缓存，可清空配置文件夹内的 history.json 并重新导入订阅，保证节点列表整洁。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Hiddify Next 如何设置用户带宽限制？</h5></div>
+    <div class="panel-body">
+        管理员可为每个用户设置上传和下载带宽上限。超出限制可自动降速或阻止访问，保证服务器资源合理分配，避免单用户占用过多带宽，提高整体公平性和使用效率。<hr />    </div>
+</div>
+<div class="panel panel-default">
     <div class="panel-heading"><h5>Nekoray 节点订阅更新失败怎么办？</h5></div>
     <div class="panel-body">
         首先检查订阅 URL 是否有效，再确认网络是否通畅。必要时可手动刷新或重新添加订阅链接，保证节点列表最新。结合策略组可保证稳定连接和科学上网体验。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Shadowrocket 的分流规则如何实现广告拦截？</h5></div>
+    <div class="panel-heading"><h5>PassWall2 如何自动切换最佳节点？</h5></div>
     <div class="panel-body">
-        通过配置规则，将广告域名或请求路径匹配到黑名单策略，使请求直接阻断或重定向到本地地址。这样用户浏览网页或使用应用时可自动屏蔽大部分广告内容。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>V2RayN 订阅更新后节点重复如何清理？</h5></div>
-    <div class="panel-body">
-        V2RayN 在导入订阅时有时会产生重复节点，可以点击右键菜单选择“删除重复项”。若仍存在旧节点缓存，可清空配置文件夹内的 history.json 并重新导入订阅，保证节点列表整洁。<hr />    </div>
+        通过延迟测速和策略组设置，PassWall2 可自动选择延迟最低的节点处理流量。用户无需手动切换节点，保证网页、视频和游戏流量的速度和稳定性，提高整体网络体验。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>WinXray 延迟检测如何提高网络稳定性？</h5></div>
@@ -202,19 +207,14 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
         在 Mellow 中可通过开启 TUN 模式来启用全局代理。启用后，系统的所有流量都会经过代理转发，可实现全面科学上网。需注意系统防火墙可能会提示权限请求。<hr />    </div>
 </div>
 <div class="panel panel-default">
+    <div class="panel-heading"><h5>Shadowrocket 的分流规则如何实现广告拦截？</h5></div>
+    <div class="panel-body">
+        通过配置规则，将广告域名或请求路径匹配到黑名单策略，使请求直接阻断或重定向到本地地址。这样用户浏览网页或使用应用时可自动屏蔽大部分广告内容。<hr />    </div>
+</div>
+<div class="panel panel-default">
     <div class="panel-heading"><h5>Matsuri 节点延迟排序如何优化网络流量？</h5></div>
     <div class="panel-body">
-        Matsuri 会定期测速节点延迟，并结合策略组自动选择延迟最低节点。无需手动切换，确保网页、视频和游戏流量通过最优节点，提高访问速度和网络稳定性。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>PassWall2 如何自动切换最佳节点？</h5></div>
-    <div class="panel-body">
-        通过延迟测速和策略组设置，PassWall2 可自动选择延迟最低的节点处理流量。用户无需手动切换节点，保证网页、视频和游戏流量的速度和稳定性，提高整体网络体验。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Vmess 节点使用 WebSocket + TLS 时应注意哪些参数？</h5></div>
-    <div class="panel-body">
-        需确保路径（path）与主机名（host）匹配服务器配置，TLS 证书有效，端口与防火墙设置开放。建议开启 mux 与 keepalive 优化连接稳定性，并定期测试延迟避免 CDN 缓存导致连接异常。    </div>
+        Matsuri 会定期测速节点延迟，并结合策略组自动选择延迟最低节点。无需手动切换，确保网页、视频和游戏流量通过最优节点，提高访问速度和网络稳定性。    </div>
 </div>
 <div class="panel panel-default mt-5">
     <div class="panel-heading">
@@ -243,16 +243,16 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2025-11-27-free-node-subscribe.htm" title="11月27日→20.8M/S|2025年最新免费节点Free V2ray订阅链接地址分享">11月27日→20.8M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-12-7-clash-node.htm" title="12月7日→20.2M/S|2025年最新免费节点Free V2ray订阅链接地址分享">12月7日→20.2M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-11-17-free-v2ray.htm" title="11月17日→21M/S|2025年最新免费节点Free V2ray订阅链接地址分享">11月17日→21M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-11-21-clash-v2ray-ss-ssr.htm" title="11月21日→19.6M/S|2025年最新免费节点Free V2ray订阅链接地址分享">11月21日→19.6M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-11-13-free-ssr-node.htm" title="11月13日→21.1M/S|2025年最新免费节点Free V2ray订阅链接地址分享">11月13日→21.1M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-12-3-node-share.htm" title="12月3日→18.1M/S|2025年最新免费节点Free V2ray订阅链接地址分享">12月3日→18.1M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-12-6-free-node-subscribe.htm" title="12月6日→23M/S|2025年最新免费节点Free V2ray订阅链接地址分享">12月6日→23M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-11-9-free-v2ray-subscribe.htm" title="11月9日→21.3M/S|2025年最新免费节点Free V2ray订阅链接地址分享">11月9日→21.3M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-12-8-free-clash-subscribe.htm" title="12月8日→21.6M/S|2025年最新免费节点Free V2ray订阅链接地址分享">12月8日→21.6M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-11-free-v2ray.htm" title="11月11日→22.8M/S|2025年最新免费节点Free V2ray订阅链接地址分享">11月11日→22.8M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-12-11-free-clash-subscribe.htm" title="12月11日→21M/S|2025年最新免费节点Free V2ray订阅链接地址分享">12月11日→21M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-12-5-clash-node.htm" title="12月5日→21.6M/S|2025年最新免费节点Free V2ray订阅链接地址分享">12月5日→21.6M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-28-free-ssr-subscribe.htm" title="11月28日→18M/S|2025年最新免费节点Free V2ray订阅链接地址分享">11月28日→18M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-12-18-clash-node.htm" title="12月18日→22.1M/S|2025年最新免费节点Free V2ray订阅链接地址分享">12月18日→22.1M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-11-22-node-share.htm" title="11月22日→18.5M/S|2025年最新免费节点Free V2ray订阅链接地址分享">11月22日→18.5M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-12-9-shadowrocket-node.htm" title="12月9日→22.5M/S|2025年最新免费节点Free V2ray订阅链接地址分享">12月9日→22.5M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-12-4-shadowrocket-node.htm" title="12月4日→22.2M/S|2025年最新免费节点Free V2ray订阅链接地址分享">12月4日→22.2M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
                         <li class="py-2"><a href="/free-nodes/2025-11-5-free-v2ray-subscribe.htm" title="11月5日→20.5M/S|2025年最新免费节点Free V2ray订阅链接地址分享">11月5日→20.5M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-11-10-free-clash-subscribe.htm" title="11月10日→20.4M/S|2025年最新免费节点Free V2ray订阅链接地址分享">11月10日→20.4M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
                     </ul>
     </div>
 </div>
@@ -264,7 +264,7 @@ IPLC、IEPL中转，点对点专线连接。高速冲浪，科学上网不二选
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">12</span> <a href="/date/2025-12/" title="2025-12 归档">2025-12</a></h4>
+                <h4><span class="badge" style="float: right;">19</span> <a href="/date/2025-12/" title="2025-12 归档">2025-12</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">23</span> <a href="/date/2025-11/" title="2025-11 归档">2025-11</a></h4>
