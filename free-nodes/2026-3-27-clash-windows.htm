@@ -345,34 +345,14 @@ Clash拥有Windows、macOS、Linux、iOS、Android等多个版本，满足不同
     </div>
 <h4>FAQ</h4>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Hiddify Next 订阅更新后节点消失，如何恢复？</h5></div>
-    <div class="panel-body">
-        先检查订阅源是否更改格式或被下架，尝试重新粘贴订阅链接并手动刷新；若仍缺失，联系订阅提供方确认是否停用某些节点或使用了新的访问权限机制（例如 token 验证）。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Clash 如何通过规则文件优化节点分流？</h5></div>
-    <div class="panel-body">
-        Clash 支持自定义规则文件，可按域名、IP 或应用类型分流流量。结合策略组使用，可将不同类型的流量自动分配到最优节点，提高访问速度和网络稳定性，减少延迟和卡顿。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Netch 是否支持系统代理？</h5></div>
-    <div class="panel-body">
-        Netch 不直接修改系统代理，而是通过虚拟网卡（TAP 驱动）实现透明代理。这种方式不会影响浏览器设置，适合游戏和应用程序需要 UDP 支持的场景。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Quantumult X 可以用脚本自动切换节点吗？</h5></div>
-    <div class="panel-body">
-        可以。Quantumult X 支持通过脚本逻辑判断网络延迟或连接失败情况，并自动切换节点。用户可以编写自定义 JS 规则，从而实现智能代理与按需分流，适合高级用户使用。<hr />    </div>
-</div>
-<div class="panel panel-default">
     <div class="panel-heading"><h5>WinXray 的多出口策略如何提高网络稳定性？</h5></div>
     <div class="panel-body">
         WinXray 支持为不同流量类型指定不同出口，通过策略组和路由规则自动选择最佳节点。这样可以分散流量压力，提高连接稳定性，并确保高优先级应用获得最佳速度。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Hysteria2 与传统代理协议有何不同？</h5></div>
+    <div class="panel-heading"><h5>Netch 是否支持系统代理？</h5></div>
     <div class="panel-body">
-        Hysteria2 使用基于 QUIC 的高性能传输协议，可显著降低延迟并提升抗干扰能力。它特别适合高丢包或高延迟网络环境，提供流畅的浏览和视频播放体验。<hr />    </div>
+        Netch 不直接修改系统代理，而是通过虚拟网卡（TAP 驱动）实现透明代理。这种方式不会影响浏览器设置，适合游戏和应用程序需要 UDP 支持的场景。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>Sing-box 是否比 Clash 更省资源？</h5></div>
@@ -385,14 +365,34 @@ Clash拥有Windows、macOS、Linux、iOS、Android等多个版本，满足不同
         Surfboard 是一款支持多种协议的客户端应用，它能够兼容 Clash 的配置文件格式，用户只需导入 YAML 文件即可。该应用以轻量、高速著称，常用于 iOS 和 macOS 系统。<hr />    </div>
 </div>
 <div class="panel panel-default">
+    <div class="panel-heading"><h5>Quantumult X 可以用脚本自动切换节点吗？</h5></div>
+    <div class="panel-body">
+        可以。Quantumult X 支持通过脚本逻辑判断网络延迟或连接失败情况，并自动切换节点。用户可以编写自定义 JS 规则，从而实现智能代理与按需分流，适合高级用户使用。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Hysteria2 与传统代理协议有何不同？</h5></div>
+    <div class="panel-body">
+        Hysteria2 使用基于 QUIC 的高性能传输协议，可显著降低延迟并提升抗干扰能力。它特别适合高丢包或高延迟网络环境，提供流畅的浏览和视频播放体验。<hr />    </div>
+</div>
+<div class="panel panel-default">
     <div class="panel-heading"><h5>如何优化 Clash DNS 解析速度？</h5></div>
     <div class="panel-body">
         可在配置文件中启用 fake-ip 模式或使用高质量的 DoH 服务（如 Cloudflare、AliDNS）。同时将 `fallback-filter.geoip` 设置为 true，避免国内域名被错误解析到境外，提高解析效率。<hr />    </div>
 </div>
 <div class="panel panel-default">
+    <div class="panel-heading"><h5>Hiddify Next 订阅更新后节点消失，如何恢复？</h5></div>
+    <div class="panel-body">
+        先检查订阅源是否更改格式或被下架，尝试重新粘贴订阅链接并手动刷新；若仍缺失，联系订阅提供方确认是否停用某些节点或使用了新的访问权限机制（例如 token 验证）。<hr />    </div>
+</div>
+<div class="panel panel-default">
     <div class="panel-heading"><h5>Surfboard 策略组如何优化视频访问？</h5></div>
     <div class="panel-body">
-        通过策略组将视频流量分配到低延迟、高带宽节点，Surfboard 可自动切换到最佳节点。减少缓冲和卡顿，提高在线视频播放流畅性和整体网络体验。    </div>
+        通过策略组将视频流量分配到低延迟、高带宽节点，Surfboard 可自动切换到最佳节点。减少缓冲和卡顿，提高在线视频播放流畅性和整体网络体验。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Clash 如何通过规则文件优化节点分流？</h5></div>
+    <div class="panel-body">
+        Clash 支持自定义规则文件，可按域名、IP 或应用类型分流流量。结合策略组使用，可将不同类型的流量自动分配到最优节点，提高访问速度和网络稳定性，减少延迟和卡顿。    </div>
 </div>
 <div class="panel panel-default mt-5">
     <div class="panel-heading">
@@ -421,16 +421,16 @@ Clash拥有Windows、macOS、Linux、iOS、Android等多个版本，满足不同
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2026-3-18-free-node-subscribe-links.htm" title="3月18日→22.4M/S|2025年最新免费节点Free V2ray订阅链接地址分享">3月18日→22.4M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-3-21-free-ssr-subscribe.htm" title="3月21日→18.5M/S|2025年最新免费节点Free V2ray订阅链接地址分享">3月21日→18.5M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-3-23-clash-node-daily-updates.htm" title="3月23日→21.1M/S|2025年最新免费节点Free V2ray订阅链接地址分享">3月23日→21.1M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-3-6-node-share.htm" title="3月6日→21.2M/S|2025年最新免费节点Free V2ray订阅链接地址分享">3月6日→21.2M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-3-4-node-share.htm" title="3月4日→21.7M/S|2025年最新免费节点Free V2ray订阅链接地址分享">3月4日→21.7M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-3-13-clash-node.htm" title="3月13日→20.1M/S|2025年最新免费节点Free V2ray订阅链接地址分享">3月13日→20.1M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-3-14-free-high-speed-nodes.htm" title="3月14日→19.9M/S|2025年最新免费节点Free V2ray订阅链接地址分享">3月14日→19.9M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
                         <li class="py-2"><a href="/free-nodes/2026-3-8-free-clash-subscribe.htm" title="3月8日→21M/S|2025年最新免费节点Free V2ray订阅链接地址分享">3月8日→21M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-3-28-free-shadowrocket-node.htm" title="3月28日→22.4M/S|2025年最新免费节点Free V2ray订阅链接地址分享">3月28日→22.4M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-3-5-clash-node.htm" title="3月5日→22.7M/S|2025年最新免费节点Free V2ray订阅链接地址分享">3月5日→22.7M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-3-23-clash-node-daily-updates.htm" title="3月23日→21.1M/S|2025年最新免费节点Free V2ray订阅链接地址分享">3月23日→21.1M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
                         <li class="py-2"><a href="/free-nodes/2026-3-15-node-share-links.htm" title="3月15日→21M/S|2025年最新免费节点Free V2ray订阅链接地址分享">3月15日→21M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-4-2-node-share-links.htm" title="4月2日→19M/S|2025年最新免费节点Free V2ray订阅链接地址分享">4月2日→19M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-3-27-clash-windows.htm" title="3月27日→19.2M/S|2025年最新免费节点Free V2ray订阅链接地址分享">3月27日→19.2M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
                         <li class="py-2"><a href="/free-nodes/2026-3-10-clash-node-daily-updates.htm" title="3月10日→18.6M/S|2025年最新免费节点Free V2ray订阅链接地址分享">3月10日→18.6M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-3-9-free-subscribe-node.htm" title="3月9日→20.1M/S|2025年最新免费节点Free V2ray订阅链接地址分享">3月9日→20.1M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-3-30-free-clash-subscribe.htm" title="3月30日→18.6M/S|2025年最新免费节点Free V2ray订阅链接地址分享">3月30日→18.6M/S|2025年最新免费节点Free V2ray订阅链接地址分享</a></li>
                     </ul>
     </div>
 </div>
